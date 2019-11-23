@@ -32,7 +32,7 @@ from contextlib import contextmanager
 from urllib import quote
 
 import glib
-import gobject
+from gi.repository import GObject
 import pango
 import gtk
 try:

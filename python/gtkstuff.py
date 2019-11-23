@@ -24,7 +24,7 @@ from abc import ABCMeta, abstractmethod
 from functools import wraps
 from contextlib import contextmanager
 
-import gobject
+from gi.repository import GObject
 import gtk
 import pango
 import glib

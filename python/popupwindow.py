@@ -19,7 +19,7 @@ from __future__ import print_function
 
 __all__ = ['PopupWindow']
 
-import gobject
+from gi.repository import GObject
 import gtk
 from .gtkstuff import threadslock, timeout_add, source_remove
 

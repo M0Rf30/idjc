@@ -36,7 +36,7 @@ from collections import deque, namedtuple, defaultdict
 from functools import partial
 
 import glib
-import gobject
+from gi.repository import GObject
 import gtk
 import pango
 import mutagen

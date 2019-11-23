@@ -13,7 +13,7 @@ import os
 import sys
 import time
 
-import gobject
+from gi.repository import GObject
 import dbus
 from dbus.mainloop.glib import DBusGMainLoop
 
@@ -38,7 +38,7 @@ def pid_exists(pid):
         return True
 
 
-class IDJCMonitor(gobject.GObject):
+class IDJCMonitor(GObject):
     """Monitor IDJC internals relating to a specific profile or session.
     
     Can yield information about streams, music metadata, health.
@@ -46,65 +46,65 @@ class IDJCMonitor(gobject.GObject):
     """
     
     __gsignals__ = {
-        'launch': (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE,
-                    (gobject.TYPE_STRING, gobject.TYPE_UINT)),
-        'quit': (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE,
-                  (gobject.TYPE_STRING, gobject.TYPE_UINT)),
-        'streamstate-changed': (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE,
-                                 (gobject.TYPE_INT, gobject.TYPE_BOOLEAN,
-                                  gobject.TYPE_STRING)),
-        'recordstate-changed': (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE,
-                                 (gobject.TYPE_INT, gobject.TYPE_BOOLEAN,
-                                  gobject.TYPE_STRING)),
-        'channelstate-changed': (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE,
-                                  (gobject.TYPE_UINT, gobject.TYPE_BOOLEAN)),
-        'voip-mode-changed': (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE,
-                               (gobject.TYPE_UINT,)),
-        'metadata-changed': (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE,
-                              (gobject.TYPE_STRING,) * 5),
-        'effect-started': (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE,
-                           (gobject.TYPE_STRING,) * 2 + (gobject.TYPE_UINT,)),
-        'effect-stopped': (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE,
-                           (gobject.TYPE_UINT,)),
-        'player-started': (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE,
-                           (gobject.TYPE_STRING,)),
-        'player-stopped': (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE,
-                           (gobject.TYPE_STRING,)),
-        'tracks-finishing': (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE,
+        'launch': (GObject.SIGNAL_RUN_LAST, GObject.TYPE_NONE,
+                    (GObject.TYPE_STRING, GObject.TYPE_UINT)),
+        'quit': (GObject.SIGNAL_RUN_LAST, GObject.TYPE_NONE,
+                  (GObject.TYPE_STRING, GObject.TYPE_UINT)),
+        'streamstate-changed': (GObject.SIGNAL_RUN_LAST, GObject.TYPE_NONE,
+                                 (GObject.TYPE_INT, GObject.TYPE_BOOLEAN,
+                                  GObject.TYPE_STRING)),
+        'recordstate-changed': (GObject.SIGNAL_RUN_LAST, GObject.TYPE_NONE,
+                                 (GObject.TYPE_INT, GObject.TYPE_BOOLEAN,
+                                  GObject.TYPE_STRING)),
+        'channelstate-changed': (GObject.SIGNAL_RUN_LAST, GObject.TYPE_NONE,
+                                  (GObject.TYPE_UINT, GObject.TYPE_BOOLEAN)),
+        'voip-mode-changed': (GObject.SIGNAL_RUN_LAST, GObject.TYPE_NONE,
+                               (GObject.TYPE_UINT,)),
+        'metadata-changed': (GObject.SIGNAL_RUN_LAST, GObject.TYPE_NONE,
+                              (GObject.TYPE_STRING,) * 5),
+        'effect-started': (GObject.SIGNAL_RUN_LAST, GObject.TYPE_NONE,
+                           (GObject.TYPE_STRING,) * 2 + (GObject.TYPE_UINT,)),
+        'effect-stopped': (GObject.SIGNAL_RUN_LAST, GObject.TYPE_NONE,
+                           (GObject.TYPE_UINT,)),
+        'player-started': (GObject.SIGNAL_RUN_LAST, GObject.TYPE_NONE,
+                           (GObject.TYPE_STRING,)),
+        'player-stopped': (GObject.SIGNAL_RUN_LAST, GObject.TYPE_NONE,
+                           (GObject.TYPE_STRING,)),
+        'tracks-finishing': (GObject.SIGNAL_RUN_LAST, GObject.TYPE_NONE,
                              ()),
-        'announcement': (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE,
-                          (gobject.TYPE_STRING,) * 3),
-        'frozen': (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE,
-                    (gobject.TYPE_STRING, gobject.TYPE_UINT,
-                     gobject.TYPE_BOOLEAN))
+        'announcement': (GObject.SIGNAL_RUN_LAST, GObject.TYPE_NONE,
+                          (GObject.TYPE_STRING,) * 3),
+        'frozen': (GObject.SIGNAL_RUN_LAST, GObject.TYPE_NONE,
+                    (GObject.TYPE_STRING, GObject.TYPE_UINT,
+                     GObject.TYPE_BOOLEAN))
     }
     
     __gproperties__ = {
-        'artist': (gobject.TYPE_STRING, 'artist', 'artist from track metadata',
-                   "", gobject.PARAM_READABLE),
-        'title': (gobject.TYPE_STRING, 'title', 'title from track metadata',
-                  "", gobject.PARAM_READABLE),
-        'album': (gobject.TYPE_STRING, 'album', 'album from track metadata',
-                  "", gobject.PARAM_READABLE),
-        'songname': (gobject.TYPE_STRING, 'songname',
+        'artist': (GObject.TYPE_STRING, 'artist', 'artist from track metadata',
+                   "", GObject.PARAM_READABLE),
+        'title': (GObject.TYPE_STRING, 'title', 'title from track metadata',
+                  "", GObject.PARAM_READABLE),
+        'album': (GObject.TYPE_STRING, 'album', 'album from track metadata',
+                  "", GObject.PARAM_READABLE),
+        'songname': (GObject.TYPE_STRING, 'songname',
                      'the song name from metadata tags when available'
                      ' and from the filenmame when not',
-                     "", gobject.PARAM_READABLE),
-        'music-filename': (gobject.TYPE_STRING, 'music_filename',
+                     "", GObject.PARAM_READABLE),
+        'music-filename': (GObject.TYPE_STRING, 'music_filename',
                            'the audio file pathname of the track',
-                           "", gobject.PARAM_READABLE),
-        'streaminfo': (gobject.TYPE_PYOBJECT, 'streaminfo',
+                           "", GObject.PARAM_READABLE),
+        'streaminfo': (GObject.TYPE_PYOBJECT, 'streaminfo',
                        'information about the streams',
-                       gobject.PARAM_READABLE),
-        'recordinfo': (gobject.TYPE_PYOBJECT, 'recordinfo',
+                       GObject.PARAM_READABLE),
+        'recordinfo': (GObject.TYPE_PYOBJECT, 'recordinfo',
                        'information about the recorders',
-                       gobject.PARAM_READABLE),
-        'channelinfo': (gobject.TYPE_PYOBJECT, 'channelinfo',
+                       GObject.PARAM_READABLE),
+        'channelinfo': (GObject.TYPE_PYOBJECT, 'channelinfo',
                         'toggle state of the audio channels',
-                        gobject.PARAM_READABLE),
-        'voip-mode': (gobject.TYPE_UINT, 'voip-mode',
+                        GObject.PARAM_READABLE),
+        'voip-mode': (GObject.TYPE_UINT, 'voip-mode',
                       'voice over ip mixer mode', 0, 2, 0,
-                      gobject.PARAM_READABLE)
+                      GObject.PARAM_READABLE)
     }
     
     def __init__(self, profile):
@@ -113,7 +113,7 @@ class IDJCMonitor(gobject.GObject):
         Can also handle sessions with "session.sessionname"
         """
         
-        gobject.GObject.__init__(self)
+        GObject.__init__(self)
         self.__profile = profile
         self.__bus = dbus.SessionBus(mainloop=DBusGMainLoop())
         self.__bus_address = ".".join((BUS_BASENAME, profile))
@@ -161,7 +161,7 @@ class IDJCMonitor(gobject.GObject):
         self.__frozen = False
         self.__main = self.__output = self.__controls = None
         if not self.__shutdown:
-            self.__probe_id = gobject.timeout_add_seconds(
+            self.__probe_id = GObject.timeout_add_seconds(
                                                 2, self._idjc_started_probe)
 
     def _idjc_started_probe(self):
@@ -212,7 +212,7 @@ class IDJCMonitor(gobject.GObject):
                 cts(each, "announcement", self._announcement_handler)
 
             # Start watchdog thread.
-            self.__watchdog_id = gobject.timeout_add_seconds(3, self._watchdog)
+            self.__watchdog_id = GObject.timeout_add_seconds(3, self._watchdog)
 
             self.__streams = {n: (False, "unknown") for n in xrange(10)}
             self.__recorders = {n: (False, "unknown") for n in xrange(4)}
@@ -269,7 +269,7 @@ class IDJCMonitor(gobject.GObject):
         """Start scanning for a new bus object."""
 
         if self.__watchdog_id is not None:
-            gobject.source_remove(self.__watchdog_id)
+            GObject.source_remove(self.__watchdog_id)
             self.emit("quit", self.__profile, self.__pid)
         self._start_probing()
         
@@ -361,8 +361,8 @@ class IDJCMonitor(gobject.GObject):
 
     def notify(self, property_name):
         if not self.__shutdown:
-            gobject.GObject.notify(self, property_name)
+            GObject.GObject.notify(self, property_name)
             
     def emit(self, *args, **kwargs):
         if not self.__shutdown:
-            gobject.GObject.emit(self, *args, **kwargs)
+            GObject.GObject.emit(self, *args, **kwargs)

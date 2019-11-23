@@ -24,7 +24,7 @@ import atexit
 
 # This is and needs to remain the initial gtk import point.
 import glib
-import gobject
+from gi.repository import GObject
 import gtk
 import pango
 

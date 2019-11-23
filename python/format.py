@@ -23,7 +23,7 @@ import ctypes
 from abc import ABCMeta, abstractmethod, abstractproperty
 
 import gtk
-import gobject
+from gi.repository import GObject
 
 from idjc import FGlobs
 from .gtkstuff import LEDDict

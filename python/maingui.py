@@ -21,7 +21,7 @@ import os
 import sys
 import fcntl
 import subprocess
-import ConfigParser
+import configparser
 import operator
 import socket
 import pickle
@@ -38,11 +38,12 @@ from binascii import hexlify, unhexlify
 
 import dbus
 import dbus.service
-import glib
-import gobject
-import gtk
+import gi
+gi.require_version('Gtk', '3.0')
+from gi.repository import Gtk
+from gi.repository import GObject
+from gi.repository import pango
 import cairo
-import pango
 
 from idjc import FGlobs, PGlobs
 from .playergui import *
@@ -76,7 +77,7 @@ class FreewheelButton(gtk.Button):
     LED = LEDDict(9)
     
     def __init__(self, mixer_write):
-        gtk.Button.__init__(self)
+        Gtk.Button.__init__(self)
         hbox = gtk.HBox()
         self._indicator = gtk.Image()
         self._indicator.set_alignment(0.0, 0.0)
@@ -3017,8 +3018,8 @@ class MainWindow(dbus.service.Object):
         try:
             PGlobs.theme = config.get('misc', 'theme')
             if PGlobs.theme == "darktheme":
-				PGlobs.themedir = FGlobs.darkthemedir
-				print("using dark theme icon set")
+                PGlobs.themedir = FGlobs.darkthemedir
+                print("using dark theme icon set")
         except ConfigParser.Error:
             pass
        

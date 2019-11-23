@@ -30,7 +30,7 @@ import gettext
 from inspect import getargspec
 from functools import wraps, partial
 
-import gobject
+from gi.repository import GObject
 import gtk
 import pango
 

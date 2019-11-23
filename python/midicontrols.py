@@ -25,7 +25,7 @@ import collections
 import gettext
 import functools
 
-import gobject
+from gi.repository import GObject
 import gtk
 import pango
 import dbus

@@ -24,7 +24,7 @@ import json
 import uuid
 
 import gtk
-import gobject
+from gi.repository import GObject
 import itertools
 import urllib
 

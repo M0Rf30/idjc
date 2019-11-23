@@ -40,7 +40,7 @@ from contextlib import closing
 import dbus
 import pango
 import gtk
-import gobject
+from gi.repository import GObject
 
 from idjc import FGlobs, PGlobs
 from .utils import string_multireplace
