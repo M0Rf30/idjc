@@ -1,0 +1,23 @@
+<script type="text/javascript">
+ui('Tour', 'tour-nav')
+</script>
+
+<h4>Screenshots and commentary</h4>
+
+<ul>
+
+<li class="content-page"><a href="tour_main.html">The main application window</a></li>
+<li class="content-page"><a href="tour_jingles.html">The jingles window</a></li>
+<li class="content-page"><a href="tour_output.html">The output window</a></li>
+<li class="content-page"><a href="tour_preferences.html">The preferences window</a></li>
+
+</ul>
+
+<h4>External links</h4>
+
+<ul>
+
+<li class="content-page"><a href="http://www.penguinproducer.com/2011/09/streamcasting-with-the-internet-dj-console-part-1/">Streamcasting With the Internet DJ Console, Part 1 </a></li>
+<li class="content-page"><a href="http://www.penguinproducer.com/2011/09/streamcasting-with-the-internet-dj-console-pt-2/">Streamcasting With the Internet DJ Console, Part 2 </a></li>
+
+</ul>

@@ -1,0 +1,14 @@
+!Makefile
+
+main-window.png
+jingles-window.png
+prefs-general.png
+prefs-channels.png
+prefs-bindings.png
+prefs-jack-ports.png
+prefs-xchat.png
+output-window.png
+
+*.html
+*.hq.png
+site/

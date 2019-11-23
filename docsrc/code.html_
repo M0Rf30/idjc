@@ -1,0 +1,9 @@
+<script type="text/javascript">
+ui('Extra code', 'code-nav')
+</script>
+
+<h4>Some relevant code modules</h4>
+
+<ul>
+<li class="content-page"><a href="code_idjcmon.html">An IDJC monitoring class</a></li>
+</ul>

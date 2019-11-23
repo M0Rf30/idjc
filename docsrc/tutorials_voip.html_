@@ -1,0 +1,55 @@
+<script type="text/javascript">
+ui('Tutorials: Setting up VoIP', 'tutorials-voip-nav')
+</script>
+
+<h4>Aims</h4>
+
+<p>In this section I'm going to provide a link to explain how to set up PulseAudio and Skype to use the VoIP feature and then explain how
+VoIP works within IDJC.</p>
+
+<h4>Skype/PulseAudio configuration</h4>
+<p><a href="https://we.riseup.net/nikgnomic/ubuntu-studio-qjackctl-and-pulseaudio-for-idjc">External Link</a></p>
+
+<h4>Testing</h4>
+
+<p>Launch IDJC. Put your headphones on and select the Green Telephone icon to put IDJC into VoIP mode. In Skype click the
+<i>Make a test sound</i> button and listen for a sound effect.</p>
+
+<h4>The IDJC VoIP modes explained</h4>
+
+<ul>
+
+<li>
+<p><strong>Private conference (Red Telephone + No microphones engaged)</strong></p>
+<p>You are in a private conference with whoever is on the VoIP service and able to talk freely without
+interrupting the stream.
+You would typically use this mode when playing a song since the listeners can no longer hear you.
+What you can hear of the streamed audio is dictated by the mixback volume control
+that has the telephone icon above it.
+When you play jingles in this mode the jingles audio goes to the VoIP listeners
+and not to the stream. The right jingle could put them in the correct mood for going on air.</p>
+</li>
+
+<li>
+<p><strong>Away serving the listeners (Red Telephone + Any microphone)</strong></p>
+<p>This mode allows for the people who are on the VoIP service to keep up with your show and
+talk among themselves while you moderate your show. All active microphone audio will go to the stream
+and inactive microphones will just be muted leaving the VoIP users as part of your audience who can hear your show
+at the level determined by the mixback volume control.</p>
+
+<p>This mode is ideal for announcing the imminent switch to the next mode.</p>
+</li>
+
+<li>
+<p><strong>VoIP users free to speak to the audience (Green Telephone)</strong></p>
+<p>Self explanatory really. Note how the microphone buttons are not available in this mode.
+It is assumed you are taking responsibility for your show and being audible to all. Shutting off microphones
+in this mode would lead to confusion over who is able to speak and follow the conversation so all microphones are
+open. See the individual microphone disable feature in the preferences as the correct way to deal with unused
+microphone channels.</p>
+</li>
+
+</ul>
+
+<h4>Final advice</h4>
+<p>There are only effectively three VoIP modes but they should be practiced off-air until they become second nature.</p>

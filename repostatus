@@ -1,0 +1,3 @@
+#!/bin/sh
+
+if test -z "$(git status --porcelain 2>&1)" ; then echo "clean" ; else echo "dirty"; fi

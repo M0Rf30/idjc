@@ -1,0 +1,28 @@
+<script type="text/javascript">
+ui('Front page', 'front-page-nav')
+</script>
+
+<h4>Introduction</h4>
+
+<p>Internet DJ Console is a project started in March 2005 to provide a powerful yet
+easy to use source-client for individuals interested in streaming live radio shows over the
+Internet using Shoutcast or Icecast servers.</p>
+
+<p>Because of the large number of streaming applications that already existed but did little more
+than stream a pair of audio channels or a fixed playlist, it was decided that IDJC would be the opposite
+and simulate audio hardware to cut down the expense of creating a home studio.</p>
+
+<p>In addition to providing a large number of show production features, this software has been written
+with the aim of producing the best possible experience for the listeners and DJ alike. To that end features
+like VoIP integration were conceived of from the very start resulting in the choice of Jack Audio Connection
+Kit to base the audio.</p>
+
+<p>This has afforded IDJC audio processing capabilities that were they built in would be considered excessive. Enjoy
+integration with powerful programs such as the well known Skype, Jack Rack (offering audio sound effects plugins),
+Jamin (the powerful audio compressor/equalizer), and <a href="http://jackaudio.org/applications">many more</a>.</p>
+
+<p>Fortunately IDJCs power does not come at the expense of a well organized user interface, nor
+have requests for features been permitted to diminish the application's intuitive feel yet throughout development
+the main goals have always been that of stability and audio quality.</p>
+
+<p id="signature">Stephen Fairchild</p>

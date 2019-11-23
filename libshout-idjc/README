@@ -1,0 +1,14 @@
+The library development tree that resided here is obsolete. Use the upstream compatible development tree obtainable with the following command.
+
+$ git clone git://git.code.sf.net/p/idjc/libshoutidjc/code libshout-idjc
+
+libshout-idjc
+-------------
+
+Libshout-idjc is a library for communicating with and sending data to shoutcast
+or icecast servers.  It's a fork of libshout that has been modified to support
+features of IDJC such as AAC streams.  It handles the socket connection, the
+timing of the data, and prevents bad data from getting to the server.
+
+Libshout-idjc is licensed under the LGPL.  Please see the COPYING file for
+details.

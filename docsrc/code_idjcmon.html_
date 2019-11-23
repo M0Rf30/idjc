@@ -1,0 +1,149 @@
+<script type="text/javascript">
+ui('Extra code: An IDJC monitoring class', 'code-idjcmon-nav')
+</script>
+
+<p>With a little work this could be made to interface with your station's web page or with cloud services.</p>
+
+<pre>#! /usr/bin/python2.7
+
+"""idjcmon.py demo code
+
+This can be extended to issue e-mail alerts if IDJC freezes or perform Twitter
+updates when the music changes.
+
+Requires IDJC 0.8.11 or higher.
+Takes the profile you wish to monitor as the command line parameter.
+"""
+
+import sys
+from functools import partial
+
+import gobject
+from idjcmonitor import *
+
+def launch_handler(monitor, profile, pid):
+    print "Hello to IDJC '%s' with process ID %d." % (profile, pid)
+
+def quit_handler(monitor, profile, pid):
+    print "Goodbye to IDJC '%s' with process ID %d." % (profile, pid)
+
+def streamstate_handler(monitor, which, state, where):
+    print "Stream %d is %s on connection %s." % (
+                                    which, ("down", "up")[state], where)
+
+def metadata_handler(monitor, artist, title, album, songname,
+                                                        music_filename):
+    print "Metadata is: artist: %s, title: %s, album: %s, filename: %s" % (
+                                    artist, title, album, music_filename)
+
+def frozen_handler(monitor, profile, pid, frozen):
+    print "IDJC '%s' with process ID %d is %s" % (
+                    profile, pid, ("no longer frozen", "frozen")[frozen])
+
+def effect_started_handler(monitor, title, pathname, player):
+    print "Effect player %d is playing %s" % (player, title)
+
+def effect_stopped_handler(monitor, player):
+    print "Effect player %d has stopped" % player
+
+def player_started_handler(monitor, player):
+    print "Player %s has started" % player
+
+def player_stopped_handler(monitor, player):
+    print "Player %s has stopped" % player
+
+def tracks_finishing_handler(monitor):
+    print "Tracks finish soon"
+
+def announcement_handler(monitor, player, state, message):
+    # Ignore announcements from interlude player.
+    if player in ("left", "right"):
+        if state == "active":
+            print "New announcement on player %s: %s" % (player, message)
+        if state == "overtime":
+            print "DJ announcement time expired"
+        if state == "inactive":
+            print "Announcement closed on player %s." % player 
+
+def announcement_overrun_changed_handler(monitor, value):
+    print "Announcement overrun state is now:", value
+
+
+class AnnouncementOverrunMonitor(gobject.GObject):
+    __gproperties__ = {'overrun':
+                       (gobject.TYPE_BOOLEAN, 'overrun flag', 'announcement '
+                        'should have finished', 0, gobject.PARAM_READABLE)}
+
+    __gsignals__ = {"overrun-changed":
+                    (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE, (bool,))}
+
+    def __init__(self, monitor, players=("left", "right", "interlude"),
+                 grace=2.0):
+        gobject.GObject.__init__(self)
+        self._monitor = monitor
+        self._players = players
+        self._overrun_f = False
+        self._offenders = set()
+        if grace % 1:
+            self._grace_timeout_add = partial(gobject.timeout_add,
+                                              int(grace * 1000.0))
+        else:
+            self._grace_timeout_add = partial(gobject.timeout_add_seconds,
+                                              int(grace))
+        monitor.connect("announcement", self._announcement_handler)
+
+    def do_get_property(self, property):
+        if property.name == "overrun":
+            return self._overrun_f
+        else:
+            raise AttributeError
+
+    def _announcement_handler(self, monitor, player, state, message):
+        if player not in self._players:
+            return
+            
+        if state == "overtime":
+            self._offenders.add(player)
+            self._grace_timeout_add(self._cb_grace_timeout, player)
+        elif state == "inactive":
+            try:
+                self._offenders.remove(player)
+            except KeyError:
+                pass
+            else:
+                if self._overrun_f and not self._offenders:
+                    self._overrun_f = False
+                    self.notify("overrun")
+                    self.emit("overrun-changed", self._overrun_f)
+
+    def _cb_grace_timeout(self, player):
+        if player in self._offenders and not self._overrun_f:
+            self._overrun_f = True
+            self.notify("overrun")
+            self.emit("overrun-changed", self._overrun_f)
+
+
+try:
+    profile = sys.argv[1]
+except IndexError:
+    profile = "default"
+
+monitor = IDJCMonitor(profile)
+monitor.connect("launch", launch_handler)
+monitor.connect("quit", quit_handler)
+monitor.connect("streamstate-changed", streamstate_handler)
+monitor.connect("metadata-changed", metadata_handler)
+monitor.connect("frozen", frozen_handler)
+monitor.connect("effect-started", effect_started_handler)
+monitor.connect("effect-stopped", effect_stopped_handler)
+monitor.connect("player-started", player_started_handler)
+monitor.connect("player-stopped", player_stopped_handler)
+monitor.connect("tracks-finishing", tracks_finishing_handler)
+monitor.connect("announcement", announcement_handler)
+
+announcement_overrun_monitor = AnnouncementOverrunMonitor(monitor)
+announcement_overrun_monitor.connect("overrun-changed",
+                                     announcement_overrun_changed_handler)
+
+gobject.MainLoop().run()
+</pre>

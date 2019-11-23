@@ -1,0 +1,45 @@
+<script type="text/javascript">
+ui('Tour: Preferences', 'tour-preferences-nav')
+</script>
+
+<a href="prefs-general.hq.png"><img class="clickthrough-left" src="prefs-general.png" alt="Preferences Window Screenshot (general)" title="Click for full size version" /></a>
+
+<h4>General</h4>
+
+<p>Here there are extensive controls that alter the way IDJC behaves on often subtle levels.</p>
+
+<p>The basic streamer option's effect is not so subtle. It allows you to stream just music
+with an absolute minimum CPU load as well as reducing the amount of screen space that is occupied.</p>
+
+<p>It's possible to toggle the meters that are visible, configure
+<a href="http://en.wikipedia.org/wiki/Replay_Gain">ReplayGain</a> and much more.</p>
+
+<br class="division" />
+
+<a href="prefs-channels.hq.png"><img class="clickthrough-right" src="prefs-channels.png" alt="Preferences Window Screenshot (audio channels)" title="Click for full size version" /></a>
+
+<h4>Audio channel processing</h4>
+
+<p>A great deal of care has been taken to make sure your voice can be heard consistently
+over the mix. The controls to do this are placed in your hands so experimenting and making
+recordings for review are advised before going on air.</p>
+
+<p>The design of the audio stack is intended to reflect real-world station set-ups and best of all,
+it's all done in software. That said, a good microphone is still advised for the best possible sound.</p>
+
+<br class="division" />
+
+<a href="prefs-bindings.hq.png"><img class="clickthrough-left" src="prefs-bindings.png" alt="Preferences Window Screenshot (microphones)" title="Click for full size version" /></a>
+
+<h4>Key and MIDI bindings</h4>
+
+<p>Set your keyboard shortcuts here.</p>
+
+<p>You can even set bindings for MIDI events, which means you can control IDJC from MIDI control surfaces or MIDI devices generally.
+The superiority of such a set-up will become apparent with use.</p>
+
+<p>Key presses are collected from the Main and Jingles windows only and depend on focus whereas MIDI
+events apply to all applications that are configured to receive them.</p>
+
+<p>The list shown to the left represents the inputs that have bindings already assigned to them and not
+the complete list of possible actions which is much larger.</p>
