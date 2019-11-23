@@ -41,7 +41,7 @@ class TooltipsGroup:
 
 
     def cb_query_tooltip(self, widget, x, y, keyboard_mode, tooltip, tip_text):
-        label = gtk.Label(tip_text)
+        label = Gtk.Label(tip_text)
         label.set_line_wrap(True)
         tooltip.set_custom(label)
         label.show()

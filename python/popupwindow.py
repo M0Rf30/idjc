@@ -40,10 +40,10 @@ class PopupWindow:
         return self.messages
     
 
-    class new_popup_window(gtk.Window):
+    class new_popup_window(Gtk.Window):
         def __init__(self):
-            gtk.Window.__init__(self, gtk.WINDOW_POPUP)
-            gtk.Window.set_decorated(self, False)
+            Gtk.Window.__init__(self, Gtk.WINDOW_POPUP)
+            Gtk.Window.set_decorated(self, False)
     
 
     @threadslock
