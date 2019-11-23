@@ -260,7 +260,7 @@ class CellRendererDuration(Gtk.CellRendererText):
 
 class CuesheetPlaylist(Gtk.Frame):
     __gsignals__ = { "playitem" : (
-                        GObject.SIGNAL_RUN_LAST, GObject.TYPE_NONE,
+                        GObject.SignalFlags.RUN_LAST, GObject.TYPE_NONE,
                             (GObject.TYPE_PYOBJECT, GObject.TYPE_PYOBJECT, ))}
 
     def __init__(self):

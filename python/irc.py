@@ -1584,10 +1584,10 @@ class IRCConnection(Gtk.TreeRowReference, threading.Thread):
 
 class MessageHandler(GObject):
     __gsignals__ = { 
-        'channels-changed': (GObject.SIGNAL_RUN_LAST | GObject.SIGNAL_ACTION,
+        'channels-changed': (GObject.SignalFlags.RUN_LAST | GObject.SIGNAL_ACTION,
                                 GObject.TYPE_NONE, (GObject.TYPE_PYOBJECT, )),
 
-        'privmsg-ready':    (GObject.SIGNAL_RUN_LAST | GObject.SIGNAL_ACTION,
+        'privmsg-ready':    (GObject.SignalFlags.RUN_LAST | GObject.SIGNAL_ACTION,
                             GObject.TYPE_NONE, (GObject.TYPE_PYOBJECT,
                             GObject.TYPE_STRING, GObject.TYPE_INT))
 
@@ -1595,7 +1595,7 @@ class MessageHandler(GObject):
 
     __gproperties__ = {
         'channels': (GObject.TYPE_PYOBJECT, 'channels', 'ircchannels',
-                                                    GObject.PARAM_READABLE)
+                                                    GObject.ParamFlags.READABLE)
     }
     
     @property

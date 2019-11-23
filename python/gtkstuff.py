@@ -458,7 +458,7 @@ class IconChooserButton(Gtk.Button):
     """
     
     __gsignals__ = {
-            "filename-changed" : (GObject.SIGNAL_RUN_LAST, GObject.TYPE_NONE,
+            "filename-changed" : (GObject.SignalFlags.RUN_LAST, GObject.TYPE_NONE,
                                                     (GObject.TYPE_PYOBJECT,)),
     }
     

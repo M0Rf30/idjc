@@ -1195,15 +1195,15 @@ class FormatControl(Gtk.VBox):
     __gproperties__ = {
         'cap-icecast': (GObject.TYPE_BOOLEAN, 'icecast capable',
                         'if true this format can stream to icecast',
-                        0, GObject.PARAM_READABLE),
+                        0, GObject.ParamFlags.READABLE),
                         
         'cap-shoutcast': (GObject.TYPE_BOOLEAN, 'shoutcast capable',
                         'if true this format can stream to shoutcast',
-                        0, GObject.PARAM_READABLE),
+                        0, GObject.ParamFlags.READABLE),
                         
         'cap-recordable': (GObject.TYPE_BOOLEAN, 'can be recorded',
                         'if true this format is compatible with the recording facility',
-                        0, GObject.PARAM_READABLE)
+                        0, GObject.ParamFlags.READABLE)
     }
     
     def __init__(self, send, receive):

@@ -199,7 +199,7 @@ class ProfileDialog(Gtk.Dialog):
     __gproperties__ = {  "selection-active" : (GObject.TYPE_BOOLEAN, 
                                 "selection active", 
                                 "selected profile is active",
-                                0, GObject.PARAM_READABLE),
+                                0, GObject.ParamFlags.READABLE),
                                 
                                 "selection": (str, "profile selection", 
                                 "profile selected in profile manager",

@@ -1511,7 +1511,7 @@ class FlatPage(ViewerCommon):
 
 
 class CatalogsInterface(GObject):
-    __gsignals__ = { "changed" : (GObject.SIGNAL_RUN_LAST, None, ()) }
+    __gsignals__ = { "changed" : (GObject.SignalFlags.RUN_LAST, None, ()) }
     time_unit_table = {N_('Minutes'): 60, N_('Hours'): 3600,
                        N_('Days'): 86400, N_('Weeks'): 604800}
     
