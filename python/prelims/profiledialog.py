@@ -196,10 +196,10 @@ class ProfileDialog(Gtk.Dialog):
     __metaclass__ = ProfileSingleton
     
     
-    __gproperties__ = {  "selection-active" : (gobject.TYPE_BOOLEAN, 
+    __gproperties__ = {  "selection-active" : (GObject.TYPE_BOOLEAN, 
                                 "selection active", 
                                 "selected profile is active",
-                                0, gobject.PARAM_READABLE),
+                                0, GObject.PARAM_READABLE),
                                 
                                 "selection": (str, "profile selection", 
                                 "profile selected in profile manager",
@@ -210,21 +210,21 @@ class ProfileDialog(Gtk.Dialog):
     _new_profile_dialog_signal_names = "new", "clone", "edit"
 
     __gsignals__ = { "selection-active-changed" : (
-                                gobject.SIGNAL_RUN_FIRST, gobject.TYPE_NONE,
-                                (str, gobject.TYPE_BOOLEAN,)),
+                                GObject.SIGNAL_RUN_FIRST, GObject.TYPE_NONE,
+                                (str, GObject.TYPE_BOOLEAN,)),
                                 
                           "selection-changed" : (
-                                gobject.SIGNAL_RUN_FIRST, gobject.TYPE_NONE,
+                                GObject.SIGNAL_RUN_FIRST, GObject.TYPE_NONE,
                                 (str,))
     }
 
     __gsignals__.update(dict(
-            (x, (gobject.SIGNAL_RUN_FIRST, gobject.TYPE_NONE,
-            (gobject.TYPE_STRING,))) for x in (_signal_names)))
+            (x, (GObject.SIGNAL_RUN_FIRST, GObject.TYPE_NONE,
+            (GObject.TYPE_STRING,))) for x in (_signal_names)))
 
     __gsignals__.update(dict(
-            (x, (gobject.SIGNAL_RUN_FIRST, gobject.TYPE_NONE,
-            (gobject.TYPE_STRING,) * 5))
+            (x, (GObject.SIGNAL_RUN_FIRST, GObject.TYPE_NONE,
+            (GObject.TYPE_STRING,) * 5))
             for x in (_new_profile_dialog_signal_names)))
 
 

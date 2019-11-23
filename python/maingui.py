@@ -656,7 +656,7 @@ class MicButton(Gtk.ToggleButton):
 
 class OpenerTab(Gtk.VBox):
     __gsignals__ = { "changed" : (
-                        gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE, ())}
+                        GObject.SIGNAL_RUN_LAST, GObject.TYPE_NONE, ())}
 
     def __init__(self, ident):
         Gtk.VBox.__init__(self)
@@ -829,8 +829,8 @@ class OpenerTab(Gtk.VBox):
 
 
 class OpenerSettings(Gtk.Frame):
-    __gsignals__ = { "changed" : (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE,
-                                                    (gobject.TYPE_PYOBJECT,))}
+    __gsignals__ = { "changed" : (GObject.SIGNAL_RUN_LAST, GObject.TYPE_NONE,
+                                                    (GObject.TYPE_PYOBJECT,))}
 
 
     def __init__(self):

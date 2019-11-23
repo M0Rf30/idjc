@@ -243,9 +243,9 @@ class NumberedLabel(Gtk.Label):
 class CellRendererDuration(Gtk.CellRendererText):
     """Render a value in frames as a time mm:ss:hs right justified."""
 
-    __gproperties__ = { "duration" : (gobject.TYPE_UINT64, "duration",
+    __gproperties__ = { "duration" : (GObject.TYPE_UINT64, "duration",
         "playback time expressed in CD audio frames",
-        0, long(3e9), 0, gobject.PARAM_WRITABLE) }
+        0, long(3e9), 0, GObject.PARAM_WRITABLE) }
 
     def __init__(self):
         Gtk.CellRendererText.__init__(self)
@@ -260,8 +260,8 @@ class CellRendererDuration(Gtk.CellRendererText):
 
 class CuesheetPlaylist(Gtk.Frame):
     __gsignals__ = { "playitem" : (
-                        gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE,
-                            (gobject.TYPE_PYOBJECT, gobject.TYPE_PYOBJECT, ))}
+                        GObject.SIGNAL_RUN_LAST, GObject.TYPE_NONE,
+                            (GObject.TYPE_PYOBJECT, GObject.TYPE_PYOBJECT, ))}
 
     def __init__(self):
         Gtk.Frame.__init__(self, " %s " % _('Cuesheet Playlist'))

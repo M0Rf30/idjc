@@ -491,14 +491,14 @@ class CellRendererXCast(Gtk.CellRendererText):
                 "<span foreground='#CCCCCC'>&#x25B4;</span>")
 
     __gproperties__ = {
-        'servertype' : (gobject.TYPE_INT,
+        'servertype' : (GObject.TYPE_INT,
                              'kind of server',
                              'indication by number of the server in use',
-                             0, 3, 0, gobject.PARAM_READWRITE),
-        'sensitive' : (gobject.TYPE_BOOLEAN,
+                             0, 3, 0, GObject.PARAM_READWRITE),
+        'sensitive' : (GObject.TYPE_BOOLEAN,
                             'sensitivity flag',
                             'indication of selectability',
-                             1, gobject.PARAM_READWRITE)
+                             1, GObject.PARAM_READWRITE)
         }
     
     def __init__(self):

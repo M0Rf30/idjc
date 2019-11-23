@@ -1582,20 +1582,20 @@ class IRCConnection(Gtk.TreeRowReference, threading.Thread):
         print("Args:", event.arguments())
 
 
-class MessageHandler(gobject.GObject):
+class MessageHandler(GObject):
     __gsignals__ = { 
-        'channels-changed': (gobject.SIGNAL_RUN_LAST | gobject.SIGNAL_ACTION,
-                                gobject.TYPE_NONE, (gobject.TYPE_PYOBJECT, )),
+        'channels-changed': (GObject.SIGNAL_RUN_LAST | GObject.SIGNAL_ACTION,
+                                GObject.TYPE_NONE, (GObject.TYPE_PYOBJECT, )),
 
-        'privmsg-ready':    (gobject.SIGNAL_RUN_LAST | gobject.SIGNAL_ACTION,
-                            gobject.TYPE_NONE, (gobject.TYPE_PYOBJECT,
-                            gobject.TYPE_STRING, gobject.TYPE_INT))
+        'privmsg-ready':    (GObject.SIGNAL_RUN_LAST | GObject.SIGNAL_ACTION,
+                            GObject.TYPE_NONE, (GObject.TYPE_PYOBJECT,
+                            GObject.TYPE_STRING, GObject.TYPE_INT))
 
     }
 
     __gproperties__ = {
-        'channels': (gobject.TYPE_PYOBJECT, 'channels', 'ircchannels',
-                                                    gobject.PARAM_READABLE)
+        'channels': (GObject.TYPE_PYOBJECT, 'channels', 'ircchannels',
+                                                    GObject.PARAM_READABLE)
     }
     
     @property
@@ -1610,7 +1610,7 @@ class MessageHandler(gobject.GObject):
     subst = dict.fromkeys(subst_keys, "<No data>")
 
     def __init__(self, model, path, stream_active):
-        gobject.GObject.__init__(self)
+        GObject.__init__(self)
         self.tree_row_ref = Gtk.TreeRowReference(model, path)
 
         self._channels = frozenset()

@@ -307,7 +307,7 @@ class FormatDropdown(Gtk.VBox):
         vbox.set_border_width(3)
         frame.add(vbox)
         
-        model = Gtk.ListStore(gobject.TYPE_PYOBJECT)
+        model = Gtk.ListStore(GObject.TYPE_PYOBJECT)
         default = 0
         for index, each in enumerate(elements):
             if "default" in each and each["default"]:
@@ -1193,17 +1193,17 @@ class FormatFamily(FormatDropdown):
 
 class FormatControl(Gtk.VBox):
     __gproperties__ = {
-        'cap-icecast': (gobject.TYPE_BOOLEAN, 'icecast capable',
+        'cap-icecast': (GObject.TYPE_BOOLEAN, 'icecast capable',
                         'if true this format can stream to icecast',
-                        0, gobject.PARAM_READABLE),
+                        0, GObject.PARAM_READABLE),
                         
-        'cap-shoutcast': (gobject.TYPE_BOOLEAN, 'shoutcast capable',
+        'cap-shoutcast': (GObject.TYPE_BOOLEAN, 'shoutcast capable',
                         'if true this format can stream to shoutcast',
-                        0, gobject.PARAM_READABLE),
+                        0, GObject.PARAM_READABLE),
                         
-        'cap-recordable': (gobject.TYPE_BOOLEAN, 'can be recorded',
+        'cap-recordable': (GObject.TYPE_BOOLEAN, 'can be recorded',
                         'if true this format is compatible with the recording facility',
-                        0, gobject.PARAM_READABLE)
+                        0, GObject.PARAM_READABLE)
     }
     
     def __init__(self, send, receive):

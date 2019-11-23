@@ -78,10 +78,10 @@ class CellRendererLED(Gtk.CellRendererPixbuf):
     """A cell renderer that displays LEDs."""
         
     __gproperties__ = {
-            "active" : (gobject.TYPE_INT, "active", "active",
-                            0, 1, 0, gobject.PARAM_WRITABLE),
-            "color" :  (gobject.TYPE_STRING, "color", "color",
-                            "clear", gobject.PARAM_WRITABLE)
+            "active" : (GObject.TYPE_INT, "active", "active",
+                            0, 1, 0, GObject.PARAM_WRITABLE),
+            "color" :  (GObject.TYPE_STRING, "color", "color",
+                            "clear", GObject.PARAM_WRITABLE)
     }
 
     def __init__(self, size=10, actives=("clear", "green")):
@@ -105,8 +105,8 @@ class CellRendererTime(Gtk.CellRendererText):
     
     
     __gproperties__ = {
-            "time" : (gobject.TYPE_INT, "time", "time",
-                         0, 1000000000, 0, gobject.PARAM_WRITABLE)
+            "time" : (GObject.TYPE_INT, "time", "time",
+                         0, 1000000000, 0, GObject.PARAM_WRITABLE)
     }
     
     
@@ -458,8 +458,8 @@ class IconChooserButton(Gtk.Button):
     """
     
     __gsignals__ = {
-            "filename-changed" : (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE,
-                                                    (gobject.TYPE_PYOBJECT,)),
+            "filename-changed" : (GObject.SIGNAL_RUN_LAST, GObject.TYPE_NONE,
+                                                    (GObject.TYPE_PYOBJECT,)),
     }
     
     def __init__(self, dialog):
@@ -630,8 +630,8 @@ class FolderChooserButton(Gtk.Button):
     mode.
     """
 
-    __gsignals__ = { 'current-folder-changed' : (gobject.SIGNAL_RUN_FIRST,
-        gobject.TYPE_NONE, (gobject.TYPE_STRING,))
+    __gsignals__ = { 'current-folder-changed' : (GObject.SIGNAL_RUN_FIRST,
+        GObject.TYPE_NONE, (GObject.TYPE_STRING,))
     }
 
     def __init__(self, dialog=None):

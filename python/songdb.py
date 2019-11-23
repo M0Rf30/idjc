@@ -867,7 +867,7 @@ class TreePage(ViewerCommon):
 
     def __init__(self, notebook, catalogs):
         self.controls = Gtk.HBox()
-        layout_store = Gtk.ListStore(str, Gtk.TreeStore, gobject.TYPE_PYOBJECT)
+        layout_store = Gtk.ListStore(str, Gtk.TreeStore, GObject.TYPE_PYOBJECT)
         self.layout_combo = Gtk.ComboBox(layout_store)
         cell_text = Gtk.CellRendererText()
         self.layout_combo.pack_start(cell_text)
@@ -1510,13 +1510,13 @@ class FlatPage(ViewerCommon):
         return True
 
 
-class CatalogsInterface(gobject.GObject):
-    __gsignals__ = { "changed" : (gobject.SIGNAL_RUN_LAST, None, ()) }
+class CatalogsInterface(GObject):
+    __gsignals__ = { "changed" : (GObject.SIGNAL_RUN_LAST, None, ()) }
     time_unit_table = {N_('Minutes'): 60, N_('Hours'): 3600,
                        N_('Days'): 86400, N_('Weeks'): 604800}
     
     def __init__(self):
-        gobject.GObject.__init__(self)
+        GObject.__init__(self)
         self._dict = {}
 
     def clear(self):
