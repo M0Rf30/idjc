@@ -22,7 +22,7 @@ import gettext
 import ctypes
 from abc import ABCMeta, abstractmethod, abstractproperty
 
-import gtk
+from gi.repository import Gtk
 from gi.repository import GObject
 
 from idjc import FGlobs
