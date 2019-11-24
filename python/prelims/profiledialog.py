@@ -83,9 +83,9 @@ class ProfileEntry(Gtk.Entry):
 
 class NewProfileDialog(Gtk.Dialog):
     _icon_dialog = IconPreviewFileChooserDialog("Choose An Icon",
-                        buttons = (Gtk.STOCK_CLEAR, Gtk.RESPONSE_NONE,
-                                      Gtk.STOCK_CANCEL, Gtk.RESPONSE_CANCEL,
-                                      Gtk.STOCK_OK, Gtk.RESPONSE_OK))
+                        buttons = (Gtk.STOCK_CLEAR, Gtk.ResponseType.NONE,
+                                      Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
+                                      Gtk.STOCK_OK, Gtk.ResponseType.OK))
     
     
     def __init__(self, row, filter_function=None, title_extra = "", edit=False):
