@@ -21,7 +21,7 @@ import os
 import time
 
 import gtk
-import glib
+from gi.repository import GLib
 import pango
 
 from idjc import FGlobs

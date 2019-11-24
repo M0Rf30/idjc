@@ -39,7 +39,7 @@ import dbus
 import dbus.service
 from dbus.mainloop.glib import DBusGMainLoop
 DBusGMainLoop(set_as_default=True)
-import glib
+from gi.repository import GLib
 
 from idjc import FGlobs
 from idjc import PGlobs

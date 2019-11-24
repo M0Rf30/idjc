@@ -26,7 +26,7 @@ import ctypes
 import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
-import glib
+from gi.repository import GLib
 
 from .utils import FixedAttributes
 from .utils import PolicedAttributes
@@ -93,7 +93,7 @@ class PGlobs(object):
       
     __metaclass__ = PolicedAttributes
 
-    config_dir = PathStr(glib.get_user_config_dir()) / FGlobs.package_name
+    config_dir = PathStr(GLib.get_user_config_dir()) / FGlobs.package_name
     #config_dir = PathStr(os.path.expanduser("~")) / ("." + FGlobs.package_name)
     profile_dir = config_dir / "profiles"
     dbus_bus_basename = "net.sf." + FGlobs.package_name

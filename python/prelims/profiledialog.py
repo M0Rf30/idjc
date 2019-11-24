@@ -23,7 +23,7 @@ __all__ = ["ProfileDialog"]
 import atexit
 
 # This is and needs to remain the initial gtk import point.
-import glib
+from gi.repository import GLib
 from gi.repository import GObject
 import gtk
 import pango

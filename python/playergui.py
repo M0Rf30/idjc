@@ -35,7 +35,7 @@ from stat import *
 from collections import deque, namedtuple, defaultdict
 from functools import partial
 
-import glib
+from gi.repository import GLib
 from gi.repository import GObject
 import gtk
 import pango

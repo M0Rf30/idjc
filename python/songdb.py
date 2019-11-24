@@ -31,7 +31,7 @@ from collections import deque, defaultdict
 from contextlib import contextmanager
 from urllib import quote
 
-import glib
+from gi.repository import GLib
 from gi.repository import GObject
 import pango
 import gtk

@@ -23,7 +23,7 @@ import gettext
 import itertools
 
 import gtk
-import glib
+from gi.repository import GLib
 
 from idjc import FGlobs, PGlobs
 from . import licence_window

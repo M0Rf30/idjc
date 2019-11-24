@@ -27,7 +27,7 @@ import gettext
 
 import gtk
 import pango
-import glib
+from gi.repository import GLib
 import mutagen
 import mutagen.id3 as id3
 from mutagen.mp3 import MP3

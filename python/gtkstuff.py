@@ -27,7 +27,7 @@ from contextlib import contextmanager
 from gi.repository import GObject
 from gi.repository import Gtk
 import pango
-import glib
+from gi.repository import GLib
 
 from idjc import FGlobs, PGlobs
 
