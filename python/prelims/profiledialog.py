@@ -56,8 +56,7 @@ _ = t.gettext
 
 
 
-Gtk.window_set_default_icon_from_file(PGlobs.default_icon)
-
+Gtk.Window.set_default_icon_from_file(PGlobs.default_icon)
 
 
 class ProfileEntry(Gtk.Entry):
