@@ -1698,7 +1698,7 @@ class StreamTab(Tab):
         self.metadata_fallback.set_width_chars(10)
         self.metadata_fallback.set_text("<Unknown>")
         self.metadata_update = Gtk.Button()
-        image = Gtk.image_new_from_stock(Gtk.STOCK_EXECUTE, Gtk.ICON_SIZE_MENU)
+        image = Gtk.image_new_from_stock(Gtk.STOCK_EXECUTE, Gtk.IconSize.MENU)
         self.metadata_update.set_image(image)
         image.show()
         self.metadata_update.connect("clicked", self.cb_metadata)
@@ -2255,7 +2255,7 @@ class StreamTabFrame(TabFrame):
         hbox.pack_start(self.metadata_group)
         self.metadata_group.show()
         self.metadata_group_set = Gtk.Button()
-        image = Gtk.image_new_from_stock(Gtk.STOCK_ADD, Gtk.ICON_SIZE_MENU)
+        image = Gtk.image_new_from_stock(Gtk.STOCK_ADD, Gtk.IconSize.MENU)
         self.metadata_group_set.set_image(image)
         image.show()
         self.metadata_group_set.connect("clicked", self.forall,
@@ -2263,7 +2263,7 @@ class StreamTabFrame(TabFrame):
         hbox.pack_start(self.metadata_group_set, False)
         self.metadata_group_set.show()
         self.metadata_group_update = Gtk.Button()
-        image = Gtk.image_new_from_stock(Gtk.STOCK_EXECUTE, Gtk.ICON_SIZE_MENU)
+        image = Gtk.image_new_from_stock(Gtk.STOCK_EXECUTE, Gtk.IconSize.MENU)
         self.metadata_group_update.set_image(image)
         image.show()
         self.metadata_group_update.connect("clicked", self.forall,

@@ -284,7 +284,7 @@ class CuesheetPlaylist(Gtk.Frame):
         def nextprev_unit(label_text):
             def icon_button(stock_item):
                 button = Gtk.Button()
-                image = Gtk.image_new_from_stock(stock_item, Gtk.ICON_SIZE_MENU)
+                image = Gtk.image_new_from_stock(stock_item, Gtk.IconSize.MENU)
                 button.set_image(image)
                 image.show()
                 return button

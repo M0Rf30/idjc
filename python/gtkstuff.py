@@ -483,7 +483,7 @@ class IconChooserButton(Gtk.Button):
         vsep = Gtk.VSeparator()
         hbox.pack_start(vsep, False)
         rightmost_icon = Gtk.image_new_from_stock(Gtk.STOCK_OPEN,
-                                                            Gtk.ICON_SIZE_MENU)
+                                                            Gtk.IconSize.MENU)
         hbox.pack_start(rightmost_icon, False)
         self.add(hbox)
         hbox.show_all()
@@ -646,7 +646,7 @@ class FolderChooserButton(Gtk.Button):
         hbox = Gtk.HBox()
         hbox.set_spacing(3)
         self.add(hbox)
-        self._icon = Gtk.image_new_from_stock(Gtk.STOCK_DIRECTORY, Gtk.ICON_SIZE_MENU)
+        self._icon = Gtk.image_new_from_stock(Gtk.STOCK_DIRECTORY, Gtk.IconSize.MENU)
         hbox.pack_start(self._icon, False)
         # TC: FolderChooserButton text for null -- no directory is set.
         self._label = Gtk.Label(_("(None)"))

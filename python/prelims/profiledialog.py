@@ -257,7 +257,7 @@ class ProfileDialog(Gtk.Dialog):
                             GdkPixbuf.Pixbuf, str, str, int, str, str, int, int)
         self.sorted = Gtk.TreeModelSort(self.store)
         self.sorted.set_sort_func(1, self._sort_func)
-        self.sorted.set_sort_column_id(1, Gtk.SORT_ASCENDING)
+        self.sorted.set_sort_column_id(1, Gtk.SortType.ASCENDING)
         self.treeview = Gtk.TreeView(self.sorted)
         self.treeview.set_headers_visible(True)
         self.treeview.set_rules_hint(True)
@@ -265,7 +265,7 @@ class ProfileDialog(Gtk.Dialog):
         autorend = Gtk.CellRendererPixbuf()
         autorend.props.width = 16
         autorend.props.stock_id = Gtk.STOCK_APPLY
-        autorend.props.stock_size = Gtk.ICON_SIZE_MENU
+        autorend.props.stock_size = Gtk.IconSize.MENU
         pbrend = Gtk.CellRendererPixbuf()
         pbrend.props.width = 16
         strrend = Gtk.CellRendererText()
@@ -275,7 +275,7 @@ class ProfileDialog(Gtk.Dialog):
         strrend_ellip.props.ellipsize = pango.ELLIPSIZE_END
         # TC: column heading. The available profile names appears below.
         c0 = Gtk.TreeViewColumn(None, autorend, visible=7)
-        image = Gtk.image_new_from_stock(Gtk.STOCK_OPEN, Gtk.ICON_SIZE_MENU)
+        image = Gtk.image_new_from_stock(Gtk.STOCK_OPEN, Gtk.IconSize.MENU)
         c0.set_widget(image)
         image.show()
         self.treeview.append_column(c0)
@@ -490,7 +490,7 @@ class ProfileDialog(Gtk.Dialog):
         cell.set_visible(val)
         if val:
             cell.props.stock_id = Gtk.STOCK_APPLY
-            cell.props.stock_size = Gtk.ICON_SIZE_MENU
+            cell.props.stock_size = Gtk.IconSize.MENU
 
 
     def _update_data(self):
