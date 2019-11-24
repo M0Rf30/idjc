@@ -1365,7 +1365,7 @@ def make_stream_meter_unit(text, meters):
     frame.set_label_align(0.5, 0.5)
     pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(
                             PGlobs.themedir / "listenerphones.png", 20, 16)
-    image = Gtk.image_new_from_pixbuf(pixbuf)
+    image = Gtk.Image.new_from_pixbuf(pixbuf)
     frame.set_label_widget(image)
     image.show()
     

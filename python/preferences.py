@@ -1140,7 +1140,7 @@ class mixprefs:
                 pathname = path / name + ".png"
                 pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(pathname,
                                                               16, 16)
-                image = Gtk.image_new_from_pixbuf(pixbuf)
+                image = Gtk.Image.new_from_pixbuf(pixbuf)
                 return image
                 
             for each in "play2 pause stop next repeat".split():

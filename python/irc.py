@@ -213,7 +213,7 @@ class IRCEntry(Gtk.Entry):  # pylint: disable=R0904
 
                 pixbuf = GdkPixbuf.Pixbuf(Gdk.COLORSPACE_RGB, True, 8, 20, 20)
                 pixbuf.fill(rgba)
-                image = Gtk.image_new_from_pixbuf(pixbuf)
+                image = Gtk.Image.new_from_pixbuf(pixbuf)
                 image.connect_after("expose-event", 
                                     lambda w,e: self._on_colour_box_expose(w))
                 hbox.pack_start(image)

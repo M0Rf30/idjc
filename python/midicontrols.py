@@ -2084,7 +2084,7 @@ class ControlsUI(Gtk.VBox):
                 row = tv.get_model()[path[0]]
                 hbox = Gtk.HBox()
                 hbox.set_spacing(3)
-                hbox.pack_start(Gtk.image_new_from_pixbuf(row[3].copy()), False)
+                hbox.pack_start(Gtk.Image.new_from_pixbuf(row[3].copy()), False)
                 hbox.pack_start(Gtk.Label(row[4]), False)
                 hbox.pack_start(Gtk.Label("  " + row[5] + row[6]), False)
                 if row[7]:

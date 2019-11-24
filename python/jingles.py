@@ -92,7 +92,7 @@ class Effect(Gtk.HBox):
         self.pack_start(self.led, False)
         self.old_ledval = 0
         
-        image = Gtk.image_new_from_file(PGlobs.themedir / "stop.png")
+        image = Gtk.Image.new_from_file(PGlobs.themedir / "stop.png")
         image.set_padding(4, 4)
         self.stop = Gtk.Button()
         self.stop.set_image(image)
@@ -431,14 +431,14 @@ class EffectBank(Gtk.Frame):
         level_vbox = Gtk.VBox()
         hbox.pack_start(level_vbox, False, padding=3)
         
-        vol_image = Gtk.image_new_from_file(PGlobs.themedir / "volume2.png")
+        vol_image = Gtk.Image.new_from_file(PGlobs.themedir / "volume2.png")
         vol = Gtk.VScale(vol_adj)
         vol.set_inverted(True)
         vol.set_draw_value(False)
         set_tip(vol, _('Effects volume.'))
 
         pb = Gdk.pixbuf_new_from_file(PGlobs.themedir / "headroom.png")
-        mute_image = Gtk.image_new_from_pixbuf(pb)
+        mute_image = Gtk.Image.new_from_pixbuf(pb)
         mute = Gtk.VScale(mute_adj)
         mute.set_inverted(True)
         mute.set_draw_value(False)
@@ -617,7 +617,7 @@ class ExtraPlayers(Gtk.HBox):
         ilevel_vbox = Gtk.VBox()
         hbox.pack_start(ilevel_vbox, False, padding=3)
         volpb = Gdk.pixbuf_new_from_file(PGlobs.themedir / "volume2.png")
-        ivol_image = Gtk.image_new_from_pixbuf(volpb)
+        ivol_image = Gtk.Image.new_from_pixbuf(volpb)
         ilevel_vbox.pack_start(ivol_image, False, padding=2)
         ivol = Gtk.VScale(self.ivol_adj)
         ivol.set_inverted(True)

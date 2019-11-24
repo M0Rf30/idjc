@@ -821,7 +821,7 @@ class ConnectionPane(Gtk.VBox):
         set_tip(ihbox, _('The sum total of listeners in this server tab.'))
         pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(
                             PGlobs.themedir / "listenerphones.png", 20, 16)
-        image = Gtk.image_new_from_pixbuf(pixbuf)
+        image = Gtk.Image.new_from_pixbuf(pixbuf)
         ihbox.pack_start(image, False, False, 0)
         image.show()
         frame = Gtk.Frame()
