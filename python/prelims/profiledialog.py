@@ -272,7 +272,7 @@ class ProfileDialog(Gtk.Dialog):
         ledrend = CellRendererLED()
         time_rend = CellRendererTime()
         strrend_ellip = Gtk.CellRendererText()
-        strrend_ellip.props.ellipsize = pango.ELLIPSIZE_END
+        strrend_ellip.props.ellipsize = Pango.EllipsizeMode.END
         # TC: column heading. The available profile names appears below.
         c0 = Gtk.TreeViewColumn(None, autorend, visible=7)
         image = Gtk.image_new_from_stock(Gtk.STOCK_OPEN, Gtk.IconSize.MENU)
