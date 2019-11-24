@@ -75,7 +75,7 @@ class LEDDict(dict):
                          "led_lit_green_black_border_64x64.png",
                          "led_lit_amber_black_border_64x64.png")
         for name, filename in zip(names, filenames):
-            self[name] = Gdk.pixbuf_new_from_file_at_size(
+            self[name] = GdkPixbuf.Pixbuf.new_from_file_at_size(
                 FGlobs.pkgdatadir / filename, size, size)
 
 
@@ -497,7 +497,7 @@ class IconChooserButton(Gtk.Button):
     def set_filename(self, f):
         try:
             disp = GLib.filename_display_name(f)
-            pb = Gdk.pixbuf_new_from_file_at_size(f, 16, 16)
+            pb = GdkPixbuf.Pixbuf.new_from_file_at_size(f, 16, 16)
         except (GLib.GError, TypeError):
             # TC: Text reads as /path/to/file.ext or this when no file is chosen.
             self._label.set_text(_("(None)"))
@@ -555,7 +555,7 @@ class IconPreviewFileChooserDialog(Gtk.FileChooserDialog):
     def _cb_update_preview(self, dialog, image):
         f = self.get_preview_filename()
         try:
-            pb = Gdk.pixbuf_new_from_file_at_size(f, 16, 16)
+            pb = GdkPixbuf.Pixbuf.new_from_file_at_size(f, 16, 16)
         except (GLib.GError, TypeError):
             active = False
         else:

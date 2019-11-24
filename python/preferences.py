@@ -1138,7 +1138,7 @@ class mixprefs:
             
             def image(name):
                 pathname = path / name + ".png"
-                pixbuf = Gdk.pixbuf_new_from_file_at_size(pathname,
+                pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(pathname,
                                                               16, 16)
                 image = Gtk.image_new_from_pixbuf(pixbuf)
                 return image

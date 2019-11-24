@@ -607,7 +607,7 @@ class MicButton(Gtk.ToggleButton):
         self._icon_image = Gtk.Image()
         icon = opener_tab.icb.get_filename()
         try:
-            pb = Gdk.pixbuf_new_from_file_at_size(icon, 47, 20)
+            pb = GdkPixbuf.Pixbuf.new_from_file_at_size(icon, 47, 20)
         except (TypeError, GLib.GError):
             pass
         else:
@@ -1363,7 +1363,7 @@ def make_stream_meter_unit(text, meters):
     
     frame = Gtk.Frame()  # Main panel listener figures box.
     frame.set_label_align(0.5, 0.5)
-    pixbuf = Gdk.pixbuf_new_from_file_at_size(
+    pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(
                             PGlobs.themedir / "listenerphones.png", 20, 16)
     image = Gtk.image_new_from_pixbuf(pixbuf)
     frame.set_label_widget(image)
@@ -1750,9 +1750,9 @@ class MicMeter(Gtk.VBox):
         lhbox.add(pad)
         pad.show()
         lhbox.set_spacing(2)
-        self.led_onpb = Gdk.pixbuf_new_from_file_at_size(
+        self.led_onpb = GdkPixbuf.Pixbuf.new_from_file_at_size(
             FGlobs.pkgdatadir / "led_lit_green_black_border_64x64.png", 7, 7)
-        self.led_offpb = Gdk.pixbuf_new_from_file_at_size(
+        self.led_offpb = GdkPixbuf.Pixbuf.new_from_file_at_size(
             FGlobs.pkgdatadir / "led_unlit_clear_border_64x64.png", 7, 7)
         self.led = Gtk.Image()
         lhbox.pack_start(self.led, False, False)
@@ -1815,7 +1815,7 @@ class RecIndicator(Gtk.HBox):
         self.pack_start(self.image, False)
         self.image.show()
         
-        self.led = [Gdk.pixbuf_new_from_file_at_size(
+        self.led = [GdkPixbuf.Pixbuf.new_from_file_at_size(
             FGlobs.pkgdatadir / (which + ".png"), 9, 9) for which in (
             "led_unlit_clear_border_64x64", "led_lit_red_black_border_64x64",
             "led_lit_amber_black_border_64x64")]

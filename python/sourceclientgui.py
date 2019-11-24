@@ -819,7 +819,7 @@ class ConnectionPane(Gtk.VBox):
         self.listener_count_button = Gtk.Button()
         ihbox = Gtk.HBox()
         set_tip(ihbox, _('The sum total of listeners in this server tab.'))
-        pixbuf = Gdk.pixbuf_new_from_file_at_size(
+        pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(
                             PGlobs.themedir / "listenerphones.png", 20, 16)
         image = Gtk.image_new_from_pixbuf(pixbuf)
         ihbox.pack_start(image, False, False, 0)
@@ -1963,7 +1963,7 @@ class RecordTab(Tab):
                 self.parentobject.receive()
 
         def path2image(self, pathname):
-            pixbuf = Gdk.pixbuf_new_from_file_at_size(pathname, 14, 14)
+            pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(pathname, 14, 14)
             image = Gtk.Image()
             image.set_from_pixbuf(pixbuf)
             image.show()
@@ -2159,7 +2159,7 @@ class TabFrame(ModuleFrame):
             indicator_lookup = {}
             for colour, indicator in indicatorlist:
                 image = Gtk.Image()
-                pixbuf = Gdk.pixbuf_new_from_file_at_size(
+                pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(
                             FGlobs.pkgdatadir / (indicator + ".png"), 16, 16)
                 image.set_from_pixbuf(pixbuf)
                 labelbox.add(image)

@@ -512,7 +512,7 @@ class ProfileDialog(Gtk.Dialog):
                             i = None
                     if i is not None:
                         try:
-                            pb = Gdk.pixbuf_new_from_file_at_size(i, 16, 16)
+                            pb = GdkPixbuf.Pixbuf.new_from_file_at_size(i, 16, 16)
                         except GLib.GError:
                             pb = i = None
                     else:

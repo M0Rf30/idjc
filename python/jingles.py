@@ -120,7 +120,7 @@ class Effect(Gtk.HBox):
         
         self.repeat = Gtk.ToggleButton()
         image = Gtk.Image()
-        pb = Gdk.pixbuf_new_from_file_at_size(PGlobs.themedir / "repeat.png", 23, 19)
+        pb = GdkPixbuf.Pixbuf.new_from_file_at_size(PGlobs.themedir / "repeat.png", 23, 19)
         image.set_from_pixbuf(pb)
         self.repeat.add(image)
         image.show()
