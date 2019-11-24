@@ -30,6 +30,7 @@ from gi.repository import GLib
 from gi.repository import GObject
 from gi.repository import Gtk
 from gi.repository import Gdk
+from gi.repository import GdkPixbuf
 from gi.repository import Pango
 
 from idjc import PGlobs, FGlobs
@@ -249,11 +250,11 @@ class ProfileDialog(Gtk.Dialog):
         self.set_border_width(6)
         w = Gtk.ScrolledWindow()
         w.set_border_width(6)
-        w.set_shadow_type(Gtk.SHADOW_ETCHED_OUT)
-        w.set_policy(Gtk.POLICY_NEVER, Gtk.POLICY_AUTOMATIC)
+        w.set_shadow_type(Gtk.ShadowType.ETCHED_OUT)
+        w.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
         self.get_content_area().add(w)
         self.store = Gtk.ListStore(
-                            Gdk.Pixbuf, str, str, int, str, str, int, int)
+                            GdkPixbuf.Pixbuf, str, str, int, str, str, int, int)
         self.sorted = Gtk.TreeModelSort(self.store)
         self.sorted.set_sort_func(1, self._sort_func)
         self.sorted.set_sort_column_id(1, Gtk.SORT_ASCENDING)
