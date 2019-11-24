@@ -35,6 +35,7 @@ gi.require_version('Gtk', '3.0')
 gi.require_version('Pango', '1.0')
 from gi.repository import GObject
 from gi.repository import Gtk
+from gi.repository import Gdk
 from gi.repository import Pango
 
 try:
@@ -121,10 +122,10 @@ class IRCEntry(Gtk.Entry):  # pylint: disable=R0904
             return True
             
         # Check for CTRL key modifier.
-        if event.state & Gtk.gdk.CONTROL_MASK:
+        if event.state & Gdk.CONTROL_MASK:
             # Remove the effect of CAPS lock - works for letter keys only.
             keyval = event.keyval + (
-                                32 if event.state & Gtk.gdk.LOCK_MASK else 0)
+                                32 if event.state & Gdk.LOCK_MASK else 0)
             try:
                 replacement = self._control_keytable[keyval]
             except KeyError:
@@ -210,7 +211,7 @@ class IRCEntry(Gtk.Entry):  # pylint: disable=R0904
                 hbox.pack_start(label)
                 label.show()
 
-                pixbuf = Gtk.gdk.Pixbuf(Gtk.gdk.COLORSPACE_RGB, True, 8, 20, 20)
+                pixbuf = Gdk.Pixbuf(Gdk.COLORSPACE_RGB, True, 8, 20, 20)
                 pixbuf.fill(rgba)
                 image = Gtk.image_new_from_pixbuf(pixbuf)
                 image.connect_after("expose-event", 

@@ -41,6 +41,7 @@ gi.require_version('Pango', '1.0')
 from gi.repository import GLib
 from gi.repository import GObject
 from gi.repository import Gtk
+from gi.repository import Gdk
 from gi.repository import Pango
 import mutagen
 import dbus
@@ -537,13 +538,13 @@ class AnnouncementDialog(Gtk.Dialog):
                     if inttime == 5:
                         self.attrlist.change(self.fontcolour_red)
                     if lock:
-                        Gtk.gdk.threads_leave()
+                        Gdk.threads_leave()
                     return True
                 else:
                     self.countdownlabel.set_text("--:--")
                     self.attrlist.change(self.fontcolour_black)
                     if lock:
-                        Gtk.gdk.threads_leave()
+                        Gdk.threads_leave()
                         self.report("overtime")
                     return False
         return True
@@ -3170,7 +3171,7 @@ class IDJC_Media_Player(dbus.service.Object):
             return
 
     def drag_data_delete(self, treeview, context):
-        if context.action == Gtk.gdk.ACTION_MOVE:
+        if context.action == Gdk.ACTION_MOVE:
             treeselection = treeview.get_selection()
             model, iter = treeselection.get_selected()
             data = model.get_value(iter, 0)
@@ -3213,10 +3214,10 @@ class IDJC_Media_Player(dbus.service.Object):
                         model.insert_before(iter_, newrow)
                     else:
                         model.insert_after(iter_, newrow)
-                if context.action == Gtk.gdk.ACTION_MOVE:
+                if context.action == Gdk.ACTION_MOVE:
                     context.finish(True, True, etime)
             else:
-                if context.action == Gtk.gdk.ACTION_MOVE:
+                if context.action == Gdk.ACTION_MOVE:
                     context.finish(True, True, etime)
                 elements = self.get_elements_from([urllib.unquote(t[7:])
                                     for t in dragged.data.strip().splitlines() 
@@ -3253,7 +3254,7 @@ class IDJC_Media_Player(dbus.service.Object):
                     self.liststore.move_before(iter_, dest_iter)
                 else:
                     self.liststore.move_after(iter_, dest_iter)
-            if context.action == Gtk.gdk.ACTION_MOVE:
+            if context.action == Gdk.ACTION_MOVE:
                 context.finish(False, False, etime)
         return True
 
@@ -3341,7 +3342,7 @@ class IDJC_Media_Player(dbus.service.Object):
         self.playlist_changed = True        # used by the request system
 
     def menu_activate(self, widget, event):
-        if event.type == Gtk.gdk.BUTTON_PRESS and event.button == 3:
+        if event.type == Gdk.BUTTON_PRESS and event.button == 3:
             self.menu_model = self.treeview.get_model()
             row_info = self.treeview.get_dest_row_at_pos(int(event.x + 0.5),
                                                             int(event.y + 0.5))
@@ -3682,7 +3683,7 @@ class IDJC_Media_Player(dbus.service.Object):
 
     def cb_keypress(self, widget, event):
         # Handle shifted arrow keys for rearranging stuff in the playlist.
-        if event.state & Gtk.gdk.SHIFT_MASK:
+        if event.state & Gdk.SHIFT_MASK:
             if event.keyval == 65362:
                 self.arrow_up()
                 return True
@@ -3850,7 +3851,7 @@ class IDJC_Media_Player(dbus.service.Object):
             text = "%d:%02d" % (mins, secs)
             cell_renderer.set_property("text", text)
 
-    gray = Gtk.gdk.color_parse("#BBB")
+    gray = Gdk.color_parse("#BBB")
     # Class variable for use by rowconfig.
     control_cell_properties = {
         ">fade10":          (("cell-background", "dark red"),
@@ -4169,10 +4170,10 @@ class IDJC_Media_Player(dbus.service.Object):
         self.treeview.set_search_column(0)
         self.treeview.set_headers_visible(False)
         self.treeview.set_enable_search(False)
-        self.treeview.enable_model_drag_source( Gtk.gdk.BUTTON1_MASK,
-            self.sourcetargets, Gtk.gdk.ACTION_DEFAULT | Gtk.gdk.ACTION_MOVE)
+        self.treeview.enable_model_drag_source( Gdk.BUTTON1_MASK,
+            self.sourcetargets, Gdk.ACTION_DEFAULT | Gdk.ACTION_MOVE)
         self.treeview.enable_model_drag_dest( self.droptargets,
-                                                        Gtk.gdk.ACTION_DEFAULT)
+                                                        Gdk.ACTION_DEFAULT)
 
         self.treeview.connect("drag_data_get", self.drag_data_get_data)
         self.treeview.connect("drag_data_received",
@@ -4258,9 +4259,9 @@ class IDJC_Media_Player(dbus.service.Object):
 
         self.pbspeedzerobutton = Gtk.Button()
         self.pbspeedzerobutton.connect("clicked", self.callback, "pbspeedzero")
-        pixbuf = Gtk.gdk.pixbuf_new_from_file(
+        pixbuf = Gdk.pixbuf_new_from_file(
                                             PGlobs.themedir / "speedicon.png")
-        pixbuf = pixbuf.scale_simple(55, 14, Gtk.gdk.INTERP_BILINEAR)
+        pixbuf = pixbuf.scale_simple(55, 14, Gdk.INTERP_BILINEAR)
         image = Gtk.Image()
         image.set_from_pixbuf(pixbuf)
         image.show()
@@ -4287,8 +4288,8 @@ class IDJC_Media_Player(dbus.service.Object):
         self.prev.show()
         set_tip(self.prev, _('Previous track.'))
 
-        pixbuf = Gtk.gdk.pixbuf_new_from_file(PGlobs.themedir / "play2.png")
-        pixbuf = pixbuf.scale_simple(14, 14, Gtk.gdk.INTERP_BILINEAR)
+        pixbuf = Gdk.pixbuf_new_from_file(PGlobs.themedir / "play2.png")
+        pixbuf = pixbuf.scale_simple(14, 14, Gdk.INTERP_BILINEAR)
         image=Gtk.Image()
         image.set_from_pixbuf(pixbuf)
         image.show()
@@ -4329,8 +4330,8 @@ class IDJC_Media_Player(dbus.service.Object):
         self.next.show()
         set_tip(self.next, _('Next track.'))
 
-        pixbuf = Gtk.gdk.pixbuf_new_from_file(PGlobs.themedir / "add3.png")
-        pixbuf = pixbuf.scale_simple(14, 14, Gtk.gdk.INTERP_HYPER)
+        pixbuf = Gdk.pixbuf_new_from_file(PGlobs.themedir / "add3.png")
+        pixbuf = pixbuf.scale_simple(14, 14, Gdk.INTERP_HYPER)
         image = Gtk.Image()
         image.set_from_pixbuf(pixbuf)
         image.show()

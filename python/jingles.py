@@ -23,8 +23,12 @@ import gettext
 import json
 import uuid
 
-import gtk
+import gi
+gi.require_version('Gtk', '3.0')
+from gi.repository import Gtk
+from gi.repository import Gdk
 from gi.repository import GObject
+from gi.repository import Gdk
 import itertools
 import urllib
 
@@ -110,13 +114,13 @@ class Effect(Gtk.HBox):
         self.pack_start(pvbox, False)
         self.trigger.connect("clicked", self._on_trigger)
         self.trigger.drag_dest_set(Gtk.DEST_DEFAULT_ALL,
-            self.dndtargets, Gtk.gdk.ACTION_DEFAULT | Gtk.gdk.ACTION_COPY)
+            self.dndtargets, Gdk.ACTION_DEFAULT | Gdk.ACTION_COPY)
         self.trigger.connect("drag-data-received", self._drag_data_received)
         set_tip(self.trigger, _('Play'))
         
         self.repeat = Gtk.ToggleButton()
         image = Gtk.Image()
-        pb = Gtk.gdk.pixbuf_new_from_file_at_size(PGlobs.themedir / "repeat.png", 23, 19)
+        pb = Gdk.pixbuf_new_from_file_at_size(PGlobs.themedir / "repeat.png", 23, 19)
         image.set_from_pixbuf(pb)
         self.repeat.add(image)
         image.show()
@@ -129,8 +133,8 @@ class Effect(Gtk.HBox):
         self.config.set_image(image)
         self.pack_start(self.config, False)
         self.config.connect("clicked", self._on_config)
-        self.config.drag_source_set(Gtk.gdk.BUTTON1_MASK,
-            self.dndsources, Gtk.gdk.ACTION_DEFAULT | Gtk.gdk.ACTION_COPY)
+        self.config.drag_source_set(Gdk.BUTTON1_MASK,
+            self.dndsources, Gdk.ACTION_DEFAULT | Gdk.ACTION_COPY)
         self.config.connect("drag-begin", self._drag_begin)
         self.config.connect("drag-data-get", self._drag_get_data)
         self.config.connect("drag-end", self._drag_end)
@@ -433,7 +437,7 @@ class EffectBank(Gtk.Frame):
         vol.set_draw_value(False)
         set_tip(vol, _('Effects volume.'))
 
-        pb = Gtk.gdk.pixbuf_new_from_file(PGlobs.themedir / "headroom.png")
+        pb = Gdk.pixbuf_new_from_file(PGlobs.themedir / "headroom.png")
         mute_image = Gtk.image_new_from_pixbuf(pb)
         mute = Gtk.VScale(mute_adj)
         mute.set_inverted(True)
@@ -612,7 +616,7 @@ class ExtraPlayers(Gtk.HBox):
 
         ilevel_vbox = Gtk.VBox()
         hbox.pack_start(ilevel_vbox, False, padding=3)
-        volpb = Gtk.gdk.pixbuf_new_from_file(PGlobs.themedir / "volume2.png")
+        volpb = Gdk.pixbuf_new_from_file(PGlobs.themedir / "volume2.png")
         ivol_image = Gtk.image_new_from_pixbuf(volpb)
         ilevel_vbox.pack_start(ivol_image, False, padding=2)
         ivol = Gtk.VScale(self.ivol_adj)

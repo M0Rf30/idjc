@@ -29,15 +29,16 @@ gi.require_version('Pango', '1.0')
 from gi.repository import GLib
 from gi.repository import GObject
 from gi.repository import Gtk
+from gi.repository import Gdk
 from gi.repository import Pango
 
 from idjc import PGlobs, FGlobs
 from idjc.prelims import MAX_PROFILE_LENGTH, profile_name_valid, default
 from ..utils import Singleton
 
-Gtk.gdk.threads_init()
-Gtk.gdk.threads_enter()
-atexit.register(Gtk.gdk.threads_leave)
+Gdk.threads_init()
+Gdk.threads_enter()
+atexit.register(Gdk.threads_leave)
 
 from ..gtkstuff import ConfirmationDialog
 from ..gtkstuff import ErrorMessageDialog
@@ -253,7 +254,7 @@ class ProfileDialog(Gtk.Dialog):
         w.set_policy(Gtk.POLICY_NEVER, Gtk.POLICY_AUTOMATIC)
         self.get_content_area().add(w)
         self.store = Gtk.ListStore(
-                            Gtk.gdk.Pixbuf, str, str, int, str, str, int, int)
+                            Gdk.Pixbuf, str, str, int, str, str, int, int)
         self.sorted = Gtk.TreeModelSort(self.store)
         self.sorted.set_sort_func(1, self._sort_func)
         self.sorted.set_sort_column_id(1, Gtk.SORT_ASCENDING)
@@ -511,7 +512,7 @@ class ProfileDialog(Gtk.Dialog):
                             i = None
                     if i is not None:
                         try:
-                            pb = Gtk.gdk.pixbuf_new_from_file_at_size(i, 16, 16)
+                            pb = Gdk.pixbuf_new_from_file_at_size(i, 16, 16)
                         except GLib.GError:
                             pb = i = None
                     else:

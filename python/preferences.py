@@ -22,8 +22,11 @@ import shutil
 import gettext
 import itertools
 
-import gtk
+import gi
+gi.require_version('Gtk', '3.0')
+from gi.repository import Gtk
 from gi.repository import GLib
+from gi.repository import Gdk
 
 from idjc import FGlobs, PGlobs
 from . import licence_window
@@ -1134,7 +1137,7 @@ class mixprefs:
             
             def image(name):
                 pathname = path / name + ".png"
-                pixbuf = Gtk.gdk.pixbuf_new_from_file_at_size(pathname,
+                pixbuf = Gdk.pixbuf_new_from_file_at_size(pathname,
                                                               16, 16)
                 image = Gtk.image_new_from_pixbuf(pixbuf)
                 return image
@@ -1550,7 +1553,7 @@ class mixprefs:
         vbox.pack_start(label, False, False, 0)
         label.show()
         
-        pixbuf = Gtk.gdk.pixbuf_new_from_file(FGlobs.pkgdatadir / "logo.png")
+        pixbuf = Gdk.pixbuf_new_from_file(FGlobs.pkgdatadir / "logo.png")
         image = Gtk.Image()
         image.set_from_pixbuf(pixbuf)
         vbox.pack_start(image, False, False, 8)

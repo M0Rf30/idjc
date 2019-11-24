@@ -30,6 +30,7 @@ gi.require_version('Gtk', '3.0')
 gi.require_version('Pango', '1.0')
 from gi.repository import GObject
 from gi.repository import Gtk
+from gi.repository import Gdk
 from gi.repository import Pango
 import dbus
 import dbus.service
@@ -385,7 +386,7 @@ class Binding(tuple):
     #
     @staticmethod
     def key_to_str(k):
-        name= Gtk.gdk.keyval_name(k)
+        name= Gdk.keyval_name(k)
         if name is None:
             return '<%04X>' % k
         return name
@@ -407,13 +408,13 @@ class Binding(tuple):
         if s.lower()=='backspace':
             # TC: The name of the backspace key.
             s= _('BackSpace')
-        n= Gtk.gdk.keyval_from_name(s)
+        n= Gdk.keyval_from_name(s)
         if n==0:
-            n= Gtk.gdk.keyval_from_name(s.lower())
+            n= Gdk.keyval_from_name(s.lower())
         if n==0:
-            n= Gtk.gdk.keyval_from_name(s.title())
+            n= Gdk.keyval_from_name(s.title())
         if n==0:
-            n= Gtk.gdk.keyval_from_name(s[:1].upper()+s[1:].lower())
+            n= Gdk.keyval_from_name(s[:1].upper()+s[1:].lower())
         return n
 
     # Note names. Convert to/from MIDI note/octave format.
@@ -443,13 +444,13 @@ class Binding(tuple):
     # a simple 0..127 range, for easy use in a SpinButton.
     #
     MODIFIERS= (
-        (Gtk.gdk.SHIFT_MASK, u'\u21D1'),
-        (Gtk.gdk.CONTROL_MASK, u'^'),
-        (Gtk.gdk.MOD1_MASK, u'\u2020'), # alt/option
-        (Gtk.gdk.MOD5_MASK, u'\u2021'), # altgr/option
-        (Gtk.gdk.META_MASK, u'\u25C6'),
-        (Gtk.gdk.SUPER_MASK, u'\u2318'), # win/command
-        (Gtk.gdk.HYPER_MASK, u'\u25CF'),
+        (Gdk.SHIFT_MASK, u'\u21D1'),
+        (Gdk.CONTROL_MASK, u'^'),
+        (Gdk.MOD1_MASK, u'\u2020'), # alt/option
+        (Gdk.MOD5_MASK, u'\u2021'), # altgr/option
+        (Gdk.META_MASK, u'\u25C6'),
+        (Gdk.SUPER_MASK, u'\u2318'), # win/command
+        (Gdk.HYPER_MASK, u'\u25CF'),
     )
     MODIFIERS_MASK= sum(m for m, c in MODIFIERS)
 
@@ -685,7 +686,7 @@ class Controls(dbus.service.Object):
         #
         if not(0xFFE1<=event.keyval<0xFFEF or 0xFE01<=event.keyval<0xFE35):
             state= event.state&Binding.MODIFIERS_MASK
-            v= 0x7F if event.type==Gtk.gdk.KEY_PRESS else 0
+            v= 0x7F if event.type==Gdk.KEY_PRESS else 0
             self.input('k%x.%x' % (state, event.keyval), v)
 
     # Utility for p_ control methods
@@ -1344,7 +1345,7 @@ class LookupComboBox(Gtk.ComboBox):
    def __init__(self, values, texts, icons= None):
       self._values = values
       if icons is not None:
-          model = Gtk.ListStore(str, bool, Gtk.gdk.Pixbuf)
+          model = Gtk.ListStore(str, bool, Gdk.Pixbuf)
       else:
           model = Gtk.ListStore(str, bool)
       for valuei, value in enumerate(values):
@@ -1985,7 +1986,7 @@ class ControlsUI(Gtk.VBox):
 
         self.source_icons= {}
         for ct in Binding.SOURCES:
-            self.source_icons[ct]= Gtk.gdk.pixbuf_new_from_file(
+            self.source_icons[ct]= Gdk.pixbuf_new_from_file(
                         PGlobs.themedir / ('control_' + ct + ".png"))
         self.editor= BindingEditor(self)
         self.editor.connect('response', self.on_editor_response)
@@ -2238,7 +2239,7 @@ class BindingListModel(Gtk.GenericTreeModel):
 
     # Make column data from binding objects
     #
-    column_types= [str, str, str, Gtk.gdk.Pixbuf, str, str, str, str, str]
+    column_types= [str, str, str, Gdk.Pixbuf, str, str, str, str, str]
     def on_get_value(self, binding, i):
         if i<3: # invisible sort columns
             inputix= '%02x.%02x.%04x' % (Binding.SOURCES.index(binding.source),

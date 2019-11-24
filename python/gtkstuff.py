@@ -29,6 +29,7 @@ gi.require_version('Gtk', '3.0')
 gi.require_version('Pango', '1.0')
 from gi.repository import GObject
 from gi.repository import Gtk
+from gi.repository import Gdk
 from gi.repository import Pango
 from gi.repository import GLib
 
@@ -73,7 +74,7 @@ class LEDDict(dict):
                          "led_lit_green_black_border_64x64.png",
                          "led_lit_amber_black_border_64x64.png")
         for name, filename in zip(names, filenames):
-            self[name] = Gtk.gdk.pixbuf_new_from_file_at_size(
+            self[name] = Gdk.pixbuf_new_from_file_at_size(
                 FGlobs.pkgdatadir / filename, size, size)
 
 
@@ -198,7 +199,7 @@ def threadslock(inner):
     
     @wraps(inner)
     def wrapper(*args, **kwargs):
-        Gtk.gdk.threads_enter()
+        Gdk.threads_enter()
         try:
             if Gtk.main_level():
                 return inner(*args, **kwargs)
@@ -207,7 +208,7 @@ def threadslock(inner):
                 print("callback cancelled")
                 return False
         finally:
-            Gtk.gdk.threads_leave()
+            Gdk.threads_leave()
     return wrapper
 
 
@@ -215,9 +216,9 @@ def threadslock(inner):
 def gdklock():
     """Like threadslock but for 'with' code blocks that manipulate Gtk."""
     
-    Gtk.gdk.threads_enter()
+    Gdk.threads_enter()
     yield
-    Gtk.gdk.threads_leave()
+    Gdk.threads_leave()
     
     
 @contextmanager
@@ -227,9 +228,9 @@ def gdkunlock():
     Useful for calling threadslock functions when already locked.
     """
     
-    Gtk.gdk.threads_leave()
+    Gdk.threads_leave()
     yield
-    Gtk.gdk.threads_enter()
+    Gdk.threads_enter()
 
 
 @contextmanager
@@ -257,13 +258,13 @@ class DefaultEntry(Gtk.Entry):
         layout.set_markup("<span foreground='dark gray'>%s</span>" %
                                                             self.default_text)
         extents = layout.get_pixel_extents()[1]
-        drawable = Gtk.gdk.Pixmap(self.get_parent_window(), extents[2],
+        drawable = Gdk.Pixmap(self.get_parent_window(), extents[2],
                                                             extents[3])
-        gc = Gtk.gdk.GC(drawable)
+        gc = Gdk.GC(drawable)
         gc2 = entry.props.style.base_gc[0]
         drawable.draw_rectangle(gc2, True, *extents)
         drawable.draw_layout(gc, 0, 0, layout)
-        pixbuf = Gtk.gdk.Pixbuf(Gtk.gdk.COLORSPACE_RGB, True, 8, extents[2],
+        pixbuf = Gdk.Pixbuf(Gdk.COLORSPACE_RGB, True, 8, extents[2],
                                                             extents[3])
         pixbuf.get_from_drawable(drawable, drawable.get_colormap(), 0, 0,
                                                             *extents)
@@ -451,7 +452,7 @@ class WindowSizeTracker(object):
     def _on_window_state_event(self, widget, event): 
         if self._is_tracking:
             self._max = event.new_window_state & \
-                                        Gtk.gdk.WINDOW_STATE_MAXIMIZED != 0
+                                        Gdk.WINDOW_STATE_MAXIMIZED != 0
 
 
 class IconChooserButton(Gtk.Button):
@@ -495,7 +496,7 @@ class IconChooserButton(Gtk.Button):
     def set_filename(self, f):
         try:
             disp = GLib.filename_display_name(f)
-            pb = Gtk.gdk.pixbuf_new_from_file_at_size(f, 16, 16)
+            pb = Gdk.pixbuf_new_from_file_at_size(f, 16, 16)
         except (GLib.GError, TypeError):
             # TC: Text reads as /path/to/file.ext or this when no file is chosen.
             self._label.set_text(_("(None)"))
@@ -553,7 +554,7 @@ class IconPreviewFileChooserDialog(Gtk.FileChooserDialog):
     def _cb_update_preview(self, dialog, image):
         f = self.get_preview_filename()
         try:
-            pb = Gtk.gdk.pixbuf_new_from_file_at_size(f, 16, 16)
+            pb = Gdk.pixbuf_new_from_file_at_size(f, 16, 16)
         except (GLib.GError, TypeError):
             active = False
         else:

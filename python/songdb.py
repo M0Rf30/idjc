@@ -35,6 +35,7 @@ import gi
 gi.require_version('Gtk', '3.0')
 gi.require_version('Pango', '1.0')
 from gi.repository import GLib
+from gi.repository import Gdk
 from gi.repository import GObject
 from gi.repository import Pango
 from gi.repository import Gtk
@@ -638,8 +639,8 @@ class ViewerCommon(PageCommon):
         self.notebook = notebook
         self._reload_upon_catalogs_changed(enable_notebook_reload=True)
         PageCommon.__init__(self, notebook, label_text, controls)
-        self.tree_view.enable_model_drag_source(Gtk.gdk.BUTTON1_MASK,
-            self._sourcetargets, Gtk.gdk.ACTION_DEFAULT | Gtk.gdk.ACTION_COPY)
+        self.tree_view.enable_model_drag_source(Gdk.BUTTON1_MASK,
+            self._sourcetargets, Gdk.ACTION_DEFAULT | Gdk.ACTION_COPY)
         self.tree_view.connect_after("drag-begin", self._cb_drag_begin)
         self.tree_view.connect("drag-data-get", self._cb_drag_data_get)
 
@@ -841,9 +842,9 @@ class ViewerCommon(PageCommon):
             bg_col = "Powder Blue"
         else:
             bg_col = "Light Pink"
-        return (Gtk.gdk.color_from_hsv(0.0, 1.0, percent),
-                Gtk.gdk.color_from_hsv(0.6666, 1.0, percent),
-                Gtk.gdk.color_from_hsv(0.3333, 1.0, percent))[int(text)], bg_col
+        return (Gdk.color_from_hsv(0.0, 1.0, percent),
+                Gdk.color_from_hsv(0.6666, 1.0, percent),
+                Gdk.color_from_hsv(0.3333, 1.0, percent))[int(text)], bg_col
 
 class ExpandAllButton(Gtk.Button):
     def __init__(self, expanded, tooltip=None):

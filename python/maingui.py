@@ -42,6 +42,7 @@ import dbus.service
 import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
+from gi.repository import Gdk
 from gi.repository import GObject
 import cairo
 
@@ -467,10 +468,10 @@ class JackMenu(MenuMixin):
 
  
 class ColouredArea(Gtk.DrawingArea):
-    def __init__(self, colour=Gtk.gdk.Color()):
+    def __init__(self, colour=Gdk.Color()):
         Gtk.DrawingArea.__init__(self)
         self.colour = colour
-        self.rect = Gtk.gdk.Rectangle()
+        self.rect = Gdk.Rectangle()
         self.connect("realize", self._on_realize)
         self.connect("configure-event", self._on_configure)
         self.connect("expose-event", self._on_expose)
@@ -482,7 +483,7 @@ class ColouredArea(Gtk.DrawingArea):
 
 
     def _on_realize(self, widget):
-        self.gc = Gtk.gdk.GC(self.window)
+        self.gc = Gdk.GC(self.window)
 
 
     def _on_configure(self, widget, event):
@@ -502,7 +503,7 @@ class ColourButton(Gtk.ColorButton):
         return self.get_color().to_string()
         
     def set_text(self, string):
-        self.set_color(Gtk.gdk.Color(string))
+        self.set_color(Gdk.Color(string))
 
 
 
@@ -605,7 +606,7 @@ class MicButton(Gtk.ToggleButton):
         self._icon_image = Gtk.Image()
         icon = opener_tab.icb.get_filename()
         try:
-            pb = Gtk.gdk.pixbuf_new_from_file_at_size(icon, 47, 20)
+            pb = Gdk.pixbuf_new_from_file_at_size(icon, 47, 20)
         except (TypeError, GLib.GError):
             pass
         else:
@@ -875,11 +876,11 @@ class OpenerSettings(Gtk.Frame):
         hbox.pack_start(Gtk.HBox())
         
         hbox.pack_start(Gtk.Label(_('Opened')), False)
-        self.open_colour = ColourButton(Gtk.gdk.Color(0.95, 0.2, 0.2))
+        self.open_colour = ColourButton(Gdk.Color(0.95, 0.2, 0.2))
         hbox.pack_start(self.open_colour, False)
         hbox.pack_start(Gtk.HBox())
         hbox.pack_start(Gtk.Label(_('Closed')), False)
-        col = Gtk.gdk.Color("gray")
+        col = Gdk.Color("gray")
         self.closed_colour = ColourButton(col)
         hbox.pack_start(self.closed_colour, False)
         hbox.pack_start(Gtk.HBox())
@@ -1361,7 +1362,7 @@ def make_stream_meter_unit(text, meters):
     
     frame = Gtk.Frame()  # Main panel listener figures box.
     frame.set_label_align(0.5, 0.5)
-    pixbuf = Gtk.gdk.pixbuf_new_from_file_at_size(
+    pixbuf = Gdk.pixbuf_new_from_file_at_size(
                             PGlobs.themedir / "listenerphones.png", 20, 16)
     image = Gtk.image_new_from_pixbuf(pixbuf)
     frame.set_label_widget(image)
@@ -1388,11 +1389,11 @@ class StreamMeter(Gtk.Frame):
     
     
     def realize(self, widget):
-        self.gc = Gtk.gdk.GC(self.window)
+        self.gc = Gdk.GC(self.window)
         self.gc.copy(self.da.get_style().fg_gc[Gtk.STATE_NORMAL])
-        self.green = Gtk.gdk.color_parse("#30D030")
-        self.red    = Gtk.gdk.color_parse("#D05044")
-        self.grey  = Gtk.gdk.color_parse("darkgray")
+        self.green = Gdk.color_parse("#30D030")
+        self.red    = Gdk.color_parse("#D05044")
+        self.grey  = Gdk.color_parse("darkgray")
 
     def expose(self, widget, event):
         if self.flash or not self.active:
@@ -1448,7 +1449,7 @@ class StreamMeter(Gtk.Frame):
         self.da.connect("realize", self.realize)
         self.da.connect("expose_event", self.expose)
         self.da.show()
-        self.rect = Gtk.gdk.Rectangle()
+        self.rect = Gdk.Rectangle()
         self.value = self.oldvalue = self.base
         self.active = False
         self.flash = False
@@ -1460,13 +1461,13 @@ class BasicMeter(Gtk.Frame):
 
 
     def realize(self, widget):
-        self.gc = Gtk.gdk.GC(self.window)
+        self.gc = Gdk.GC(self.window)
         self.gc.copy(self.da.get_style().fg_gc[Gtk.STATE_NORMAL])
-        self.lowc = Gtk.gdk.color_parse("#30D030")
-        self.midc = Gtk.gdk.color_parse("#CCCF44")
-        self.highc = Gtk.gdk.color_parse("#D05044")
-        self.backc = Gtk.gdk.color_parse("darkgray")
-        self.linec = Gtk.gdk.color_parse("#505050")
+        self.lowc = Gdk.color_parse("#30D030")
+        self.midc = Gdk.color_parse("#CCCF44")
+        self.highc = Gdk.color_parse("#D05044")
+        self.backc = Gdk.color_parse("darkgray")
+        self.linec = Gdk.color_parse("#505050")
 
 
     def expose(self, widget, event):
@@ -1569,12 +1570,12 @@ class StackedMeter(Gtk.Frame):
     
     
     def realize(self, widget):
-        self.gc = Gtk.gdk.GC(self.window)
+        self.gc = Gdk.GC(self.window)
         self.gc.copy(self.da.get_style().fg_gc[Gtk.STATE_NORMAL])
-        self.ngc = Gtk.gdk.color_parse("#30D030")
-        self.dsc = Gtk.gdk.color_parse("#CCCF44")
-        self.compc = Gtk.gdk.color_parse("#D05044")
-        self.backc = Gtk.gdk.color_parse("darkgray")
+        self.ngc = Gdk.color_parse("#30D030")
+        self.dsc = Gdk.color_parse("#CCCF44")
+        self.compc = Gdk.color_parse("#D05044")
+        self.backc = Gdk.color_parse("darkgray")
 
 
     def expose(self, widget, event):
@@ -1748,9 +1749,9 @@ class MicMeter(Gtk.VBox):
         lhbox.add(pad)
         pad.show()
         lhbox.set_spacing(2)
-        self.led_onpb = Gtk.gdk.pixbuf_new_from_file_at_size(
+        self.led_onpb = Gdk.pixbuf_new_from_file_at_size(
             FGlobs.pkgdatadir / "led_lit_green_black_border_64x64.png", 7, 7)
-        self.led_offpb = Gtk.gdk.pixbuf_new_from_file_at_size(
+        self.led_offpb = Gdk.pixbuf_new_from_file_at_size(
             FGlobs.pkgdatadir / "led_unlit_clear_border_64x64.png", 7, 7)
         self.led = Gtk.Image()
         lhbox.pack_start(self.led, False, False)
@@ -1813,7 +1814,7 @@ class RecIndicator(Gtk.HBox):
         self.pack_start(self.image, False)
         self.image.show()
         
-        self.led = [Gtk.gdk.pixbuf_new_from_file_at_size(
+        self.led = [Gdk.pixbuf_new_from_file_at_size(
             FGlobs.pkgdatadir / (which + ".png"), 9, 9) for which in (
             "led_unlit_clear_border_64x64", "led_lit_red_black_border_64x64",
             "led_lit_amber_black_border_64x64")]
@@ -1856,7 +1857,7 @@ class RecordingPanel(Gtk.VBox):
 # A dialog window to appear when shutdown is selected while still streaming.
 class idjc_shutdown_dialog:
     def window_attn(self, widget, event):
-        if event.new_window_state | Gtk.gdk.WINDOW_STATE_ICONIFIED:
+        if event.new_window_state | Gdk.WINDOW_STATE_ICONIFIED:
             widget.set_urgency_hint(True)
         else:
             widget.set_urgency_hint(False)
@@ -2582,7 +2583,7 @@ class MainWindow(dbus.service.Object):
         if Gtk.main_level():
             Gtk.main_quit()
 
-        while Gtk.gdk.events_pending():
+        while Gdk.events_pending():
             Gtk.main_iteration()
 
         time.sleep(0.3)
@@ -2616,7 +2617,7 @@ class MainWindow(dbus.service.Object):
         if Gtk.main_level():
             Gtk.main_quit()
 
-        while Gtk.gdk.events_pending():
+        while Gdk.events_pending():
             Gtk.main_iteration()
 
         time.sleep(0.3) # Allow time for all subthreads/programs time to exit 
@@ -3071,7 +3072,7 @@ class MainWindow(dbus.service.Object):
         # create the GUI elements
         self.window_group = Gtk.WindowGroup()
         self.window = Gtk.Window(Gtk.WINDOW_TOPLEVEL)
-        self.window.set_gravity(Gtk.gdk.GRAVITY_STATIC)
+        self.window.set_gravity(Gdk.GRAVITY_STATIC)
         self.window_group.add_window(self.window)
         self.window.set_title(self.appname + pm.title_extra)
         self.window.connect("delete_event", self.delete_event)
@@ -3151,9 +3152,9 @@ class MainWindow(dbus.service.Object):
         phonebox.viewlevels = (5,)       
         phonebox.set_spacing(2)
         
-        pixbuf4 = Gtk.gdk.pixbuf_new_from_file(
+        pixbuf4 = Gdk.pixbuf_new_from_file(
                                         FGlobs.pkgdatadir / "greenphone.png")
-        pixbuf4 = pixbuf4.scale_simple(25, 20, Gtk.gdk.INTERP_BILINEAR)
+        pixbuf4 = pixbuf4.scale_simple(25, 20, Gdk.INTERP_BILINEAR)
         image = Gtk.Image()
         image.set_from_pixbuf(pixbuf4)
         image.show()
@@ -3165,9 +3166,9 @@ class MainWindow(dbus.service.Object):
         set_tip(self.greenphone,
                             _('Mix voice over IP audio to the output stream.'))
 
-        pixbuf5 = Gtk.gdk.pixbuf_new_from_file(
+        pixbuf5 = Gdk.pixbuf_new_from_file(
                                             FGlobs.pkgdatadir / "redphone.png")
-        pixbuf5 = pixbuf5.scale_simple(25, 20, Gtk.gdk.INTERP_BILINEAR)
+        pixbuf5 = pixbuf5.scale_simple(25, 20, Gdk.INTERP_BILINEAR)
         image = Gtk.Image()
         image.set_from_pixbuf(pixbuf5)
         image.show()
@@ -3193,8 +3194,8 @@ class MainWindow(dbus.service.Object):
         self.mic_opener.show()
         
         # playlist advance button
-        pixbuf = Gtk.gdk.pixbuf_new_from_file(PGlobs.themedir / "advance.png")
-        pixbuf = pixbuf.scale_simple(32, 14, Gtk.gdk.INTERP_BILINEAR)
+        pixbuf = Gdk.pixbuf_new_from_file(PGlobs.themedir / "advance.png")
+        pixbuf = pixbuf.scale_simple(32, 14, Gdk.INTERP_BILINEAR)
         image = Gtk.Image()
         image.set_from_pixbuf(pixbuf)
         self.advance = Gtk.Button()
@@ -3272,8 +3273,8 @@ class MainWindow(dbus.service.Object):
         self.voiplevsbox.pack_start(self.voipgainvbox, False)
         self.voipgainvbox.show()
 
-        pixbuf = Gtk.gdk.pixbuf_new_from_file(FGlobs.pkgdatadir / "greenphone.png")
-        pixbuf = pixbuf.scale_simple(20, 17, Gtk.gdk.INTERP_HYPER)
+        pixbuf = Gdk.pixbuf_new_from_file(FGlobs.pkgdatadir / "greenphone.png")
+        pixbuf = pixbuf.scale_simple(20, 17, Gdk.INTERP_HYPER)
         greenphoneimage = Gtk.Image()
         greenphoneimage.set_from_pixbuf(pixbuf)
         self.voipgainvbox.pack_start(greenphoneimage, False)
@@ -3294,8 +3295,8 @@ class MainWindow(dbus.service.Object):
         self.voiplevsbox.pack_start(self.mixbackvbox, False)
         self.mixbackvbox.show()
          
-        pixbuf = Gtk.gdk.pixbuf_new_from_file(FGlobs.pkgdatadir / "pbphone.png")
-        pixbuf = pixbuf.scale_simple(20, 17, Gtk.gdk.INTERP_HYPER)
+        pixbuf = Gdk.pixbuf_new_from_file(FGlobs.pkgdatadir / "pbphone.png")
+        pixbuf = pixbuf.scale_simple(20, 17, Gdk.INTERP_HYPER)
         pbphoneimage = Gtk.Image()
         pbphoneimage.set_from_pixbuf(pixbuf)
         self.mixbackvbox.pack_start(pbphoneimage, False)
@@ -3570,16 +3571,16 @@ class MainWindow(dbus.service.Object):
         label.set_attributes(attrlist)
         pvbox.add(label)
         label.show()
-        liststore = Gtk.ListStore(Gtk.gdk.Pixbuf)
+        liststore = Gtk.ListStore(Gdk.Pixbuf)
         self.crosspattern = Gtk.ComboBox(liststore)
         cell = Gtk.CellRendererPixbuf()
         self.crosspattern.pack_start(cell, True)
         self.crosspattern.add_attribute(cell, 'pixbuf', 0)
-        liststore.append((Gtk.gdk.pixbuf_new_from_file(
+        liststore.append((Gdk.pixbuf_new_from_file(
                                     PGlobs.themedir / "classic_cross.png"), ))
-        liststore.append((Gtk.gdk.pixbuf_new_from_file(
+        liststore.append((Gdk.pixbuf_new_from_file(
                                     PGlobs.themedir / "mk2_cross.png"), ))
-        liststore.append((Gtk.gdk.pixbuf_new_from_file(
+        liststore.append((Gdk.pixbuf_new_from_file(
                                     PGlobs.themedir / "pat3.png"), ))
         pvbox.pack_start(self.crosspattern, True, True, 0)
         self.crosspattern.show()
@@ -3942,7 +3943,7 @@ class MainWindow(dbus.service.Object):
         self.jingles.interlude.treeview.set_flags(Gtk.CAN_FOCUS)
         self.player_left.treeview.grab_focus()
       
-        self.window.add_events(Gtk.gdk.KEY_PRESS_MASK)
+        self.window.add_events(Gdk.KEY_PRESS_MASK)
         self.window.connect("key-press-event", self.cb_key_capture)
         self.window.connect("key-release-event", self.cb_key_capture)
         self.jingles_window.connect("key-press-event", self.cb_key_capture)

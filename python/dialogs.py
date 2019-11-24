@@ -24,6 +24,7 @@ import gi
 gi.require_version('Gtk', '3.0')
 gi.require_version('Pango', '1.0')
 from gi.repository import Gtk
+from gi.repository import Gdk
 from gi.repository import GLib
 from gi.repository import Pango
 
@@ -62,7 +63,7 @@ class disconnection_notification_dialog(Gtk.Dialog):
 
 
     def window_attn(self, widget, event):
-        if event.new_window_state | Gtk.gdk.WINDOW_STATE_ICONIFIED:
+        if event.new_window_state | Gdk.WINDOW_STATE_ICONIFIED:
             widget.set_urgency_hint(True)
         else:
             widget.set_urgency_hint(False)
@@ -127,7 +128,7 @@ class autodisconnection_notification_dialog(Gtk.Dialog):
 
 
     def window_attn(self, widget, event):
-        if event.new_window_state | Gtk.gdk.WINDOW_STATE_ICONIFIED:
+        if event.new_window_state | Gdk.WINDOW_STATE_ICONIFIED:
             widget.set_urgency_hint(True)
         else:
             widget.set_urgency_hint(False)
