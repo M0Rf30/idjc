@@ -301,14 +301,14 @@ class DefaultEntry(Gtk.Entry):
                 pass
 
 
-class HistoryEntry(Gtk.ComboBoxEntry):
+class HistoryEntry(Gtk.ComboBox):
     """Combobox which performs history function."""
 
     def __init__(self, max_size=6, initial_text=("",), store_blank=True):
         self.max_size = max_size
         self.store_blank = store_blank
         self.ls = Gtk.ListStore(str)
-        Gtk.ComboBoxEntry.__init__(self, self.ls, 0)
+        Gtk.ComboBox.__init__(self, self.ls, 0)
         self.connect("notify::popup-shown", self.update_history)
         self.child.connect("activate", self.update_history)
         self.set_history("\x00".join(initial_text))
