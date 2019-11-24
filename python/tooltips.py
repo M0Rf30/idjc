@@ -15,9 +15,9 @@
 #   along with this program in the file entitled COPYING.
 #   If not, see <http://www.gnu.org/licenses/>.
 
-import gtk
-
-
+import gi
+gi.require_version('Gtk', '3.0')
+from gi.repository import Gtk
 
 class TooltipsGroup:
     """A central control point for tooltips.""" 

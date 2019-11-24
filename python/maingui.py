@@ -43,6 +43,7 @@ import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 from gi.repository import Gdk
+from gi.repository import GdkPixbuf
 from gi.repository import GObject
 import cairo
 
@@ -3571,7 +3572,7 @@ class MainWindow(dbus.service.Object):
         label.set_attributes(attrlist)
         pvbox.add(label)
         label.show()
-        liststore = Gtk.ListStore(Gdk.Pixbuf)
+        liststore = Gtk.ListStore(GdkPixbuf.Pixbuf)
         self.crosspattern = Gtk.ComboBox(liststore)
         cell = Gtk.CellRendererPixbuf()
         self.crosspattern.pack_start(cell, True)

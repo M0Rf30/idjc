@@ -30,6 +30,7 @@ gi.require_version('Pango', '1.0')
 from gi.repository import GObject
 from gi.repository import Gtk
 from gi.repository import Gdk
+from gi.repository import GdkPixbuf
 from gi.repository import Pango
 from gi.repository import GLib
 
@@ -264,7 +265,7 @@ class DefaultEntry(Gtk.Entry):
         gc2 = entry.props.style.base_gc[0]
         drawable.draw_rectangle(gc2, True, *extents)
         drawable.draw_layout(gc, 0, 0, layout)
-        pixbuf = Gdk.Pixbuf(Gdk.COLORSPACE_RGB, True, 8, extents[2],
+        pixbuf = GdkPixbuf.Pixbuf(Gdk.COLORSPACE_RGB, True, 8, extents[2],
                                                             extents[3])
         pixbuf.get_from_drawable(drawable, drawable.get_colormap(), 0, 0,
                                                             *extents)

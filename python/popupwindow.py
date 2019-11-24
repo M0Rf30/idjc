@@ -19,8 +19,10 @@ from __future__ import print_function
 
 __all__ = ['PopupWindow']
 
+import gi
+gi.require_version('Gtk', '3.0')
 from gi.repository import GObject
-import gtk
+from gi.repository import Gtk
 from .gtkstuff import threadslock, timeout_add, source_remove
 
 

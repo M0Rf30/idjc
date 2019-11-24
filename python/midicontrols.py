@@ -31,6 +31,7 @@ gi.require_version('Pango', '1.0')
 from gi.repository import GObject
 from gi.repository import Gtk
 from gi.repository import Gdk
+from gi.repository import GdkPixbuf
 from gi.repository import Pango
 import dbus
 import dbus.service
@@ -1345,7 +1346,7 @@ class LookupComboBox(Gtk.ComboBox):
    def __init__(self, values, texts, icons= None):
       self._values = values
       if icons is not None:
-          model = Gtk.ListStore(str, bool, Gdk.Pixbuf)
+          model = Gtk.ListStore(str, bool, GdkPixbuf.Pixbuf)
       else:
           model = Gtk.ListStore(str, bool)
       for valuei, value in enumerate(values):
@@ -2239,7 +2240,7 @@ class BindingListModel(Gtk.GenericTreeModel):
 
     # Make column data from binding objects
     #
-    column_types= [str, str, str, Gdk.Pixbuf, str, str, str, str, str]
+    column_types= [str, str, str, GdkPixbuf.Pixbuf, str, str, str, str, str]
     def on_get_value(self, binding, i):
         if i<3: # invisible sort columns
             inputix= '%02x.%02x.%04x' % (Binding.SOURCES.index(binding.source),
