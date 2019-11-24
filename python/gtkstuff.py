@@ -24,6 +24,7 @@ from abc import ABCMeta, abstractmethod
 from functools import wraps
 from contextlib import contextmanager
 
+import gi
 gi.require_version('Gtk', '3.0')
 gi.require_version('Pango', '1.0')
 from gi.repository import GObject

@@ -31,6 +31,7 @@ from collections import deque, defaultdict
 from contextlib import contextmanager
 from urllib import quote
 
+import gi
 gi.require_version('Gtk', '3.0')
 gi.require_version('Pango', '1.0')
 from gi.repository import GLib

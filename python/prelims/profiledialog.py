@@ -23,6 +23,7 @@ __all__ = ["ProfileDialog"]
 import atexit
 
 # This is and needs to remain the initial gtk import point.
+import gi
 gi.require_version('Gtk', '3.0')
 gi.require_version('Pango', '1.0')
 from gi.repository import GLib
