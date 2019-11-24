@@ -25,8 +25,10 @@ import string
 import re
 import gettext
 
-import gtk
-import pango
+gi.require_version('Gtk', '3.0')
+gi.require_version('Pango', '1.0')
+from gi.repository import Gtk
+from gi.repository import Pango
 from gi.repository import GLib
 import mutagen
 import mutagen.id3 as id3

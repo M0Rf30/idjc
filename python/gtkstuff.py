@@ -24,9 +24,11 @@ from abc import ABCMeta, abstractmethod
 from functools import wraps
 from contextlib import contextmanager
 
+gi.require_version('Gtk', '3.0')
+gi.require_version('Pango', '1.0')
 from gi.repository import GObject
 from gi.repository import Gtk
-import pango
+from gi.repository import Pango
 from gi.repository import GLib
 
 from idjc import FGlobs, PGlobs

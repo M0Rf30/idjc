@@ -31,10 +31,13 @@ from collections import deque, defaultdict
 from contextlib import contextmanager
 from urllib import quote
 
+gi.require_version('Gtk', '3.0')
+gi.require_version('Pango', '1.0')
 from gi.repository import GLib
 from gi.repository import GObject
-import pango
-import gtk
+from gi.repository import Pango
+from gi.repository import Gtk
+
 try:
     import MySQLdb as sql
 except ImportError:

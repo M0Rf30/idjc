@@ -25,9 +25,11 @@ import collections
 import gettext
 import functools
 
+gi.require_version('Gtk', '3.0')
+gi.require_version('Pango', '1.0')
 from gi.repository import GObject
-import gtk
-import pango
+from gi.repository import Gtk
+from gi.repository import Pango
 import dbus
 import dbus.service
 

@@ -20,9 +20,11 @@
 import os
 import time
 
-import gtk
+gi.require_version('Gtk', '3.0')
+gi.require_version('Pango', '1.0')
+from gi.repository import Gtk
 from gi.repository import GLib
-import pango
+from gi.repository import Pango
 
 from idjc import FGlobs
 from idjc.prelims import ProfileManager

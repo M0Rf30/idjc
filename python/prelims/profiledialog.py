@@ -23,10 +23,12 @@ __all__ = ["ProfileDialog"]
 import atexit
 
 # This is and needs to remain the initial gtk import point.
+gi.require_version('Gtk', '3.0')
+gi.require_version('Pango', '1.0')
 from gi.repository import GLib
 from gi.repository import GObject
-import gtk
-import pango
+from gi.repository import Gtk
+from gi.repository import Pango
 
 from idjc import PGlobs, FGlobs
 from idjc.prelims import MAX_PROFILE_LENGTH, profile_name_valid, default

@@ -35,10 +35,12 @@ from stat import *
 from collections import deque, namedtuple, defaultdict
 from functools import partial
 
+gi.require_version('Gtk', '3.0')
+gi.require_version('Pango', '1.0')
 from gi.repository import GLib
 from gi.repository import GObject
-import gtk
-import pango
+from gi.repository import Gtk
+from gi.repository import Pango
 import mutagen
 import dbus
 import dbus.service
