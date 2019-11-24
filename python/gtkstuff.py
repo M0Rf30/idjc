@@ -142,7 +142,7 @@ class StandardDialog(Gtk.Dialog):
         hbox = Gtk.HBox()
         hbox.set_spacing(12)
         hbox.set_border_width(6)
-        image = Gtk.image_new_from_stock(stock_item,
+        image = Gtk.Image.new_from_stock(stock_item,
                                                         Gtk.ICON_SIZE_DIALOG)
         image.set_alignment(0.0, 0.0)
         hbox.pack_start(image, False)
@@ -482,7 +482,7 @@ class IconChooserButton(Gtk.Button):
         
         vsep = Gtk.VSeparator()
         hbox.pack_start(vsep, False)
-        rightmost_icon = Gtk.image_new_from_stock(Gtk.STOCK_OPEN,
+        rightmost_icon = Gtk.Image.new_from_stock(Gtk.STOCK_OPEN,
                                                             Gtk.IconSize.MENU)
         hbox.pack_start(rightmost_icon, False)
         self.add(hbox)
@@ -646,7 +646,7 @@ class FolderChooserButton(Gtk.Button):
         hbox = Gtk.HBox()
         hbox.set_spacing(3)
         self.add(hbox)
-        self._icon = Gtk.image_new_from_stock(Gtk.STOCK_DIRECTORY, Gtk.IconSize.MENU)
+        self._icon = Gtk.Image.new_from_stock(Gtk.STOCK_DIRECTORY, Gtk.IconSize.MENU)
         hbox.pack_start(self._icon, False)
         # TC: FolderChooserButton text for null -- no directory is set.
         self._label = Gtk.Label(_("(None)"))

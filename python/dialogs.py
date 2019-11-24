@@ -295,7 +295,7 @@ class ReconnectionDialog(Gtk.Dialog):
         hbox.set_spacing(12)
         self.get_content_area().pack_start(hbox, False)
         hbox.show()
-        i = Gtk.image_new_from_stock(Gtk.STOCK_DISCONNECT, Gtk.ICON_SIZE_DIALOG)
+        i = Gtk.Image.new_from_stock(Gtk.STOCK_DISCONNECT, Gtk.ICON_SIZE_DIALOG)
         i.set_alignment(0.5, 0)
         hbox.pack_start(i, False)
         i.show()

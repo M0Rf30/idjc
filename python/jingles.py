@@ -127,7 +127,7 @@ class Effect(Gtk.HBox):
         self.pack_start(self.repeat, False)
         set_tip(self.repeat, _('Repeat'))
 
-        image = Gtk.image_new_from_stock(Gtk.STOCK_PROPERTIES,
+        image = Gtk.Image.new_from_stock(Gtk.STOCK_PROPERTIES,
                                                             Gtk.IconSize.MENU)
         self.config = Gtk.Button()
         self.config.set_image(image)

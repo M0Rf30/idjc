@@ -117,7 +117,7 @@ class NewProfileDialog(Gtk.Dialog):
             icon = Gtk.STOCK_EDIT
         else:
             icon = Gtk.STOCK_COPY if row else Gtk.STOCK_NEW
-        self.image = Gtk.image_new_from_stock(icon, Gtk.ICON_SIZE_DIALOG)
+        self.image = Gtk.Image.new_from_stock(icon, Gtk.ICON_SIZE_DIALOG)
         self.image.set_alignment(0.0, 0.0)
         hbox.pack_start(self.image, False)
         table = Gtk.Table(2, 4)
@@ -275,7 +275,7 @@ class ProfileDialog(Gtk.Dialog):
         strrend_ellip.props.ellipsize = Pango.EllipsizeMode.END
         # TC: column heading. The available profile names appears below.
         c0 = Gtk.TreeViewColumn(None, autorend, visible=7)
-        image = Gtk.image_new_from_stock(Gtk.STOCK_OPEN, Gtk.IconSize.MENU)
+        image = Gtk.Image.new_from_stock(Gtk.STOCK_OPEN, Gtk.IconSize.MENU)
         c0.set_widget(image)
         image.show()
         self.treeview.append_column(c0)

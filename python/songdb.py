@@ -420,13 +420,13 @@ class PrefsControls(Gtk.Frame):
         
         self._disconnect = Gtk.Button()
         self._disconnect.set_sensitive(False)
-        image = Gtk.image_new_from_stock(Gtk.STOCK_DISCONNECT, Gtk.IconSize.MENU)
+        image = Gtk.Image.new_from_stock(Gtk.STOCK_DISCONNECT, Gtk.IconSize.MENU)
         self._disconnect.add(image)
         self._disconnect.connect("clicked", lambda w: self.dbtoggle.set_active(False))
         hbox.pack_start(self._disconnect, False)
         
         self._connect = Gtk.Button()
-        image = Gtk.image_new_from_stock(Gtk.STOCK_CONNECT, Gtk.IconSize.MENU)
+        image = Gtk.Image.new_from_stock(Gtk.STOCK_CONNECT, Gtk.IconSize.MENU)
         self._connect.add(image)
         self._connect.connect("clicked", lambda w: self.dbtoggle.set_active(True))
         hbox.pack_start(self._connect, False)
@@ -882,7 +882,7 @@ class TreePage(ViewerCommon):
         self.right_controls.set_spacing(1)
         self.tree_rebuild = Gtk.Button()
         set_tip(self.tree_rebuild, _('Reload the database.'))
-        image = Gtk.image_new_from_stock(Gtk.STOCK_REFRESH, Gtk.IconSize.MENU)
+        image = Gtk.Image.new_from_stock(Gtk.STOCK_REFRESH, Gtk.IconSize.MENU)
         self.tree_rebuild.add(image)
         self.tree_rebuild.connect("clicked", self._cb_tree_rebuild)
         self.tree_rebuild.set_use_stock(True)
@@ -1272,7 +1272,7 @@ class FlatPage(ViewerCommon):
         self.where_entry = Gtk.Entry()
         self.where_entry.connect("activate", self._cb_update)
         where_hbox.pack_start(self.where_entry)
-        image = Gtk.image_new_from_stock(Gtk.STOCK_EXECUTE,
+        image = Gtk.Image.new_from_stock(Gtk.STOCK_EXECUTE,
                                                         Gtk.ICON_SIZE_BUTTON)
         self.update_button = Gtk.Button()
         self.update_button.connect("clicked", self._cb_update)
