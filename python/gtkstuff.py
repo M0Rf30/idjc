@@ -541,7 +541,7 @@ class IconPreviewFileChooserDialog(Gtk.FileChooserDialog):
 
         vbox = Gtk.VBox()
         frame = Gtk.Frame()
-        vbox.pack_start(frame, expand=True, fill=False)
+        vbox.pack_start(frame, True, False, 0)
         frame.show()
         image = Gtk.Image()
         frame.add(image)
