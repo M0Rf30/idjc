@@ -509,7 +509,7 @@ class ProfileDialog(Gtk.Dialog):
                     if i is not None:
                         try:
                             pb = Gtk.gdk.pixbuf_new_from_file_at_size(i, 16, 16)
-                        except glib.GError:
+                        except GLib.GError:
                             pb = i = None
                     else:
                         pb = None
@@ -535,7 +535,7 @@ class ProfileDialog(Gtk.Dialog):
         self._title_extra = title_extra
         try:
             self.set_icon_from_file(iconpathname)
-        except glib.GError:
+        except GLib.GError:
             print("Profile icon image file not found:", iconpathname)
         else:
             Gtk.window_set_default_icon_from_file(iconpathname)

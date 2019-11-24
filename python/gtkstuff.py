@@ -491,9 +491,9 @@ class IconChooserButton(Gtk.Button):
 
     def set_filename(self, f):
         try:
-            disp = glib.filename_display_name(f)
+            disp = GLib.filename_display_name(f)
             pb = Gtk.gdk.pixbuf_new_from_file_at_size(f, 16, 16)
-        except (glib.GError, TypeError):
+        except (GLib.GError, TypeError):
             # TC: Text reads as /path/to/file.ext or this when no file is chosen.
             self._label.set_text(_("(None)"))
             self._image.clear()
@@ -551,7 +551,7 @@ class IconPreviewFileChooserDialog(Gtk.FileChooserDialog):
         f = self.get_preview_filename()
         try:
             pb = Gtk.gdk.pixbuf_new_from_file_at_size(f, 16, 16)
-        except (glib.GError, TypeError):
+        except (GLib.GError, TypeError):
             active = False
         else:
             active = True
@@ -734,25 +734,25 @@ def _source_wrapper(data):
 
 def source_remove(data):
     if data[0]:
-        glib.source_remove(data[4])
+        GLib.source_remove(data[4])
     data[0] = False
 
 
 def timeout_add(interval, callback, *args, **kwargs):
     data = [True, callback, args, kwargs]
-    data.append(glib.timeout_add(interval, _source_wrapper, data))
+    data.append(GLib.timeout_add(interval, _source_wrapper, data))
     return data
 
 
 def timeout_add_seconds(interval, callback, *args, **kwargs):
     data = [True, callback, args, kwargs]
-    data.append(glib.timeout_add_seconds(interval, _source_wrapper, data))
+    data.append(GLib.timeout_add_seconds(interval, _source_wrapper, data))
     return data
 
 
 def idle_add(callback, *args, **kwargs):
     data = [True, callback, args, kwargs]
-    data.append(glib.idle_add(_source_wrapper, data))
+    data.append(GLib.idle_add(_source_wrapper, data))
     return data
 
 

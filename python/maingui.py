@@ -605,7 +605,7 @@ class MicButton(Gtk.ToggleButton):
         icon = opener_tab.icb.get_filename()
         try:
             pb = Gtk.gdk.pixbuf_new_from_file_at_size(icon, 47, 20)
-        except (TypeError, glib.GError):
+        except (TypeError, GLib.GError):
             pass
         else:
             self._icon_image.set_from_pixbuf(pb)

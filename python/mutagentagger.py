@@ -699,15 +699,15 @@ class MutagenGUI:
         if idjcroot:
             if encoding is not None:
                 label.set_markup(u"<b>" + _('Filename:').decode("utf-8") + \
-                u" " + glib.markup_escape_text(unicode(os.path.split(
+                u" " + GLib.markup_escape_text(unicode(os.path.split(
                 pathname)[1], encoding).encode("utf-8", "replace")) + u"</b>")
             else:
                 label.set_markup(u"<b>" + _('Filename:').decode("utf-8") + \
-                u" " + glib.markup_escape_text(os.path.split(
+                u" " + GLib.markup_escape_text(os.path.split(
                 pathname)[1]).encode("utf-8", "replace") + u"</b>")
         else:
             label.set_markup(u"<b>" + _('Filename:').decode("utf-8") + u" " + \
-            glib.markup_escape_text(unicode(os.path.split(
+            GLib.markup_escape_text(unicode(os.path.split(
             pathname)[1], "latin1").encode("utf-8", "replace")) + u"</b>")
         vbox.pack_start(label, False, False, 6)
         label.show()

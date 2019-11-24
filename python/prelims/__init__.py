@@ -335,7 +335,7 @@ class DBusUptimeReporter(dbus.service.Object):
 
             self._interface_cache[profile] = interface
 
-        if glib.main_depth():
+        if GLib.main_depth():
             # asynchronous: more CPU efficient but requires event loop
             interface.get_uptime(reply_handler=rh, error_handler=eh)
             return self._uptime_cache[profile]

@@ -1066,7 +1066,7 @@ class IDJC_Media_Player(dbus.service.Object):
         # TC: Cuesheet data element as shown in the playlist.
         element = PlayerRow(
             '<span foreground="dark green">%s</span>' % _("(Cue sheet)") + 
-            glib.markup_escape_text(metadata), cue_pathname, totalframes //
+            GLib.markup_escape_text(metadata), cue_pathname, totalframes //
             75 + 1, metadata, "utf-8", global_cue_title, global_cue_performer,
             RGDEF, cuesheet_liststore, "", "")
 
@@ -1097,12 +1097,12 @@ class IDJC_Media_Player(dbus.service.Object):
 
         # Use this name for metadata when we can't get anything from tags.
         # The name will also appear grey to indicate a tagless state.
-        meta_name = os.path.splitext(glib.filename_display_basename(filename)
+        meta_name = os.path.splitext(GLib.filename_display_basename(filename)
                                                     )[0].lstrip("0123456789 -")
         encoding = None  # Obsolete
         # TC: Playlist text meaning the metadata tag is missing or incomplete.
         rsmeta_name = '<span foreground="dark red">(%s)</span> %s' % (
-                            _('Bad Tag'), glib.markup_escape_text(meta_name))
+                            _('Bad Tag'), GLib.markup_escape_text(meta_name))
         title_retval = meta_name
 
         def gain(handle=None, prefix="", gain=None, ref=None):
@@ -1361,7 +1361,7 @@ class IDJC_Media_Player(dbus.service.Object):
         uuid_ = str(uuid.uuid4())
 
         def player_row(meta_name):
-            return PlayerRow(glib.markup_escape_text(meta_name), filename,
+            return PlayerRow(GLib.markup_escape_text(meta_name), filename,
                 length, meta_name, encoding, title, artist, rg, cuesheet,
                 album, uuid_)
 
