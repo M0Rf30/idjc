@@ -272,7 +272,7 @@ class ConnectionDialog(Gtk.Dialog):
         hbox.pack_start(icon)
         col = Gtk.VBox(homogeneous = True, spacing = 4)
         hbox.pack_start(col)
-        sg = Gtk.SizeGroup(Gtk.SIZE_GROUP_HORIZONTAL)
+        sg = Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL)
         for text, widget in zip(
                 (_('Server type'), _('Hostname'), _('Port number'), 
                 _('Mount point'), _('Login name'), _('Password'),
@@ -1237,7 +1237,7 @@ class StreamTab(Tab):
     def item_item_layout2(self, item_item_pairs, sizegroup):
         """Widget packing method."""
         
-        rhs_size = Gtk.SizeGroup(Gtk.SIZE_GROUP_HORIZONTAL)
+        rhs_size = Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL)
         vbox = Gtk.VBox()
         vbox.set_spacing(2)
         for left, right in item_item_pairs:
@@ -1784,7 +1784,7 @@ class StreamTab(Tab):
             ' to which you connect is configured.'))
         genre_entry_box.pack_start(self.make_public, False, False, 0)
         self.make_public.show()
-        info_sizegroup = Gtk.SizeGroup(Gtk.SIZE_GROUP_VERTICAL)
+        info_sizegroup = Gtk.SizeGroup(Gtk.SizeGroupMode.VERTICAL)
         stream_details_pane = self.label_item_layout((
             # TC: The DJ or Stream name.
             (_('DJ name'), self.dj_name_entry),
@@ -1827,7 +1827,7 @@ class StreamTab(Tab):
         self.icq_entry = Gtk.Entry()
         set_tip(self.icq_entry,
                     _('ICQ instant messenger connection info goes here.'))
-        contact_sizegroup = Gtk.SizeGroup(Gtk.SIZE_GROUP_VERTICAL)
+        contact_sizegroup = Gtk.SizeGroup(Gtk.SizeGroupMode.VERTICAL)
         contact_details_pane = self.label_item_layout((
                                                  (_('IRC'), self.irc_entry),
                                                  (_('AIM'), self.aim_entry),

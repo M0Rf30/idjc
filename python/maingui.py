@@ -144,8 +144,9 @@ class MenuMixin(object):
                     mi.connect("activate", self.cb_autowipe)
 
                 if issubclass(how, Gtk.CheckMenuItem) and use_underline == True:
+                    # TODO Toggle Action is deprecated 
                     a = Gtk.ToggleAction(None, text, None, None)
-                    a.connect_proxy(mi)
+                    mi.set_related_action(a)
                     setattr(self, name + "menu_a", a)
 
         return mkitems
@@ -669,7 +670,7 @@ class OpenerTab(Gtk.VBox):
         self.label.show()
         self.set_ident(ident)
         self.activedict = {}
-        sg = Gtk.SizeGroup(Gtk.SIZE_GROUP_HORIZONTAL)
+        sg = Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL)
         lhbox = Gtk.HBox()
         lhbox.set_spacing(3)
         label = Gtk.Label(_('Text'))
@@ -779,7 +780,7 @@ class OpenerTab(Gtk.VBox):
         frame.add(ivbox)
         ivbox.set_border_width(6)
         ivbox.set_spacing(3)
-        sg = Gtk.SizeGroup(Gtk.SIZE_GROUP_HORIZONTAL)
+        sg = Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL)
         def enbox(l, r):
             hbox = Gtk.HBox()
             hbox.set_spacing(3)
@@ -3103,9 +3104,9 @@ class MainWindow(dbus.service.Object):
         self.vbox8.pack_start(menuhbox, False, False, 0)
         menuhbox.show()
         self.menu = MainMenu()
-        menuhbox.pack_start(self.menu)
+        menuhbox.pack_start(self.menu, True, True, 0)
         self.menu.show()
-        self.rightpane.pack_start(self.vbox8, True, True ,0)
+        self.rightpane.pack_start(self.vbox8, True, True, 0)
         self.window.add(self.paned)
         self.rightpane.show()
         self.paned.show()
@@ -3122,20 +3123,20 @@ class MainWindow(dbus.service.Object):
         self.hbox10.show()
   
         self.hbox10spc = Gtk.HBox()
-        self.vbox8.pack_start(self.hbox10spc, False, padding=3)
+        self.vbox8.pack_start(self.hbox10spc, False, False, 3)
         self.hbox10spc.show()
   
         self.vbox8.pack_start(self.hbox10, False, False, 0)
         
         spc = Gtk.HBox()
-        self.vbox8.pack_start(spc, False, padding=2)
+        self.vbox8.pack_start(spc, False, False, 2)
         spc.show()
         
         # show box 8 now that it's finished
         self.vbox8.show()               
 
         self.freewheel_button = FreewheelButton(self.mixer_write)
-        self.hbox10.pack_start(self.freewheel_button, False)
+        self.hbox10.pack_start(self.freewheel_button, False, False, 0)
 
         self.dsp_button = Gtk.ToggleButton()
         self.dsp_button.viewlevels = (5,)
@@ -3153,57 +3154,60 @@ class MainWindow(dbus.service.Object):
         phonebox.viewlevels = (5,)       
         phonebox.set_spacing(2)
         
-        pixbuf4 = Gdk.pixbuf_new_from_file(
-                                        FGlobs.pkgdatadir / "greenphone.png")
-        pixbuf4 = pixbuf4.scale_simple(25, 20, Gdk.INTERP_BILINEAR)
+        pixbuf4 = GdkPixbuf.Pixbuf.new_from_file(
+            FGlobs.pkgdatadir / "greenphone.png")
+        pixbuf4 = pixbuf4.scale_simple(25, 20, GdkPixbuf.InterpType.BILINEAR)
         image = Gtk.Image()
         image.set_from_pixbuf(pixbuf4)
         image.show()
         self.greenphone = Gtk.ToggleButton()
         self.greenphone.add(image)
         self.greenphone.connect("toggled", self.cb_toggle, "Greenphone")
-        phonebox.pack_start(self.greenphone)
+        phonebox.pack_start(self.greenphone, True, True, 0)
         self.greenphone.show()
         set_tip(self.greenphone,
                             _('Mix voice over IP audio to the output stream.'))
 
-        pixbuf5 = Gdk.pixbuf_new_from_file(
-                                            FGlobs.pkgdatadir / "redphone.png")
-        pixbuf5 = pixbuf5.scale_simple(25, 20, Gdk.INTERP_BILINEAR)
+        pixbuf5 = GdkPixbuf.Pixbuf.new_from_file(
+            FGlobs.pkgdatadir / "redphone.png"
+        )
+        pixbuf5 = pixbuf5.scale_simple(25, 20, GdkPixbuf.InterpType.BILINEAR)
         image = Gtk.Image()
         image.set_from_pixbuf(pixbuf5)
         image.show()
         self.redphone = Gtk.ToggleButton()
         self.redphone.add(image)
         self.redphone.connect("toggled", self.cb_toggle, "Redphone")
-        phonebox.pack_start(self.redphone)
+        phonebox.pack_start(self.redphone, True, True, 0)
         self.redphone.show()
         set_tip(self.redphone, _('Mix voice over IP audio to the DJ only.'))
  
-        self.hbox10.pack_start(phonebox, False)
+        self.hbox10.pack_start(phonebox, False, False, 0)
         phonebox.show()
          
         self.pan_preset_chooser = PanPresetChooser()
         self.pan_preset_chooser.viewlevels = (5,)
-        self.hbox10.pack_start(self.pan_preset_chooser, False)
+        self.hbox10.pack_start(self.pan_preset_chooser, False, False, 0)
         self.pan_preset_chooser.show_all()
         
         # microphone open/unmute dynamic widget cluster thingy
         self.mic_opener = MicOpener(self, self.flash_test)
         self.mic_opener.viewlevels = (5,)
-        self.hbox10.pack_start(self.mic_opener)
+        self.hbox10.pack_start(self.mic_opener, True, True, 0)
         self.mic_opener.show()
         
         # playlist advance button
-        pixbuf = Gdk.pixbuf_new_from_file(PGlobs.themedir / "advance.png")
-        pixbuf = pixbuf.scale_simple(32, 14, Gdk.INTERP_BILINEAR)
+        pixbuf = GdkPixbuf.Pixbuf.new_from_file(
+            FGlobs.themedir / "advance.png"
+        )
+        pixbuf = pixbuf.scale_simple(32, 14, GdkPixbuf.InterpType.BILINEAR)
         image = Gtk.Image()
         image.set_from_pixbuf(pixbuf)
         self.advance = Gtk.Button()
         self.advance.add(image)
         image.show()
         self.advance.connect("clicked", self.callback, "Advance")
-        self.hbox10.pack_end(self.advance, False)
+        self.hbox10.pack_end(self.advance, False, False, 0)
         self.advance.show()
         set_tip(self.advance, _('This button steps through the active playlist,'
                             ' pausing between tracks. The active playlist is'
@@ -3244,7 +3248,8 @@ class MainWindow(dbus.service.Object):
         self.deckadj = Gtk.Adjustment(127.0, 0.0, 127.0, 1.0, 6.0)
         self.deckadj.connect("value_changed", self.cb_deckvol)
         self.deckvol = Gtk.VScale(self.deckadj)
-        self.deckvol.set_update_policy(Gtk.UPDATE_CONTINUOUS)
+        # TODO
+        # self.deckvol.set_update_policy(Gtk.UPDATE_CONTINUOUS)
         self.deckvol.set_draw_value(False)
         self.deckvol.set_inverted(True)
         hboxvol.pack_start(self.deckvol, False, False, 4)
@@ -3256,29 +3261,32 @@ class MainWindow(dbus.service.Object):
         self.deck2adj = Gtk.Adjustment(127.0, 0.0, 127.0, 1.0, 6.0)
         self.deck2adj.connect("value_changed", self.cb_deckvol)
         self.deck2vol = Gtk.VScale(self.deck2adj)
-        self.deck2vol.set_update_policy(Gtk.UPDATE_CONTINUOUS)
+        # TODO
+        # self.deck2vol.set_update_policy(Gtk.UPDATE_CONTINUOUS)
         self.deck2vol.set_draw_value(False)
         self.deck2vol.set_inverted(True)
-        hboxvol.pack_start(self.deck2vol, False)
+        hboxvol.pack_start(self.deck2vol, False, False, 0)
         set_tip(self.deck2vol,
                         _('The volume control for the right music player.'))
 
         self.spacerbox = Gtk.VBox()
-        self.vboxvol.pack_start(self.spacerbox, False, padding=3)
+        self.vboxvol.pack_start(self.spacerbox, False, False, 3)
 
         self.voiplevsbox = Gtk.HBox(True, 0)
-        self.vboxvol.pack_start(self.voiplevsbox, True)
+        self.vboxvol.pack_start(self.voiplevsbox, True, True, 0)
 
         self.voipgainvbox = Gtk.VBox()
         self.voipgainvbox.set_spacing(1)
-        self.voiplevsbox.pack_start(self.voipgainvbox, False)
+        self.voiplevsbox.pack_start(self.voipgainvbox, False, False, 0)
         self.voipgainvbox.show()
 
-        pixbuf = Gdk.pixbuf_new_from_file(FGlobs.pkgdatadir / "greenphone.png")
-        pixbuf = pixbuf.scale_simple(20, 17, Gdk.INTERP_HYPER)
+        pixbuf = GdkPixbuf.Pixbuf.new_from_file(
+            FGlobs.pkgdatadir / "greenphone.png"
+        )
+        pixbuf = pixbuf.scale_simple(20, 17, GdkPixbuf.InterpType.HYPER)
         greenphoneimage = Gtk.Image()
         greenphoneimage.set_from_pixbuf(pixbuf)
-        self.voipgainvbox.pack_start(greenphoneimage, False)
+        self.voipgainvbox.pack_start(greenphoneimage, False, False, 0)
         greenphoneimage.show()
         
         self.voipgainadj = Gtk.Adjustment(64.0, 0.0, 127.0, 1.0, 6.0)
@@ -3287,20 +3295,22 @@ class MainWindow(dbus.service.Object):
         voipgain.set_update_policy(Gtk.UPDATE_CONTINUOUS)
         voipgain.set_draw_value(False)
         voipgain.set_inverted(True)
-        self.voipgainvbox.pack_start(voipgain)
+        self.voipgainvbox.pack_start(voipgain, True, True, 0)
         voipgain.show()
         set_tip(self.voipgainvbox, _('VoIP level adjustment. 0dB gain is at the mid point.'))
 
         self.mixbackvbox = Gtk.VBox()
         self.mixbackvbox.set_spacing(1)
-        self.voiplevsbox.pack_start(self.mixbackvbox, False)
+        self.voiplevsbox.pack_start(self.mixbackvbox, False, False, 0)
         self.mixbackvbox.show()
          
-        pixbuf = Gdk.pixbuf_new_from_file(FGlobs.pkgdatadir / "pbphone.png")
-        pixbuf = pixbuf.scale_simple(20, 17, Gdk.INTERP_HYPER)
+        pixbuf = GdkPixbuf.Pixbuf.new_from_file(
+            FGlobs.pkgdatadir / "pbphone.png"
+        )
+        pixbuf = pixbuf.scale_simple(20, 17, GdkPixbuf.InterpType.HYPER)
         pbphoneimage = Gtk.Image()
         pbphoneimage.set_from_pixbuf(pixbuf)
-        self.mixbackvbox.pack_start(pbphoneimage, False)
+        self.mixbackvbox.pack_start(pbphoneimage, False, False, 0)
         pbphoneimage.show()
         
         self.mixbackadj = Gtk.Adjustment(64.0, 0.0, 127.0, 1.0, 6.0)
@@ -3309,7 +3319,7 @@ class MainWindow(dbus.service.Object):
         mixback.set_update_policy(Gtk.UPDATE_CONTINUOUS)
         mixback.set_draw_value(False)
         mixback.set_inverted(True)
-        self.mixbackvbox.pack_start(mixback)
+        self.mixbackvbox.pack_start(mixback, True, True, 0)
         mixback.show()
         set_tip(self.mixbackvbox,
         _('The stream volume level to send to the voice over IP connection.'))
@@ -3405,9 +3415,9 @@ class MainWindow(dbus.service.Object):
         self.crossbox.set_border_width(2)
         self.crossbox.set_spacing(3)
         
-        cross_sizegroup = Gtk.SizeGroup(Gtk.SIZE_GROUP_HORIZONTAL)
-        cross_sizegroup2 = Gtk.SizeGroup(Gtk.SIZE_GROUP_HORIZONTAL)
-        sg3 = Gtk.SizeGroup(Gtk.SIZE_GROUP_VERTICAL)
+        cross_sizegroup = Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL)
+        cross_sizegroup2 = Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL)
+        sg3 = Gtk.SizeGroup(Gtk.SizeGroupMode.VERTICAL)
                 
         smvbox = Gtk.VBox()
         label = Gtk.Label(_('Monitor Mix'))
@@ -3479,8 +3489,9 @@ class MainWindow(dbus.service.Object):
         plvbox = Gtk.VBox()
         # TC: Abbreviation of left.
         label = Gtk.Label(_('L'))
-        attrlist = pango.AttrList()
-        attrlist.insert(pango.AttrSize(8000, 0, len(_('L'))))
+        attrlist = Pango.AttrList()
+        # TODO
+        #attrlist.insert(pango.AttrSize(8000, 0, len(_('L'))))
         label.set_attributes(attrlist)
         plvbox.add(label)
         label.show()
@@ -3515,8 +3526,9 @@ class MainWindow(dbus.service.Object):
         prvbox = Gtk.VBox()
         # TC: Abbreviation of right.
         label = Gtk.Label(_('R'))
-        attrlist = pango.AttrList()
-        attrlist.insert(pango.AttrSize(8000, 0, len(_('R'))))
+        attrlist = Pango.AttrList()
+        # TODO
+        #attrlist.insert(pango.AttrSize(8000, 0, len(_('R'))))
         label.set_attributes(attrlist)
         prvbox.add(label)
         label.show()
@@ -3531,13 +3543,14 @@ class MainWindow(dbus.service.Object):
         
         patternbox = Gtk.HBox()
         patternbox.set_spacing(2)
-        sg4 = Gtk.SizeGroup(Gtk.SIZE_GROUP_VERTICAL)
+        sg4 = Gtk.SizeGroup(Gtk.SizeGroupMode.VERTICAL)
         
         passbox = Gtk.VBox()
         # TC: Describes a mid point.
         label = Gtk.Label(_('Middle'))
-        attrlist = pango.AttrList()
-        attrlist.insert(pango.AttrSize(8000, 0, len(_('Middle'))))
+        attrlist = Pango.AttrList()
+        # TODO
+        #attrlist.insert(pango.AttrSize(8000, 0, len(_('Middle'))))
         label.set_attributes(attrlist)
         label.show()
         passbox.add(label)
@@ -3567,8 +3580,9 @@ class MainWindow(dbus.service.Object):
         pvbox = Gtk.VBox()
         # TC: The attenuation response curve of the crossfader. User selectable.
         label = Gtk.Label(_('Response'))
-        attrlist = pango.AttrList()
-        attrlist.insert(pango.AttrSize(8000, 0, len(_('Response'))))
+        attrlist = Pango.AttrList()
+        # TODO
+        #attrlist.insert(pango.AttrSize(8000, 0, len(_('Response'))))
         label.set_attributes(attrlist)
         pvbox.add(label)
         label.show()
@@ -3605,8 +3619,9 @@ class MainWindow(dbus.service.Object):
         tvbox = Gtk.VBox()
         # TC: Duration in seconds.
         label = Gtk.Label(_('Time'))
-        attrlist = pango.AttrList()
-        attrlist.insert(pango.AttrSize(8000, 0, len(_('Time'))))
+        attrlist = Pango.AttrList()
+        # TODO
+        #attrlist.insert(pango.AttrSize(8000, 0, len(_('Time'))))
         label.set_attributes(attrlist)
         tvbox.add(label)
         label.show()
@@ -3633,8 +3648,9 @@ class MainWindow(dbus.service.Object):
         # TC: The crossfader pass-across button text.
         # TC: The actual button appears as [<-->] with this text above it.
         label = Gtk.Label(_('Pass'))
-        attrlist = pango.AttrList()
-        attrlist.insert(pango.AttrSize(8000, 0, len(_('Pass'))))
+        attrlist = Pango.AttrList()
+        # TODO
+        #attrlist.insert(pango.AttrSize(8000, 0, len(_('Pass'))))
         label.set_attributes(attrlist)
         pvbox.add(label)
         label.show()
@@ -3696,7 +3712,7 @@ class MainWindow(dbus.service.Object):
         set_tip(self.stream_peak_box, _('A peak hold meter indicating the '
                                         'signal strength of the stream audio.'))
 
-        sg = Gtk.SizeGroup(Gtk.SIZE_GROUP_HORIZONTAL)
+        sg = Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL)
         self.stream_indicator = []
         for i in range(PGlobs.num_streamers):
             self.stream_indicator.append(StreamMeter(1, 100))
@@ -3731,7 +3747,7 @@ class MainWindow(dbus.service.Object):
         else:
             chvbox = Gtk.VBox()
             chvbox.set_spacing(4)
-            self.micmeterbox.pack_start(chvbox)
+            self.micmeterbox.pack_start(chvbox, True, True, 0)
             chvbox.show()
             def showhide(widget, state, box, l, r):
                 if l.flags() & Gtk.SENSITIVE or r.flags() & Gtk.SENSITIVE:
@@ -3741,9 +3757,9 @@ class MainWindow(dbus.service.Object):
             for l, r in zip(*((iter(self.mic_meters),) * 2)):
                 chhbox = Gtk.HBox()
                 chhbox.set_spacing(4)
-                chhbox.pack_start(l, False)
-                chhbox.pack_end(r, False)
-                chvbox.pack_start(chhbox)
+                chhbox.pack_start(l, False, False, 0)
+                chhbox.pack_end(r, False, False, 0)
+                chvbox.pack_start(chhbox, True, True, 0)
                 chhbox.show()
                 for each in l, r:
                     each.connect("state-changed", showhide, chhbox, l, r)
@@ -3878,7 +3894,7 @@ class MainWindow(dbus.service.Object):
         self.controls.load_prefs()
 
         self.window.realize()
-        media_sg = Gtk.SizeGroup(Gtk.SIZE_GROUP_HORIZONTAL)
+        media_sg = Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL)
         media_sg.add_widget(self.vbox3L)
         media_sg.add_widget(self.vbox3R)
         

@@ -549,7 +549,7 @@ class ExtraPlayers(Gtk.HBox):
     def __init__(self, parent):
         self.approot = parent
 
-        sg = Gtk.SizeGroup(Gtk.SIZE_GROUP_VERTICAL)
+        sg = Gtk.SizeGroup(Gtk.SizeGroupMode.VERTICAL)
         self.nb_label = Gtk.HBox(False, 0)
         vb = Gtk.VBox()
         lbl = Gtk.Label(_('Effects'))

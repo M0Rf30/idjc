@@ -1615,7 +1615,7 @@ class BindingEditor(Gtk.Dialog):
             label.set_width_chars(10)
             label.set_alignment(0, 0.5)
 
-        sg= Gtk.SizeGroup(Gtk.SIZE_GROUP_VERTICAL)
+        sg= Gtk.SizeGroup(Gtk.SizeGroupMode.VERTICAL)
 
         row0, row1, row2, row3= Gtk.HBox(spacing= 4), Gtk.HBox(spacing= 4), \
                                 Gtk.HBox(spacing= 4), Gtk.HBox(spacing= 4)

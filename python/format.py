@@ -302,7 +302,7 @@ class FormatDropdown(Gtk.VBox):
         if tooltip is not None:
             set_tip(frame, tooltip)
         self.pack_start(frame, fill=False)
-        size_group = Gtk.SizeGroup(Gtk.SIZE_GROUP_VERTICAL)
+        size_group = Gtk.SizeGroup(Gtk.SizeGroupMode.VERTICAL)
         vbox = Gtk.VBox()
         vbox.set_border_width(3)
         frame.add(vbox)
@@ -428,7 +428,7 @@ class FormatSpin(Gtk.VBox):
         self._spin_button.emit("value-changed")
         
         self.show_all()
-        size_group = Gtk.SizeGroup(Gtk.SIZE_GROUP_VERTICAL)
+        size_group = Gtk.SizeGroup(Gtk.SizeGroupMode.VERTICAL)
         size_group.add_widget(prev_object.get_children()[0])
         size_group.add_widget(frame)
         self.scale = 1
@@ -1269,7 +1269,7 @@ class FormatControl(Gtk.VBox):
         apply_button.connect("clicked", self._on_apply, back_button, elem_box)
         back_button.connect("clicked", self._on_back, apply_button)
         
-        sizegroup = Gtk.SizeGroup(Gtk.SIZE_GROUP_VERTICAL)
+        sizegroup = Gtk.SizeGroup(Gtk.SizeGroupMode.VERTICAL)
         for each in elem_box:
             sizegroup.add_widget(each)
         
