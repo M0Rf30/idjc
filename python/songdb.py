@@ -876,7 +876,7 @@ class TreePage(ViewerCommon):
         self.layout_combo = Gtk.ComboBox()
         self.layout_combo.set_model(layout_store)
         cell_text = Gtk.CellRendererText()
-        self.layout_combo.pack_start(cell_text)
+        self.layout_combo.pack_start(cell_text, True)
         self.layout_combo.add_attribute(cell_text, "text", 0)
         self.controls.pack_start(self.layout_combo, False, False, 0)
         self.right_controls = Gtk.HBox()
