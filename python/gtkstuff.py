@@ -143,7 +143,7 @@ class StandardDialog(Gtk.Dialog):
         hbox.set_spacing(12)
         hbox.set_border_width(6)
         image = Gtk.Image.new_from_stock(stock_item,
-                                                        Gtk.ICON_SIZE_DIALOG)
+                                                        Gtk.IconSize.DIALOG)
         image.set_alignment(0.0, 0.0)
         hbox.pack_start(image, False)
         vbox = Gtk.VBox()

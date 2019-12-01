@@ -595,7 +595,7 @@ class PageCommon(Gtk.VBox):
             column = Gtk.TreeViewColumn(label, renderer)
             if mw != -1:
                 column.set_resizable(True)
-                column.set_sizing(Gtk.TREE_VIEW_COLUMN_FIXED)
+                column.set_sizing(Gtk.TreeViewColumnSizing.FIXED)
                 column.set_min_width(mw)
                 column.set_fixed_width(mw + 50)
             tree_view.append_column(column)
@@ -1247,8 +1247,9 @@ class FlatPage(ViewerCommon):
         self.transfrom = self.db_accessor = None
 
         # TC: User specified search filter entry box title text.
-        self.controls = Gtk.Frame(" %s " % _('Filters'))
-        self.controls.set_shadow_type(Gtk.SHADOW_OUT)
+        self.controls = Gtk.Frame()
+        self.controls.set_label(" %s " % _('Filters'))
+        self.controls.set_shadow_type(Gtk.ShadowType.OUT)
         self.controls.set_border_width(1)
         self.controls.set_label_align(0.5, 0.5)
         filter_vbox = Gtk.VBox()
@@ -1257,29 +1258,29 @@ class FlatPage(ViewerCommon):
         self.controls.add(filter_vbox)
         
         fuzzy_hbox = Gtk.HBox()
-        filter_vbox.pack_start(fuzzy_hbox, False)
+        filter_vbox.pack_start(fuzzy_hbox, False, False, 0)
         # TC: A type of search on any data field matching paritial strings.
         fuzzy_label = Gtk.Label(_('Fuzzy Search'))
-        fuzzy_hbox.pack_start(fuzzy_label, False)
+        fuzzy_hbox.pack_start(fuzzy_label, False, False, 0)
         self.fuzzy_entry = Gtk.Entry()
         self.fuzzy_entry.connect("changed", self._cb_fuzzysearch_changed)
         fuzzy_hbox.pack_start(self.fuzzy_entry, True, True, 0)
         
         where_hbox = Gtk.HBox()
-        filter_vbox.pack_start(where_hbox, False)
+        filter_vbox.pack_start(where_hbox, False, False, 0)
         # TC: WHERE is an SQL keyword.
         where_label = Gtk.Label(_('WHERE'))
-        where_hbox.pack_start(where_label, False)
+        where_hbox.pack_start(where_label, False, False, 0)
         self.where_entry = Gtk.Entry()
         self.where_entry.connect("activate", self._cb_update)
-        where_hbox.pack_start(self.where_entry)
+        where_hbox.pack_start(self.where_entry, True, True, 0)
         image = Gtk.Image.new_from_stock(Gtk.STOCK_EXECUTE,
-                                                        Gtk.ICON_SIZE_BUTTON)
+                                                        Gtk.IconSize.BUTTON)
         self.update_button = Gtk.Button()
         self.update_button.connect("clicked", self._cb_update)
         self.update_button.set_image(image)
         image.show
-        where_hbox.pack_start(self.update_button, False)
+        where_hbox.pack_start(self.update_button, False, False, 0)
         
         ViewerCommon.__init__(self, notebook, _("Search"), self.controls,
                                                                     catalogs)
@@ -1293,17 +1294,17 @@ class FlatPage(ViewerCommon):
                             str, int, int, str,
                             str, int, str)
         self.tree_cols = self._make_tv_columns(self.tree_view, (
-            ("(0)", 0, self._cell_ralign, -1, pango.ELLIPSIZE_NONE),
-            (_('Artist'), (1, 10, 11, 12, 13, 9), self._cell_show_unknown, 100, pango.ELLIPSIZE_END),
-            (_('Album'), (2, 10, 11, 12, 13, 9), self._cell_show_unknown, 100, pango.ELLIPSIZE_END),
-            (_('Title'), (4, 10, 11, 12, 13, 9), self._cell_show_unknown, 100, pango.ELLIPSIZE_END),
+            ("(0)", 0, self._cell_ralign, -1, Pango.EllipsizeMode.NONE),
+            (_('Artist'), (1, 10, 11, 12, 13, 9), self._cell_show_unknown, 100, Pango.EllipsizeMode.END),
+            (_('Album'), (2, 10, 11, 12, 13, 9), self._cell_show_unknown, 100, Pango.EllipsizeMode.END),
+            (_('Title'), (4, 10, 11, 12, 13, 9), self._cell_show_unknown, 100, Pango.EllipsizeMode.END),
             (_('Last Played'), (10, 11, 12, 9), self._cell_progress, -1, None, Gtk.CellRendererProgress()),
-            (_('Disk'), 8, self._cell_ralign, -1, pango.ELLIPSIZE_NONE),
-            (_('Track'), 3, self._cell_ralign, -1, pango.ELLIPSIZE_NONE),
-            (_('Duration'), 5, self._cell_secs_to_h_m_s, -1, pango.ELLIPSIZE_NONE),
-            (_('Bitrate'), 6, self._cell_k, -1, pango.ELLIPSIZE_NONE),
-            (_('Filename'), (9, 7), self._cell_filename, 100, pango.ELLIPSIZE_END),
-            (_('Path'), (9, 7), self._cell_path, -1, pango.ELLIPSIZE_NONE),
+            (_('Disk'), 8, self._cell_ralign, -1, Pango.EllipsizeMode.NONE),
+            (_('Track'), 3, self._cell_ralign, -1, Pango.EllipsizeMode.NONE),
+            (_('Duration'), 5, self._cell_secs_to_h_m_s, -1, Pango.EllipsizeMode.NONE),
+            (_('Bitrate'), 6, self._cell_k, -1, Pango.EllipsizeMode.NONE),
+            (_('Filename'), (9, 7), self._cell_filename, 100, Pango.EllipsizeMode.END),
+            (_('Path'), (9, 7), self._cell_path, -1, Pango.EllipsizeMode.NONE),
             ))
 
         self.tree_view.set_rules_hint(True)

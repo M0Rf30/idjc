@@ -435,7 +435,7 @@ class ServerDialog(Gtk.Dialog):
         hbox.set_spacing(5)
         
         image = Gtk.Image.new_from_stock(
-                                        Gtk.STOCK_NETWORK, Gtk.ICON_SIZE_DIALOG)
+                                        Gtk.STOCK_NETWORK, Gtk.IconSize.DIALOG)
         image.set_alignment(0.5, 0)
         table = Gtk.Table(10, 2)
         table.set_col_spacings(6)
@@ -576,7 +576,7 @@ class ChannelsDialog(Gtk.Dialog):
         self.hbox = Gtk.HBox()
         self.hbox.set_border_width(16)
         self.hbox.set_spacing(5)
-        self.image = Gtk.Image.new_from_stock(self.icon, Gtk.ICON_SIZE_DIALOG)
+        self.image = Gtk.Image.new_from_stock(self.icon, Gtk.IconSize.DIALOG)
         self.image.set_alignment(0.5, 0)
         self.hbox.pack_start(self.image, False, padding=20)
         self.hbox.pack_start(self.mainbox)

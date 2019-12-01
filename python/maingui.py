@@ -1017,7 +1017,7 @@ class MicOpener(Gtk.HBox):
         # Opener buttons built here.
         def build(group_list, closer):
             image = Gtk.Image.new_from_stock(
-                                        Gtk.STOCK_CLOSE, Gtk.ICON_SIZE_BUTTON)
+                                        Gtk.STOCK_CLOSE, Gtk.IconSize.BUTTON)
             closer_button = Gtk.Button()
             closer_button.set_image(image)
             closer_button.show_all()
@@ -1894,7 +1894,7 @@ class idjc_shutdown_dialog:
         hbox.set_spacing(12)
         dialog.get_content_area().add(hbox)
         image = Gtk.Image.new_from_stock(
-                                Gtk.STOCK_DIALOG_WARNING, Gtk.ICON_SIZE_DIALOG)
+                                Gtk.STOCK_DIALOG_WARNING, Gtk.IconSize.DIALOG)
         image.set_alignment(0.5, 0)
         hbox.pack_start(image, False)
 

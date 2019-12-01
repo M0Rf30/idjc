@@ -117,7 +117,7 @@ class NewProfileDialog(Gtk.Dialog):
             icon = Gtk.STOCK_EDIT
         else:
             icon = Gtk.STOCK_COPY if row else Gtk.STOCK_NEW
-        self.image = Gtk.Image.new_from_stock(icon, Gtk.ICON_SIZE_DIALOG)
+        self.image = Gtk.Image.new_from_stock(icon, Gtk.IconSize.DIALOG)
         self.image.set_alignment(0.0, 0.0)
         hbox.pack_start(self.image, False)
         table = Gtk.Table(2, 4)

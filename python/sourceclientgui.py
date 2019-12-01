@@ -268,7 +268,7 @@ class ConnectionDialog(Gtk.Dialog):
         self.set_border_width(5)
         hbox = Gtk.HBox(spacing = 20)
         hbox.set_border_width(15)
-        icon = Gtk.Image.new_from_stock(Gtk.STOCK_NETWORK, Gtk.ICON_SIZE_DIALOG)
+        icon = Gtk.Image.new_from_stock(Gtk.STOCK_NETWORK, Gtk.IconSize.DIALOG)
         hbox.pack_start(icon)
         col = Gtk.VBox(homogeneous = True, spacing = 4)
         hbox.pack_start(col)
