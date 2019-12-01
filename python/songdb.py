@@ -429,16 +429,15 @@ class PrefsControls(Gtk.Frame):
         image = Gtk.Image.new_from_stock(Gtk.STOCK_CONNECT, Gtk.IconSize.MENU)
         self._connect.add(image)
         self._connect.connect("clicked", lambda w: self.dbtoggle.set_active(True))
-        hbox.pack_start(self._connect, False)
+        hbox.pack_start(self._connect, False, False, 0)
         
         self._statusbar = Gtk.Statusbar()
-        self._statusbar.set_has_resize_grip(False)
         cid = self._statusbar.get_context_id("all output")
         self._statusbar.push(cid, _('Disconnected'))
-        hbox.pack_start(self._statusbar)
+        hbox.pack_start(self._statusbar, True, True, 0)
 
         if have_songdb:
-            vbox.pack_start(hbox, False)
+            vbox.pack_start(hbox, False, False, 0)
         else:
             vbox.set_sensitive(False)
             label = Gtk.Label(_('Module mysql-python (MySQLdb) required'))
@@ -1839,7 +1838,7 @@ class MediaPane(Gtk.VBox):
 
         spc = Gtk.VBox()
         spc.set_border_width(2)
-        self.pack_start(spc, False)
+        self.pack_start(spc, False, False, 0)
         spc.show()
 
         self.notebook.show_all()
