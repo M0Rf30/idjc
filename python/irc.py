@@ -1586,7 +1586,7 @@ class IRCConnection(Gtk.TreeRowReference, threading.Thread):
         print("Args:", event.arguments())
 
 
-class MessageHandler(GObject):
+class MessageHandler(GObject.GObject):
     __gsignals__ = { 
         'channels-changed': (GObject.SignalFlags.RUN_LAST | GObject.SIGNAL_ACTION,
                                 GObject.TYPE_NONE, (GObject.TYPE_PYOBJECT, )),

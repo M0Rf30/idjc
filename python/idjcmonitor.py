@@ -38,7 +38,7 @@ def pid_exists(pid):
         return True
 
 
-class IDJCMonitor(GObject):
+class IDJCMonitor(GObject.GObject):
     """Monitor IDJC internals relating to a specific profile or session.
     
     Can yield information about streams, music metadata, health.

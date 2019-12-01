@@ -19,8 +19,9 @@
 
 __all__ = ['LicenceWindow']
 
-import gtk
-
+import gi
+gi.require_version('Gtk', '3.0')
+from gi.repository import Gtk
 from idjc import FGlobs
 
 
