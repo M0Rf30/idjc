@@ -669,6 +669,7 @@ class ViewerCommon(PageCommon):
         ('TEXT', 0, 2),
         ('STRING', 0, 3))
 
+
     def _cb_drag_begin(self, widget, context):
         """Set icon for drag and drop operation."""
 
@@ -1309,7 +1310,7 @@ class FlatPage(ViewerCommon):
 
         self.tree_view.set_rules_hint(True)
         self.tree_view.set_rubber_banding(True)
-        self.tree_selection.set_mode(Gtk.SELECTION_MULTIPLE)
+        self.tree_selection.set_mode(Gtk.SelectionMode.MULTIPLE)
 
     def reload(self):
         if self.catalogs.update_required(self._old_cat_data):
@@ -1621,9 +1622,9 @@ class CatalogsPage(PageCommon):
         self.list_store = Gtk.ListStore(
                         int, int, str, int, str, int, str, str, int, int, int)
         self.tree_cols = self._make_tv_columns(self.tree_view, (
-            (_('Name'), 6, None, 65, pango.ELLIPSIZE_END),
-            (_('Catalog Path'), 7, None, 100, pango.ELLIPSIZE_END),
-            (_('Prepend Path'), 2, None, -1, pango.ELLIPSIZE_NONE)
+            (_('Name'), 6, None, 65, Pango.EllipsizeMode.END),
+            (_('Catalog Path'), 7, None, 100, Pango.EllipsizeMode.END),
+            (_('Prepend Path'), 2, None, -1, Pango.EllipsizeMode.NONE)
             ))
 
         rend1 = Gtk.CellRendererToggle()

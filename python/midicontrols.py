@@ -2001,7 +2001,7 @@ class ControlsUI(Gtk.VBox):
         column_input.set_expand(True)
         cricon= Gtk.CellRendererPixbuf()
         crtext= Gtk.CellRendererText()
-        crtext.props.ellipsize= pango.ELLIPSIZE_END
+        crtext.props.ellipsize= Pango.EllipsizeMode.END
         column_input.pack_start(cricon, False)
         column_input.pack_start(crtext, True)
         column_input.set_attributes(cricon, pixbuf= 3, cell_background= 8)

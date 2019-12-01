@@ -933,7 +933,7 @@ class IRCPane(Gtk.VBox):
         col.add_attribute(toggle, "active", 1)
         
         crt = Gtk.CellRendererText()
-        crt.props.ellipsize = pango.ELLIPSIZE_END
+        crt.props.ellipsize = Pango.EllipsizeMode.END
         col.pack_start(crt, True)
         col.set_cell_data_func(crt, self._cell_data_func)
         

@@ -780,7 +780,7 @@ class ConnectionPane(Gtk.VBox):
         col_type.set_alignment(0.5)
         self.treeview.append_column(col_type)
         text_cell_rend = Gtk.CellRendererText()
-        text_cell_rend.set_property("ellipsize", pango.ELLIPSIZE_END)
+        text_cell_rend.set_property("ellipsize", Pango.EllipsizeMode.END)
         col_host = Gtk.TreeViewColumn(_('Hostname/IP address'), text_cell_rend,
                                                                         text=2)
         col_host.set_sizing = Gtk.TREE_VIEW_COLUMN_FIXED
@@ -1591,7 +1591,7 @@ class StreamTab(Tab):
         self.server_connect.connect("toggled", self.cb_server_connect)
         hbox.pack_start(self.server_connect, True, True, 0)
         self.server_connect_label = Gtk.Label()
-        self.server_connect_label.set_ellipsize(pango.ELLIPSIZE_MIDDLE)
+        self.server_connect_label.set_ellipsize(Pango.EllipsizeMode.MIDDLE)
         self.server_connect.add(self.server_connect_label)
         self.server_connect_label.show()
         self.server_connect.show()

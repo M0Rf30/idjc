@@ -477,7 +477,7 @@ class IconChooserButton(Gtk.Button):
         hbox.pack_start(image, False, padding=1)
         label = Gtk.Label()
         label.set_alignment(0, 0.5)
-        label.set_ellipsize(pango.ELLIPSIZE_END)
+        label.set_ellipsize(Pango.EllipsizeMode.END)
         hbox.pack_start(label)
         
         vsep = Gtk.VSeparator()
@@ -651,7 +651,7 @@ class FolderChooserButton(Gtk.Button):
         # TC: FolderChooserButton text for null -- no directory is set.
         self._label = Gtk.Label(_("(None)"))
         self._label.set_alignment(0.0, 0.5)
-        self._label.set_ellipsize(pango.ELLIPSIZE_END)
+        self._label.set_ellipsize(Pango.EllipsizeMode.END)
         hbox.pack_start(self._label)
         self._label.show()
         self.set_dialog(dialog)

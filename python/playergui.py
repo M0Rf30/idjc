@@ -327,7 +327,7 @@ class CuesheetPlaylist(Gtk.Frame):
         renderer_toggle = Gtk.CellRendererToggle()
         renderer_toggle.connect("toggled", self._play_clicked)
         renderer_text_desc = Gtk.CellRendererText()
-        renderer_text_desc.set_property("ellipsize", pango.ELLIPSIZE_END)
+        renderer_text_desc.set_property("ellipsize", Pango.EllipsizeMode.END)
         renderer_text_rjust = Gtk.CellRendererText()
         renderer_text_rjust.set_property("xalign", 0.9)
         renderer_duration = CellRendererDuration()
@@ -4154,7 +4154,7 @@ class IDJC_Media_Player(dbus.service.Object):
         self.rgcellrender = Gtk.CellRendererText()
         self.playtimecellrender = Gtk.CellRendererText()
         self.cellrender = Gtk.CellRendererText()
-        self.cellrender.set_property("ellipsize", pango.ELLIPSIZE_END)
+        self.cellrender.set_property("ellipsize", Pango.EllipsizeMode.END)
         self.rgtvcolumn = Gtk.TreeViewColumn("", self.rgcellrender)
         self.playtimetvcolumn = Gtk.TreeViewColumn(
                                         "Time", self.playtimecellrender)
