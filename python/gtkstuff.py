@@ -582,7 +582,7 @@ class LabelSubst(Gtk.Frame):
         frame.set_label(" %s " % default_text)
         frame.set_label_align(0.5, 0.5)
         frame.set_border_width(3)
-        self.vbox.pack_start(frame)
+        self.vbox.pack_start(frame, False, False, 0)
         hbox = Gtk.HBox()
         hbox.set_spacing(3)
         frame.add(hbox)
@@ -590,11 +590,11 @@ class LabelSubst(Gtk.Frame):
         use_supplied = Gtk.RadioButton(None, _("Alternative"))
         use_default = Gtk.RadioButton(use_supplied, _('Default'))
         self.activedict[ui_name + "_use_supplied"] = use_supplied
-        hbox.pack_start(use_default, False)
-        hbox.pack_start(use_supplied, False)
+        hbox.pack_start(use_default, False, False, 0)
+        hbox.pack_start(use_supplied, False, False, 0)
         entry = Gtk.Entry()
         self.textdict[ui_name + "_text"] = entry
-        hbox.pack_start(entry)
+        hbox.pack_start(entry, False, False, 0)
         
         if isinstance(widget, Gtk.Frame):
             def set_text(new_text):
@@ -649,12 +649,12 @@ class FolderChooserButton(Gtk.Button):
         hbox.set_spacing(3)
         self.add(hbox)
         self._icon = Gtk.Image.new_from_stock(Gtk.STOCK_DIRECTORY, Gtk.IconSize.MENU)
-        hbox.pack_start(self._icon, False)
+        hbox.pack_start(self._icon, False, False, 0)
         # TC: FolderChooserButton text for null -- no directory is set.
         self._label = Gtk.Label(_("(None)"))
         self._label.set_alignment(0.0, 0.5)
         self._label.set_ellipsize(Pango.EllipsizeMode.END)
-        hbox.pack_start(self._label)
+        hbox.pack_start(self._label, False, False, 0)
         self._label.show()
         self.set_dialog(dialog)
         self.connect("clicked", self._on_clicked)
