@@ -281,6 +281,7 @@ class ProfileDialog(Gtk.Dialog):
         self.treeview.append_column(c0)
         c1 = Gtk.TreeViewColumn(_("Profile"))
         c1.pack_start(pbrend, expand=False)
+        c1.pack_start(strrend, expand=True)
         c1.add_attribute(pbrend, "pixbuf", 0)
         c1.add_attribute(strrend, "text", 1)
         c1.set_spacing(2)
@@ -294,8 +295,8 @@ class ProfileDialog(Gtk.Dialog):
         self.treeview.append_column(c3)
         # TC: column heading. The time a particular profile has been running.
         c4 = Gtk.TreeViewColumn(_("Up-time"))
-        c4.pack_start(ledrend)
-        c4.pack_start(time_rend)
+        c4.pack_start(ledrend, expand=True)
+        c4.pack_start(time_rend, expand=True)
         c4.add_attribute(ledrend, "active", 3)
         c4.add_attribute(time_rend, "time", 6)
         c4.set_spacing(2)
