@@ -878,7 +878,7 @@ class TreePage(ViewerCommon):
         cell_text = Gtk.CellRendererText()
         self.layout_combo.pack_start(cell_text)
         self.layout_combo.add_attribute(cell_text, "text", 0)
-        self.controls.pack_start(self.layout_combo, False)
+        self.controls.pack_start(self.layout_combo, False, False, 0)
         self.right_controls = Gtk.HBox()
         self.right_controls.set_spacing(1)
         self.tree_rebuild = Gtk.Button()
