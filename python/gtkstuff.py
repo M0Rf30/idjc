@@ -578,7 +578,8 @@ class LabelSubst(Gtk.Frame):
         self.activedict = {}
 
     def add_widget(self, widget, ui_name, default_text):
-        frame = Gtk.Frame(" %s " % default_text)
+        frame = Gtk.Frame()
+        frame.set_label(" %s " % default_text)
         frame.set_label_align(0.5, 0.5)
         frame.set_border_width(3)
         self.vbox.pack_start(frame)
