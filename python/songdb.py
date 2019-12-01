@@ -325,7 +325,7 @@ class Settings(Gtk.Table):
         self.textdict = {}
 
         # Attachment for labels.
-        l_attach = partial(self.attach, xoptions=Gtk.SHRINK | Gtk.FILL)
+        l_attach = partial(self.attach, xoptions=Gtk.AttachOptions.SHRINK | Gtk.AttachOptions.FILL)
         
         # Top row.
         hostportlabel, self.hostnameport = self._factory(
@@ -423,7 +423,7 @@ class PrefsControls(Gtk.Frame):
         image = Gtk.Image.new_from_stock(Gtk.STOCK_DISCONNECT, Gtk.IconSize.MENU)
         self._disconnect.add(image)
         self._disconnect.connect("clicked", lambda w: self.dbtoggle.set_active(False))
-        hbox.pack_start(self._disconnect, False)
+        hbox.pack_start(self._disconnect, False, False, 0)
         
         self._connect = Gtk.Button()
         image = Gtk.Image.new_from_stock(Gtk.STOCK_CONNECT, Gtk.IconSize.MENU)
@@ -1666,8 +1666,9 @@ class CatalogsPage(PageCommon):
         rend3.connect("edited", self._on_spin_edited, 1)
         col = self.tree_view.insert_column_with_attributes(4, _("Path Peel"),
                                                                 rend3, text=1)
-
-        rend4 = self.tree_view.get_column(5).get_cell_renderers()[0]
+        # TODO get_cell_renderers replacement?
+        #rend4 = self.tree_view.get_column(5).get_cell_renderers()[0]
+        rend4 = Gtk.CellRendererText()
         rend4.props.editable = True
         rend4.connect("edited", self._on_prepend_edited)
 
