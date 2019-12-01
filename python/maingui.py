@@ -469,7 +469,7 @@ class JackMenu(MenuMixin):
 
  
 class ColouredArea(Gtk.DrawingArea):
-    def __init__(self, colour=Gdk.Color()):
+    def __init__(self, colour=Gdk.RGBA(255, 255, 255, 0)):
         Gtk.DrawingArea.__init__(self)
         self.colour = colour
         self.rect = Gdk.Rectangle()
@@ -2993,7 +2993,7 @@ class MainWindow(dbus.service.Object):
         
         socket.setdefaulttimeout(15)
         
-        config = ConfigParser.RawConfigParser()
+        config = configparser.RawConfigParser()
         config.read(pm.basedir / 'config')
         try:
             PGlobs.num_micpairs = config.getint(
@@ -3072,8 +3072,8 @@ class MainWindow(dbus.service.Object):
   
         # create the GUI elements
         self.window_group = Gtk.WindowGroup()
-        self.window = Gtk.Window(Gtk.WINDOW_TOPLEVEL)
-        self.window.set_gravity(Gdk.GRAVITY_STATIC)
+        self.window = Gtk.Window(Gtk.WindowType.TOPLEVEL)
+        self.window.set_gravity(Gdk.Gravity.STATIC)
         self.window_group.add_window(self.window)
         self.window.set_title(self.appname + pm.title_extra)
         self.window.connect("delete_event", self.delete_event)
