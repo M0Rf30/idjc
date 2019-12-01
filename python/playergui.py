@@ -315,7 +315,7 @@ class CuesheetPlaylist(Gtk.Frame):
 
         scrolled = Gtk.ScrolledWindow()
         scrolled.set_size_request(-1, 117)
-        scrolled.set_policy(Gtk.POLICY_NEVER, Gtk.POLICY_ALWAYS)
+        scrolled.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.ALWAYS)
         scrolled.set_shadow_type(Gtk.ShadowType.ETCHED_IN)
         vbox.pack_start(scrolled)
         scrolled.show()
@@ -573,7 +573,7 @@ class AnnouncementDialog(Gtk.Dialog):
         self.vbox.add(ivbox)
         ivbox.show()
         sw = Gtk.ScrolledWindow()
-        sw.set_policy(Gtk.POLICY_NEVER, Gtk.POLICY_AUTOMATIC)
+        sw.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
         sw.set_shadow_type(Gtk.ShadowType.IN)
         sw.set_size_request(500, 200)
         ivbox.pack_start(sw, True, True, 0)
@@ -4131,8 +4131,10 @@ class IDJC_Media_Player(dbus.service.Object):
         self.progressbox.show()
 
         # A frame for our playlist
-        plframe = Gtk.Frame(" %s " % dict(left=_('Playlist 1'),
-                        right=_('Playlist 2'), interlude=_('Playlist 3'))[name])
+        plframe = Gtk.Frame(
+            label=" %s " % {'left': _('Playlist 1'),
+                            'right': _('Playlist 2'),
+                            'interlude': ('Playlist 3')}[name])
             
         plframe.set_border_width(4)
         plframe.set_shadow_type(Gtk.ShadowType.ETCHED_IN)
@@ -4142,7 +4144,7 @@ class IDJC_Media_Player(dbus.service.Object):
         plvbox.show()
         # The scrollable window box that will contain our playlist.
         self.scrolllist = Gtk.ScrolledWindow()
-        self.scrolllist.set_policy(Gtk.POLICY_AUTOMATIC, Gtk.POLICY_ALWAYS)
+        self.scrolllist.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.ALWAYS)
         self.scrolllist.set_size_request(-1, 117)
         self.scrolllist.set_border_width(4)
         self.scrolllist.set_shadow_type(Gtk.ShadowType.IN)

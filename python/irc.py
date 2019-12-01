@@ -629,7 +629,7 @@ class MessageDialog(ChannelsDialog):
         self.mainbox.pack_start(hbox, False)
         
         sw = Gtk.ScrolledWindow()
-        sw.set_policy(Gtk.POLICY_NEVER, Gtk.POLICY_ALWAYS)
+        sw.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.ALWAYS)
         irc_view = IRCView()
         sw.add(irc_view)
         self.mainbox.pack_start(sw, False)
@@ -940,7 +940,7 @@ class IRCPane(Gtk.VBox):
         self._treeview.append_column(col)
         
         sw = Gtk.ScrolledWindow()
-        sw.set_policy(Gtk.POLICY_NEVER, Gtk.POLICY_AUTOMATIC)
+        sw.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
         sw.add(self._treeview)
         
         bb = Gtk.HButtonBox()

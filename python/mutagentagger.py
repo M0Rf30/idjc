@@ -75,7 +75,7 @@ class FreeTagFrame(Gtk.Frame):
         Gtk.Frame.__init__(self)
         sw = Gtk.ScrolledWindow()
         sw.set_border_width(5)
-        sw.set_policy(Gtk.POLICY_NEVER, Gtk.POLICY_ALWAYS)
+        sw.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.ALWAYS)
         self.add(sw)
         sw.show()
         self.tb = Gtk.TextBuffer()

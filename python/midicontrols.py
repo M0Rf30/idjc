@@ -2066,7 +2066,7 @@ class ControlsUI(Gtk.VBox):
 
         self.set_border_width(4)
         scroll= Gtk.ScrolledWindow()
-        scroll.set_policy(Gtk.POLICY_NEVER, Gtk.POLICY_AUTOMATIC)
+        scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
         scroll.add(self.tree)
         self.pack_start(scroll, True, True)
         self.pack_start(buttons, False, False)

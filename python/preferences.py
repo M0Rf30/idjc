@@ -930,7 +930,7 @@ class mixprefs:
         
         generalwindow = Gtk.ScrolledWindow()
         generalwindow.set_border_width(8)
-        generalwindow.set_policy(Gtk.POLICY_NEVER, Gtk.POLICY_AUTOMATIC)
+        generalwindow.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
         outervbox = Gtk.VBox()
         outervbox.set_spacing(5)
         generalwindow.add_with_viewport(outervbox)
@@ -1478,7 +1478,7 @@ class mixprefs:
 
         scrolled_window = Gtk.ScrolledWindow()
         scrolled_window.set_border_width(0)
-        scrolled_window.set_policy(Gtk.POLICY_NEVER, Gtk.POLICY_AUTOMATIC)
+        scrolled_window.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
         panevbox = Gtk.VBox()
         scrolled_window.add_with_viewport(panevbox)
         scrolled_window.show()
@@ -1590,7 +1590,7 @@ class mixprefs:
             sw = Gtk.ScrolledWindow()
             sw.set_border_width(1)
             sw.set_shadow_type(Gtk.ShadowType.NONE)
-            sw.set_policy(Gtk.POLICY_NEVER, Gtk.POLICY_AUTOMATIC)
+            sw.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
             label = Gtk.Label(title)
             nb.append_page(sw, label)
             sw.show()

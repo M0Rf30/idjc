@@ -756,7 +756,7 @@ class ConnectionPane(Gtk.VBox):
         vbox.show()
         scrolled = Gtk.ScrolledWindow()
         scrolled.set_shadow_type(Gtk.ShadowType.ETCHED_IN)
-        scrolled.set_policy(Gtk.POLICY_AUTOMATIC, Gtk.POLICY_ALWAYS)
+        scrolled.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.ALWAYS)
         vbox.pack_start(scrolled, True)
         scrolled.show()
         self.liststore = Gtk.ListStore(*[x[1] for x in LISTFORMAT])

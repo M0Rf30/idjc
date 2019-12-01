@@ -3376,7 +3376,7 @@ class MainWindow(dbus.service.Object):
         self.history_window.show()
         self.history_window.set_size_request(-1, 81)
         self.history_window.set_shadow_type(Gtk.ShadowType.IN)
-        self.history_window.set_policy(Gtk.POLICY_NEVER, Gtk.POLICY_ALWAYS)
+        self.history_window.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.ALWAYS)
         
         history_clear_box = Gtk.HBox()
         # TC: Popup menu item, wipes away the tracks played history text.
