@@ -526,13 +526,13 @@ class PageCommon(Gtk.VBox):
         Gtk.VBox.__init__(self)
         self.set_spacing(2)
         self.scrolled_window = Gtk.ScrolledWindow()
-        self.scrolled_window.set_policy(Gtk.POLICY_AUTOMATIC, Gtk.POLICY_ALWAYS)
-        self.pack_start(self.scrolled_window)
+        self.scrolled_window.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.ALWAYS)
+        self.pack_start(self.scrolled_window, True, True, 0)
         self.tree_view = Gtk.TreeView()
         self.tree_view.set_enable_search(False)
         self.tree_selection = self.tree_view.get_selection()
         self.scrolled_window.add(self.tree_view)
-        self.pack_start(controls, False)
+        self.pack_start(controls, False, False, 0)
         label = Gtk.Label(label_text)
         notebook.append_page(self, label)
         self._update_id = deque()
@@ -639,8 +639,8 @@ class ViewerCommon(PageCommon):
         self.notebook = notebook
         self._reload_upon_catalogs_changed(enable_notebook_reload=True)
         PageCommon.__init__(self, notebook, label_text, controls)
-        self.tree_view.enable_model_drag_source(Gdk.BUTTON1_MASK,
-            self._sourcetargets, Gdk.ACTION_DEFAULT | Gdk.ACTION_COPY)
+        self.tree_view.enable_model_drag_source(Gdk.ModifierType.BUTTON1_MASK,
+            self._sourcetargets, Gdk.DragAction.DEFAULT | Gdk.DragAction.COPY)
         self.tree_view.connect_after("drag-begin", self._cb_drag_begin)
         self.tree_view.connect("drag-data-get", self._cb_drag_data_get)
 
@@ -889,11 +889,11 @@ class TreePage(ViewerCommon):
         self.tree_rebuild.set_use_stock(True)
         tree_expand = ExpandAllButton(True, _('Expand entire tree.'))
         tree_collapse = ExpandAllButton(False, _('Collapse tree.'))
-        sg = Gtk.SizeGroup(Gtk.SIZE_GROUP_HORIZONTAL)
+        sg = Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL)
         for each in (self.tree_rebuild, tree_expand, tree_collapse):
-            self.right_controls.pack_start(each, False)
+            self.right_controls.pack_start(each, False, False, 0)
             sg.add_widget(each)
-        self.controls.pack_end(self.right_controls, False)
+        self.controls.pack_end(self.right_controls, False, False, 0)
 
         ViewerCommon.__init__(self, notebook, _('Browse'), self.controls,
                                                                     catalogs)
@@ -904,20 +904,20 @@ class TreePage(ViewerCommon):
         tree_collapse.connect_object("clicked", Gtk.TreeView.collapse_all,
                                                                 self.tree_view)
         self.tree_cols = self._make_tv_columns(self.tree_view, (
-                ("", (1, 15, 16, 17, 18, 14), self._cell_show_nested, 180, pango.ELLIPSIZE_END),
+                ("", (1, 15, 16, 17, 18, 14), self._cell_show_nested, 180, Pango.EllipsizeMode.END),
                 # TC: Track artist.
-                (_('Artist'), (10, 9), self._data_merge, 100, pango.ELLIPSIZE_END),
+                (_('Artist'), (10, 9), self._data_merge, 100, Pango.EllipsizeMode.END),
                 # TC: The disk number of the album track.
-                (_('Disk'), 5, self._cell_ralign, -1, pango.ELLIPSIZE_NONE),
+                (_('Disk'), 5, self._cell_ralign, -1, Pango.EllipsizeMode.NONE),
                 # TC: The album track number.
-                (_('Track'), 7, self._cell_ralign, -1, pango.ELLIPSIZE_NONE),
+                (_('Track'), 7, self._cell_ralign, -1, Pango.EllipsizeMode.NONE),
                 # TC: Track playback time.
-                (_('Duration'), 13, self._cond_cell_secs_to_h_m_s, -1, pango.ELLIPSIZE_NONE),
+                (_('Duration'), 13, self._cond_cell_secs_to_h_m_s, -1, Pango.EllipsizeMode.NONE),
                 (_('Last Played'), (15, 16, 17, 14), self._cell_progress, -1, None, Gtk.CellRendererProgress()),
-                (_('Bitrate'), 12, self._cell_k, -1, pango.ELLIPSIZE_NONE),
-                (_('Filename'), (14, 11), self._cell_filename, 100, pango.ELLIPSIZE_END),
+                (_('Bitrate'), 12, self._cell_k, -1, Pango.EllipsizeMode.NONE),
+                (_('Filename'), (14, 11), self._cell_filename, 100, Pango.EllipsizeMode.END),
                 # TC: Directory path to a file.
-                (_('Path'), (14, 11), self._cell_path, -1, pango.ELLIPSIZE_NONE),
+                (_('Path'), (14, 11), self._cell_path, -1, Pango.EllipsizeMode.NONE),
                 ))
 
         self.artist_store = Gtk.TreeStore(*self.DATA_SIGNATURE)
@@ -932,10 +932,10 @@ class TreePage(ViewerCommon):
         self.loading_vbox.set_spacing(20)
         # TC: The database tree view is being built (populated).
         self.loading_label = Gtk.Label()
-        self.loading_vbox.pack_start(self.loading_label, False)
+        self.loading_vbox.pack_start(self.loading_label, False, False, 0)
         self.progress_bar = Gtk.ProgressBar()
-        self.loading_vbox.pack_start(self.progress_bar, False)
-        self.pack_start(self.loading_vbox)
+        self.loading_vbox.pack_start(self.progress_bar, False, False, 0)
+        self.pack_start(self.loading_vbox, True, True, 0)
         self._pulse_id = deque()
         
         self.show_all()
