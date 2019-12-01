@@ -281,7 +281,6 @@ class ProfileDialog(Gtk.Dialog):
         self.treeview.append_column(c0)
         c1 = Gtk.TreeViewColumn(_("Profile"))
         c1.pack_start(pbrend, expand=False)
-        c1.pack_start(strrend)
         c1.add_attribute(pbrend, "pixbuf", 0)
         c1.add_attribute(strrend, "text", 1)
         c1.set_spacing(2)
