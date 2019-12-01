@@ -445,13 +445,13 @@ class Binding(tuple):
     # a simple 0..127 range, for easy use in a SpinButton.
     #
     MODIFIERS= (
-        (Gdk.SHIFT_MASK, u'\u21D1'),
-        (Gdk.CONTROL_MASK, u'^'),
-        (Gdk.MOD1_MASK, u'\u2020'), # alt/option
-        (Gdk.MOD5_MASK, u'\u2021'), # altgr/option
-        (Gdk.META_MASK, u'\u25C6'),
-        (Gdk.SUPER_MASK, u'\u2318'), # win/command
-        (Gdk.HYPER_MASK, u'\u25CF'),
+        (Gdk.ModifierType.SHIFT_MASK, u'\u21D1'),
+        (Gdk.ModifierType.CONTROL_MASK, u'^'),
+        (Gdk.ModifierType.MOD1_MASK, u'\u2020'), # alt/option
+        (Gdk.ModifierType.MOD5_MASK, u'\u2021'), # altgr/option
+        (Gdk.ModifierType.META_MASK, u'\u25C6'),
+        (Gdk.ModifierType.SUPER_MASK, u'\u2318'), # win/command
+        (Gdk.ModifierType.HYPER_MASK, u'\u25CF'),
     )
     MODIFIERS_MASK= sum(m for m, c in MODIFIERS)
 
