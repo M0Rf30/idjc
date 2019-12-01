@@ -4267,7 +4267,7 @@ class IDJC_Media_Player(dbus.service.Object):
         self.pbspeedzerobutton.connect("clicked", self.callback, "pbspeedzero")
         pixbuf = Gdk.pixbuf_new_from_file(
                                             PGlobs.themedir / "speedicon.png")
-        pixbuf = pixbuf.scale_simple(55, 14, Gdk.INTERP_BILINEAR)
+        pixbuf = pixbuf.scale_simple(55, 14, GdkPixbuf.InterpType.BILINEAR)
         image = Gtk.Image()
         image.set_from_pixbuf(pixbuf)
         image.show()
@@ -4295,7 +4295,7 @@ class IDJC_Media_Player(dbus.service.Object):
         set_tip(self.prev, _('Previous track.'))
 
         pixbuf = Gdk.pixbuf_new_from_file(PGlobs.themedir / "play2.png")
-        pixbuf = pixbuf.scale_simple(14, 14, Gdk.INTERP_BILINEAR)
+        pixbuf = pixbuf.scale_simple(14, 14, GdkPixbuf.InterpType.BILINEAR)
         image=Gtk.Image()
         image.set_from_pixbuf(pixbuf)
         image.show()
@@ -4337,7 +4337,7 @@ class IDJC_Media_Player(dbus.service.Object):
         set_tip(self.next, _('Next track.'))
 
         pixbuf = Gdk.pixbuf_new_from_file(PGlobs.themedir / "add3.png")
-        pixbuf = pixbuf.scale_simple(14, 14, Gdk.INTERP_HYPER)
+        pixbuf = pixbuf.scale_simple(14, 14, GdkPixbuf.InterpType.HYPER)
         image = Gtk.Image()
         image.set_from_pixbuf(pixbuf)
         image.show()
