@@ -228,8 +228,9 @@ class CueSheetListStore(Gtk.ListStore):
 
 
 class NumberedLabel(Gtk.Label):
-    attrs = pango.AttrList()
-    attrs.insert(pango.AttrFamily("Monospace" , 0, 3))
+    attrs = Pango.AttrList()
+    # TODO: stylize this
+    #attrs.insert(pango.AttrFamily("Monospace" , 0, 3))
     #attrs.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0, 3))
 
     def set_value(self, value):
