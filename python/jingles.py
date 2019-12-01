@@ -60,14 +60,14 @@ class Effect(Gtk.HBox):
     L.E.D., stop, and config button.
     """
 
-    dndsources = (("IDJC_EFFECT_BUTTON", Gtk.TARGET_SAME_APP, 6),)
+    dndsources = (("IDJC_EFFECT_BUTTON", Gtk.TargetFlags.SAME_APP, 6),)
 
     dndtargets = (  # Drag and drop source target specs.
-        ('text/plain', 0, 1),
-        ('TEXT', 0, 2),
-        ('STRING', 0, 3),
-        ('text/uri-list', 0, 4),
-        ("IDJC_EFFECT_BUTTON", Gtk.TARGET_SAME_APP, 6))
+        Gtk.TargetEntry.new('text/plain', 0, 1),
+        Gtk.TargetEntry.new('TEXT', 0, 2),
+        Gtk.TargetEntry.new('STRING', 0, 3),
+        Gtk.TargetEntry.new('text/uri-list', 0, 4),
+        Gtk.TargetEntry.new("IDJC_EFFECT_BUTTON", Gtk.TargetFlags.SAME_APP, 6))
 
     def __init__(self, num, others, parent):
         self.num = num
