@@ -121,7 +121,7 @@ class HistoryEntryWithMenu(HistoryEntry):
 class ModuleFrame(Gtk.Frame):
     def __init__(self, frametext = None):
         Gtk.Frame.__init__(self, frametext)
-        Gtk.Frame.set_shadow_type(self, Gtk.SHADOW_ETCHED_OUT)
+        Gtk.Frame.set_shadow_type(self, Gtk.ShadowType.ETCHED_OUT)
         self.vbox = Gtk.VBox()
         self.add(self.vbox)
         self.vbox.show()
@@ -130,13 +130,13 @@ class ModuleFrame(Gtk.Frame):
 class CategoryFrame(Gtk.Frame):
     def __init__(self, frametext = None):
         Gtk.Frame.__init__(self, frametext)
-        Gtk.Frame.set_shadow_type(self, Gtk.SHADOW_IN)
+        Gtk.Frame.set_shadow_type(self, Gtk.ShadowType.IN)
 
  
 class SubcategoryFrame(Gtk.Frame):
     def __init__(self, frametext = None):
         Gtk.Frame.__init__(self, frametext)
-        Gtk.Frame.set_shadow_type(self, Gtk.SHADOW_ETCHED_IN)
+        Gtk.Frame.set_shadow_type(self, Gtk.ShadowType.ETCHED_IN)
 
 
 class ConnectionDialog(Gtk.Dialog):
@@ -755,7 +755,7 @@ class ConnectionPane(Gtk.VBox):
         self.add(vbox)
         vbox.show()
         scrolled = Gtk.ScrolledWindow()
-        scrolled.set_shadow_type(Gtk.SHADOW_ETCHED_IN)
+        scrolled.set_shadow_type(Gtk.ShadowType.ETCHED_IN)
         scrolled.set_policy(Gtk.POLICY_AUTOMATIC, Gtk.POLICY_ALWAYS)
         vbox.pack_start(scrolled, True)
         scrolled.show()
@@ -1270,9 +1270,9 @@ class StreamTab(Tab):
         lh.pack_start(lv, False, False, 0)
         rh.pack_start(rv, False, False, 0)
         lframe = Gtk.Frame()
-        lframe.set_shadow_type(Gtk.SHADOW_OUT)
+        lframe.set_shadow_type(Gtk.ShadowType.OUT)
         rframe = Gtk.Frame()
-        rframe.set_shadow_type(Gtk.SHADOW_OUT)
+        rframe.set_shadow_type(Gtk.ShadowType.OUT)
         lv.pack_start(lframe, True, False, 0)
         rv.pack_start(rframe, True, False, 0)
         lvi = Gtk.VBox()
@@ -2073,7 +2073,7 @@ class RecordTab(Tab):
             self.source_store.append((" FLAC+CUE", FGlobs.flacenabled))
             hbox.pack_start(self.source_combo, False, False, 0)
             self.source_combo.show()
-            arrow = Gtk.Arrow(Gtk.ARROW_RIGHT, Gtk.SHADOW_IN)
+            arrow = Gtk.Arrow(Gtk.ARROW_RIGHT, Gtk.ShadowType.IN)
             hbox.pack_start(arrow, False, False, 0)
             arrow.show()
             file_dialog = Gtk.FileChooserDialog("", None,
@@ -2204,7 +2204,7 @@ class StreamTabFrame(TabFrame):
         set_tip(outerframe,
                         _('Perform operations on multiple servers in unison.'))
         outerframe.set_border_width(8)
-        outerframe.set_shadow_type(Gtk.SHADOW_OUT)
+        outerframe.set_shadow_type(Gtk.ShadowType.OUT)
         gvbox = Gtk.VBox()
         gvbox.set_border_width(8)
         gvbox.set_spacing(8)

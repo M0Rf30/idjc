@@ -316,7 +316,7 @@ class CuesheetPlaylist(Gtk.Frame):
         scrolled = Gtk.ScrolledWindow()
         scrolled.set_size_request(-1, 117)
         scrolled.set_policy(Gtk.POLICY_NEVER, Gtk.POLICY_ALWAYS)
-        scrolled.set_shadow_type(Gtk.SHADOW_ETCHED_IN)
+        scrolled.set_shadow_type(Gtk.ShadowType.ETCHED_IN)
         vbox.pack_start(scrolled)
         scrolled.show()
         self.treeview = Gtk.TreeView()
@@ -391,7 +391,7 @@ class ButtonFrame(Gtk.Frame):
         self.hbox = Gtk.HBox()
         self.add(self.hbox)
         self.hbox.show()
-        self.set_shadow_type(Gtk.SHADOW_NONE)
+        self.set_shadow_type(Gtk.ShadowType.NONE)
         self.set_label_align(0.5, 0.5)
 
 
@@ -574,7 +574,7 @@ class AnnouncementDialog(Gtk.Dialog):
         ivbox.show()
         sw = Gtk.ScrolledWindow()
         sw.set_policy(Gtk.POLICY_NEVER, Gtk.POLICY_AUTOMATIC)
-        sw.set_shadow_type(Gtk.SHADOW_IN)
+        sw.set_shadow_type(Gtk.ShadowType.IN)
         sw.set_size_request(500, 200)
         ivbox.pack_start(sw, True, True, 0)
         sw.show()
@@ -3986,7 +3986,7 @@ class IDJC_Media_Player(dbus.service.Object):
 
     def popupwindow_populate(self, window, parentwidget, parent_x, parent_y):
         frame = Gtk.Frame()
-        frame.set_shadow_type(Gtk.SHADOW_OUT)
+        frame.set_shadow_type(Gtk.ShadowType.OUT)
         window.add(frame)
         frame.show()
         hbox = Gtk.HBox()
@@ -4084,7 +4084,7 @@ class IDJC_Media_Player(dbus.service.Object):
         self.hbox1.set_spacing(3)
         frame = Gtk.Frame()
         frame.set_border_width(3)
-        frame.set_shadow_type(Gtk.SHADOW_IN)
+        frame.set_shadow_type(Gtk.ShadowType.IN)
         frame.add(self.hbox1)
         frame.show()
         pbox.pack_start(frame, False, False, 0)
@@ -4134,7 +4134,7 @@ class IDJC_Media_Player(dbus.service.Object):
                         right=_('Playlist 2'), interlude=_('Playlist 3'))[name])
             
         plframe.set_border_width(4)
-        plframe.set_shadow_type(Gtk.SHADOW_ETCHED_IN)
+        plframe.set_shadow_type(Gtk.ShadowType.ETCHED_IN)
         plframe.show()
         plvbox = Gtk.VBox()
         plframe.add(plvbox)
@@ -4144,7 +4144,7 @@ class IDJC_Media_Player(dbus.service.Object):
         self.scrolllist.set_policy(Gtk.POLICY_AUTOMATIC, Gtk.POLICY_ALWAYS)
         self.scrolllist.set_size_request(-1, 117)
         self.scrolllist.set_border_width(4)
-        self.scrolllist.set_shadow_type(Gtk.SHADOW_IN)
+        self.scrolllist.set_shadow_type(Gtk.ShadowType.IN)
         # A liststore object for our playlist
         self.liststore = Gtk.ListStore(str, str, int, str, str, str,
                                 str, str, CueSheetListStore, str, str)

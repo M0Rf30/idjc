@@ -373,7 +373,7 @@ Public License instead of this License.
     def __init__(self):
         Gtk.ScrolledWindow.__init__(self)
         self.set_policy(Gtk.POLICY_NEVER, Gtk.POLICY_ALWAYS)
-        self.set_shadow_type(Gtk.SHADOW_ETCHED_IN)
+        self.set_shadow_type(Gtk.ShadowType.ETCHED_IN)
         text_view = Gtk.TextView()
         text_view.set_wrap_mode(Gtk.WRAP_WORD)
         text_view.set_editable(False)

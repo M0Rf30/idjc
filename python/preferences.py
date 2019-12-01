@@ -1484,7 +1484,7 @@ class mixprefs:
         scrolled_window.show()
         panevbox.set_border_width(3)
         panevbox.set_spacing(3)
-        panevbox.get_parent().set_shadow_type(Gtk.SHADOW_NONE)
+        panevbox.get_parent().set_shadow_type(Gtk.ShadowType.NONE)
         panevbox.show()
 
         # Opener buttons for channels
@@ -1580,7 +1580,7 @@ class mixprefs:
         
         lw = licence_window.LicenceWindow()
         lw.set_border_width(1)
-        lw.set_shadow_type(Gtk.SHADOW_ETCHED_IN)
+        lw.set_shadow_type(Gtk.ShadowType.ETCHED_IN)
         label = Gtk.Label(_('Licence'))
         nb.append_page(lw, label)
         lw.show()
@@ -1589,7 +1589,7 @@ class mixprefs:
         def contribs_page(title, content):
             sw = Gtk.ScrolledWindow()
             sw.set_border_width(1)
-            sw.set_shadow_type(Gtk.SHADOW_NONE)
+            sw.set_shadow_type(Gtk.ShadowType.NONE)
             sw.set_policy(Gtk.POLICY_NEVER, Gtk.POLICY_AUTOMATIC)
             label = Gtk.Label(title)
             nb.append_page(sw, label)

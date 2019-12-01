@@ -1446,7 +1446,7 @@ class StreamMeter(Gtk.Frame):
         self.base = base
         self.top = top
         Gtk.Frame.__init__(self)
-        self.set_shadow_type(Gtk.SHADOW_IN)
+        self.set_shadow_type(Gtk.ShadowType.IN)
         self.da = Gtk.DrawingArea()
         self.add(self.da)
         self.da.connect("configure_event", self.cb_configure)
@@ -1552,7 +1552,7 @@ class BasicMeter(Gtk.Frame):
         assert mut >= lut, "mut must be greater than or equal to lut"
         assert mut <= top, "mut must not exceed top"
         Gtk.Frame.__init__(self)
-        self.set_shadow_type(Gtk.SHADOW_IN)
+        self.set_shadow_type(Gtk.ShadowType.IN)
         self.da = Gtk.DrawingArea()
         self.add(self.da)
         self.da.connect("configure_event", self.cb_configure)
@@ -1640,7 +1640,7 @@ class StackedMeter(Gtk.Frame):
         self.top = top
         assert top > base, "top must be greater than base"
         Gtk.Frame.__init__(self)
-        self.set_shadow_type(Gtk.SHADOW_IN)
+        self.set_shadow_type(Gtk.ShadowType.IN)
         self.da = Gtk.DrawingArea()
         self.add(self.da)
         self.da.connect("configure_event", self.cb_configure)
@@ -3233,7 +3233,7 @@ class MainWindow(dbus.service.Object):
         self.volframe = Gtk.Frame()
         self.volframe.viewlevels = (5,)
         self.volframe.set_border_width(5)
-        self.volframe.set_shadow_type(Gtk.SHADOW_ETCHED_IN)
+        self.volframe.set_shadow_type(Gtk.ShadowType.ETCHED_IN)
         self.volframe.add(self.vboxvol)
         self.volframe.show()
         self.hbox4.pack_start(self.volframe, False, True, 3)
@@ -3373,7 +3373,7 @@ class MainWindow(dbus.service.Object):
         self.history_window.set_border_width(4)
         self.history_window.show()
         self.history_window.set_size_request(-1, 81)
-        self.history_window.set_shadow_type(Gtk.SHADOW_IN)
+        self.history_window.set_shadow_type(Gtk.ShadowType.IN)
         self.history_window.set_policy(Gtk.POLICY_NEVER, Gtk.POLICY_ALWAYS)
         
         history_clear_box = Gtk.HBox()
@@ -3499,7 +3499,7 @@ class MainWindow(dbus.service.Object):
         plvbox.add(label)
         label.show()
         self.passleft = make_arrow_button(
-                            self, Gtk.ARROW_LEFT, Gtk.SHADOW_NONE, "cfmleft")
+                            self, Gtk.ARROW_LEFT, Gtk.ShadowType.NONE, "cfmleft")
         plvbox.add(self.passleft)
         self.passleft.show()
         self.crossbox.pack_start(plvbox, False, False, 0)
@@ -3536,7 +3536,7 @@ class MainWindow(dbus.service.Object):
         prvbox.add(label)
         label.show()
         self.passright = make_arrow_button(
-                            self, Gtk.ARROW_RIGHT, Gtk.SHADOW_NONE, "cfmright")
+                            self, Gtk.ARROW_RIGHT, Gtk.ShadowType.NONE, "cfmright")
         prvbox.add(self.passright)
         self.passright.show()
         self.crossbox.pack_start(prvbox, False, False, 0)
@@ -3565,7 +3565,7 @@ class MainWindow(dbus.service.Object):
         passbox.show()
         
         self.passmidleft = make_arrow_button(
-                                self, Gtk.ARROW_UP, Gtk.SHADOW_NONE, "cfmmidl")
+                                self, Gtk.ARROW_UP, Gtk.ShadowType.NONE, "cfmmidl")
         sg4.add_widget(self.passmidleft)
         passhbox.pack_start(self.passmidleft, False, False, 0)
         self.passmidleft.show()
@@ -3573,7 +3573,7 @@ class MainWindow(dbus.service.Object):
         _('Move the crossfader to the middle of its range of travel.'))
         
         self.passmidright = make_arrow_button(
-                                self, Gtk.ARROW_UP, Gtk.SHADOW_NONE, "cfmmidr")
+                                self, Gtk.ARROW_UP, Gtk.ShadowType.NONE, "cfmmidr")
         passhbox.pack_start(self.passmidright, False, False, 0)
         self.passmidright.show()
         set_tip(self.passmidright,
