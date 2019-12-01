@@ -4111,10 +4111,11 @@ class IDJC_Media_Player(dbus.service.Object):
         # The play progress and seek bar
         self.progressadj = Gtk.Adjustment(0.0, 0.0, 100.0, 0.1, 1.0, 0.0)
         self.progressadj.connect("value_changed", self.cb_progress)
-        self.progressbar = Gtk.HScale(self.progressadj)
-        self.progressbar.set_update_policy(Gtk.UPDATE_CONTINUOUS)
+        self.progressbar = Gtk.HScale(adjustment=self.progressadj)
+        # TODO
+        #self.progressbar.set_update_policy(Gtk.UPDATE_CONTINUOUS)
         self.progressbar.set_digits(1)
-        self.progressbar.set_value_pos(Gtk.POS_TOP)
+        self.progressbar.set_value_pos(Gtk.PositionType.TOP)
         self.progressbar.set_draw_value(False)
         self.progressbar.connect("button_press_event", self.cb_event,
                                                             "ProgressPress")
@@ -4251,8 +4252,9 @@ class IDJC_Media_Player(dbus.service.Object):
         # The playback speed control
         self.pbspeedadj = Gtk.Adjustment(64.0, 0.0, 127.0, 0.1, 0.0, 0.0)
         self.pbspeedadj.connect("value_changed", self.cb_pbspeed)
-        self.pbspeedbar = Gtk.HScale(self.pbspeedadj)
-        self.pbspeedbar.set_update_policy(Gtk.UPDATE_CONTINUOUS)
+        self.pbspeedbar = Gtk.HScale(adjustment=self.pbspeedadj)
+        # TODO
+        #self.pbspeedbar.set_update_policy(Gtk.UPDATE_CONTINUOUS)
         self.pbspeedbar.connect("format-value", self.pbspeedbar_format)
         self.pbspeedbox.pack_start(self.pbspeedbar, True, True, 0)
         self.pbspeedbar.show()

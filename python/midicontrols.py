@@ -1868,7 +1868,7 @@ class ValueSnapHScale(Gtk.HBox):
             self.hscale.clear_marks()
             if not self.snap:
                 mark= lower + (upper - lower + 1) // 2
-                self.hscale.add_mark(mark, Gtk.POS_BOTTOM, None)
+                self.hscale.add_mark(mark, Gtk.PositionType.BOTTOM, None)
         self.hscale.set_adjustment(adj)
         self.hscale.set_update_policy(policy)
         adj.props.value= val

@@ -3250,7 +3250,7 @@ class MainWindow(dbus.service.Object):
         # Primary volume control
         self.deckadj = Gtk.Adjustment(127.0, 0.0, 127.0, 1.0, 6.0)
         self.deckadj.connect("value_changed", self.cb_deckvol)
-        self.deckvol = Gtk.VScale(self.deckadj)
+        self.deckvol = Gtk.VScale(adjustment=self.deckadj)
         # TODO
         # self.deckvol.set_update_policy(Gtk.UPDATE_CONTINUOUS)
         self.deckvol.set_draw_value(False)
@@ -3263,7 +3263,7 @@ class MainWindow(dbus.service.Object):
         # Visible when using separate player volume controls.
         self.deck2adj = Gtk.Adjustment(127.0, 0.0, 127.0, 1.0, 6.0)
         self.deck2adj.connect("value_changed", self.cb_deckvol)
-        self.deck2vol = Gtk.VScale(self.deck2adj)
+        self.deck2vol = Gtk.VScale(adjustment=self.deck2adj)
         # TODO
         # self.deck2vol.set_update_policy(Gtk.UPDATE_CONTINUOUS)
         self.deck2vol.set_draw_value(False)
@@ -3294,8 +3294,9 @@ class MainWindow(dbus.service.Object):
         
         self.voipgainadj = Gtk.Adjustment(64.0, 0.0, 127.0, 1.0, 6.0)
         self.voipgainadj.connect("value_changed", self.cb_deckvol)
-        voipgain = Gtk.VScale(self.voipgainadj)
-        voipgain.set_update_policy(Gtk.UPDATE_CONTINUOUS)
+        voipgain = Gtk.VScale(adjustment=self.voipgainadj)
+        # TODO
+        #voipgain.set_update_policy(Gtk.UPDATE_CONTINUOUS)
         voipgain.set_draw_value(False)
         voipgain.set_inverted(True)
         self.voipgainvbox.pack_start(voipgain, True, True, 0)
@@ -3318,8 +3319,9 @@ class MainWindow(dbus.service.Object):
         
         self.mixbackadj = Gtk.Adjustment(64.0, 0.0, 127.0, 1.0, 6.0)
         self.mixbackadj.connect("value_changed", self.cb_deckvol)
-        mixback = Gtk.VScale(self.mixbackadj)
-        mixback.set_update_policy(Gtk.UPDATE_CONTINUOUS)
+        mixback = Gtk.VScale(adjustment=self.mixbackadj)
+        # TODO
+        #mixback.set_update_policy(Gtk.UPDATE_CONTINUOUS)
         mixback.set_draw_value(False)
         mixback.set_inverted(True)
         self.mixbackvbox.pack_start(mixback, True, True, 0)
