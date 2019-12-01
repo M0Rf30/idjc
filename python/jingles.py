@@ -114,7 +114,7 @@ class Effect(Gtk.HBox):
         self.pack_start(pvbox, False)
         self.trigger.connect("clicked", self._on_trigger)
         self.trigger.drag_dest_set(Gtk.DEST_DEFAULT_ALL,
-            self.dndtargets, Gdk.ACTION_DEFAULT | Gdk.ACTION_COPY)
+            self.dndtargets, Gdk.DragAction.DEFAULT | Gdk.DragAction.COPY)
         self.trigger.connect("drag-data-received", self._drag_data_received)
         set_tip(self.trigger, _('Play'))
         
@@ -133,8 +133,8 @@ class Effect(Gtk.HBox):
         self.config.set_image(image)
         self.pack_start(self.config, False)
         self.config.connect("clicked", self._on_config)
-        self.config.drag_source_set(Gdk.BUTTON1_MASK,
-            self.dndsources, Gdk.ACTION_DEFAULT | Gdk.ACTION_COPY)
+        self.config.drag_source_set(Gdk.ModifierType.BUTTON1_MASK,
+            self.dndsources, Gdk.DragAction.DEFAULT | Gdk.DragAction.COPY)
         self.config.connect("drag-begin", self._drag_begin)
         self.config.connect("drag-data-get", self._drag_get_data)
         self.config.connect("drag-end", self._drag_end)

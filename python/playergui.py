@@ -3173,7 +3173,7 @@ class IDJC_Media_Player(dbus.service.Object):
             return
 
     def drag_data_delete(self, treeview, context):
-        if context.action == Gdk.ACTION_MOVE:
+        if context.action == Gdk.DragAction.MOVE:
             treeselection = treeview.get_selection()
             model, iter = treeselection.get_selected()
             data = model.get_value(iter, 0)
@@ -3216,10 +3216,10 @@ class IDJC_Media_Player(dbus.service.Object):
                         model.insert_before(iter_, newrow)
                     else:
                         model.insert_after(iter_, newrow)
-                if context.action == Gdk.ACTION_MOVE:
+                if context.action == Gdk.DragAction.MOVE:
                     context.finish(True, True, etime)
             else:
-                if context.action == Gdk.ACTION_MOVE:
+                if context.action == Gdk.DragAction.MOVE:
                     context.finish(True, True, etime)
                 elements = self.get_elements_from([urllib.unquote(t[7:])
                                     for t in dragged.data.strip().splitlines() 
@@ -3256,7 +3256,7 @@ class IDJC_Media_Player(dbus.service.Object):
                     self.liststore.move_before(iter_, dest_iter)
                 else:
                     self.liststore.move_after(iter_, dest_iter)
-            if context.action == Gdk.ACTION_MOVE:
+            if context.action == Gdk.DragAction.MOVE:
                 context.finish(False, False, etime)
         return True
 
@@ -4175,10 +4175,10 @@ class IDJC_Media_Player(dbus.service.Object):
         self.treeview.set_search_column(0)
         self.treeview.set_headers_visible(False)
         self.treeview.set_enable_search(False)
-        self.treeview.enable_model_drag_source( Gdk.BUTTON1_MASK,
-            self.sourcetargets, Gdk.ACTION_DEFAULT | Gdk.ACTION_MOVE)
+        self.treeview.enable_model_drag_source( Gdk.ModifierType.BUTTON1_MASK,
+            self.sourcetargets, Gdk.DragAction.DEFAULT | Gdk.DragAction.MOVE)
         self.treeview.enable_model_drag_dest( self.droptargets,
-                                                        Gdk.ACTION_DEFAULT)
+                                                        Gdk.DragAction.DEFAULT)
 
         self.treeview.connect("drag_data_get", self.drag_data_get_data)
         self.treeview.connect("drag_data_received",
