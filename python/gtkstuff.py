@@ -50,8 +50,8 @@ def SB():
             GTK_SB.__init__(self, adjustment, climb_rate, digits)
         
     return SpinButton
-        
-Gtk.SpinButton = SB()
+# TODO        
+#Gtk.SpinButton = SB()
 del SB
 
 

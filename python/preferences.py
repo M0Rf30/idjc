@@ -68,7 +68,8 @@ class CSLEntry(Gtk.Entry):
 class InitialPlayerConfig(Gtk.Frame):
     def __init__(self, title, player, prefix):
         self.player = player
-        Gtk.Frame.__init__(self, " %s " % title)
+        Gtk.Frame.__init__()
+        self.set_label(" %s " % title)
         vbox = Gtk.VBox()
         vbox.set_border_width(3)
         self.add(vbox)
@@ -235,20 +236,20 @@ class PanPresetChooser(Gtk.HBox):
         self.set_spacing(1)
 
         label = Gtk.Label(u"\u25C4")
-        self.pack_start(label)
+        self.pack_start(label, False, False, 0)
         label.show()
 
         self.buttons = []
         for i in range(PGlobs.num_panpresets):
             button = PanPresetButton(str(i + 1))
-            self.pack_start(button, False)
+            self.pack_start(button, False, False, 0)
             button.show()
             self.buttons.append(button)
             button.connect_object("clicked", PanWidget.load_presets, i)
             button.connect("clicked", self._cb_clicked)
 
         label = Gtk.Label(u"\u25BA")
-        self.pack_start(label)
+        self.pack_start(label, False, False, 0)
         label.show()
             
         set_tip(self, _('The pan preset selection buttons.\n\n'

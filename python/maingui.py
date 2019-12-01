@@ -838,7 +838,8 @@ class OpenerSettings(Gtk.Frame):
 
 
     def __init__(self):
-        Gtk.Frame.__init__(self, " %s " % _('Main Panel Opener Buttons'))
+        super(OpenerSettings, self).__init__()
+        self.set_label(" %s " % _('Main Panel Opener Buttons'))
         self.set_border_width(3)
         
         def changed(*args):
@@ -856,46 +857,47 @@ class OpenerSettings(Gtk.Frame):
                                         "while allocating channel openers."))
 
         self.button_numbers.connect("toggled", changed)
-        vbox.pack_start(self.button_numbers, False)
+        vbox.pack_start(self.button_numbers, False, False, 0)
         
-        frame = Gtk.Frame(" %s " % _('Status Indicator Appearance'))
+        frame = Gtk.Frame()
+        frame.set_label(" %s " % _('Status Indicator Appearance'))
 
         set_tip(frame,
         _('Each opener button has two vertical bars at the side to make the '
         'button state more apparent. These settings control their appearance.'))
 
-        vbox.pack_start(frame, False, padding=6)
+        vbox.pack_start(frame, False, False, 6)
         hbox = Gtk.HBox()
         hbox.set_border_width(3)
         hbox.set_spacing(3)
         frame.add(hbox)
         
-        hbox.pack_start(Gtk.Label(_('Width')), False)
+        hbox.pack_start(Gtk.Label(_('Width')), False, False, 0)
         self.indicator_width = Gtk.SpinButton(
-                                Gtk.Adjustment(4.0, 0.0, 10.0, 1.0), digits=0)
+                adjustment=Gtk.Adjustment(4.0, 0.0, 10.0, 1.0), digits=0)
         self.indicator_width.connect("value-changed", changed)
-        hbox.pack_start(self.indicator_width, False)
-        hbox.pack_start(Gtk.HBox())
+        hbox.pack_start(self.indicator_width, False, False, 0)
+        hbox.pack_start(Gtk.HBox(), False, False, 0)
         
-        hbox.pack_start(Gtk.Label(_('Opened')), False)
+        hbox.pack_start(Gtk.Label(_('Opened')), False, False, 0)
         self.open_colour = ColourButton(Gdk.Color(0.95, 0.2, 0.2))
-        hbox.pack_start(self.open_colour, False)
-        hbox.pack_start(Gtk.HBox())
-        hbox.pack_start(Gtk.Label(_('Closed')), False)
-        col = Gdk.Color("gray")
+        hbox.pack_start(self.open_colour, False, False, 0)
+        hbox.pack_start(Gtk.HBox(), False, False, 0)
+        hbox.pack_start(Gtk.Label(_('Closed')), False, False, 0)
+        col = Gdk.RGBA(50, 50, 50, 1)
         self.closed_colour = ColourButton(col)
-        hbox.pack_start(self.closed_colour, False)
-        hbox.pack_start(Gtk.HBox())
-        hbox.pack_start(Gtk.Label(_('Remind')), False)
+        hbox.pack_start(self.closed_colour, False, False, 0)
+        hbox.pack_start(Gtk.HBox(), False, False, 0)
+        hbox.pack_start(Gtk.Label(_('Remind')), False, False, 0)
         self.reminder_colour = ColourButton(col)
-        hbox.pack_start(self.reminder_colour, False)
+        hbox.pack_start(self.reminder_colour, False, False, 0)
       
         for each in (self.open_colour, self.closed_colour,
                                                         self.reminder_colour):
             each.connect("color-set", changed)
       
         self.notebook = Gtk.Notebook()
-        vbox.pack_start(self.notebook, False, padding=3)
+        vbox.pack_start(self.notebook, False, False, 3)
         self.show_all()
     
         self.activedict = {
@@ -1024,7 +1026,7 @@ class MicOpener(Gtk.HBox):
             closer_button.show_all()
 
             if closer == "left":
-                self.pack_start(closer_button, False)
+                self.pack_start(closer_button, False, False, 0)
 
             for i, g in enumerate(group_list):
                 if g:
@@ -1049,14 +1051,14 @@ class MicOpener(Gtk.HBox):
                                     lambda w, btn: btn.set_active(False), mb)
 
             if closer == "right":
-                self.pack_start(closer_button, False)
+                self.pack_start(closer_button, False, False, 0)
                 
         if aux_qty:
             build(aux_group_list, closer=("right" if aux_qty > 1 else None))
             if mic_qty:
                 spc = Gtk.HBox()
                 spc.set_size_request(3, -1)
-                self.pack_start(spc, False)
+                self.pack_start(spc, False, False, 0)
                 spc.show()
                 
         if mic_qty:
@@ -3197,8 +3199,9 @@ class MainWindow(dbus.service.Object):
         self.mic_opener.show()
         
         # playlist advance button
+        # TODO
         pixbuf = GdkPixbuf.Pixbuf.new_from_file(
-            FGlobs.themedir / "advance.png"
+            FGlobs.darkthemedir / "advance.png"
         )
         pixbuf = pixbuf.scale_simple(32, 14, GdkPixbuf.InterpType.BILINEAR)
         image = Gtk.Image()
