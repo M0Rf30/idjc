@@ -873,7 +873,8 @@ class TreePage(ViewerCommon):
     def __init__(self, notebook, catalogs):
         self.controls = Gtk.HBox()
         layout_store = Gtk.ListStore(str, Gtk.TreeStore, GObject.TYPE_PYOBJECT)
-        self.layout_combo = Gtk.ComboBox(layout_store)
+        self.layout_combo = Gtk.ComboBox()
+        self.layout_combo.set_model(layout_store)
         cell_text = Gtk.CellRendererText()
         self.layout_combo.pack_start(cell_text)
         self.layout_combo.add_attribute(cell_text, "text", 0)
@@ -1521,7 +1522,7 @@ class CatalogsInterface(GObject.GObject):
                        N_('Days'): 86400, N_('Weeks'): 604800}
     
     def __init__(self):
-        GObject.__init__(self)
+        super(CatalogsInterface, self).__init__()
         self._dict = {}
 
     def clear(self):
