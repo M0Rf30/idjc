@@ -568,7 +568,8 @@ class LabelSubst(Gtk.Frame):
     """User interface label substitution widget -- by the user."""
 
     def __init__(self, heading):
-        Gtk.Frame.__init__(self, " %s " % heading)
+        super(LabelSubst, self).__init__()
+        self.set_label(" %s " % heading)
         self.vbox = Gtk.VBox()
         self.vbox.set_border_width(2)
         self.vbox.set_spacing(2)

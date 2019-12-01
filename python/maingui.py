@@ -3100,7 +3100,7 @@ class MainWindow(dbus.service.Object):
         self.vbox8 = Gtk.VBox(False, 0)
         
         menuhbox = Gtk.HBox()
-        self.vbox8.pack_start(menuhbox, False)
+        self.vbox8.pack_start(menuhbox, False, False, 0)
         menuhbox.show()
         self.menu = MainMenu()
         menuhbox.pack_start(self.menu)
