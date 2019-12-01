@@ -776,27 +776,27 @@ class ConnectionPane(Gtk.VBox):
         rend_type = CellRendererXCast()
         rend_type.set_property("xalign", 0.5) 
         col_type = Gtk.TreeViewColumn("", rend_type, servertype = 1)
-        col_type.set_sizing = Gtk.TREE_VIEW_COLUMN_AUTOSIZE
+        col_type.set_sizing = Gtk.TreeViewColumnSizing.AUTOSIZE
         col_type.set_alignment(0.5)
         self.treeview.append_column(col_type)
         text_cell_rend = Gtk.CellRendererText()
         text_cell_rend.set_property("ellipsize", Pango.EllipsizeMode.END)
         col_host = Gtk.TreeViewColumn(_('Hostname/IP address'), text_cell_rend,
                                                                         text=2)
-        col_host.set_sizing = Gtk.TREE_VIEW_COLUMN_FIXED
+        col_host.set_sizing = Gtk.TreeViewColumnSizing.FIXED
         col_host.set_expand(True)
         self.treeview.append_column(col_host)
         rend_port = Gtk.CellRendererText()
         rend_port.set_property("xalign", 1.0)
         # TC: TCP port number.
         col_port = Gtk.TreeViewColumn(_('Port'), rend_port, text = 3)
-        col_port.set_sizing = Gtk.TREE_VIEW_COLUMN_AUTOSIZE
+        col_port.set_sizing = Gtk.TreeViewColumnSizing.AUTOSIZE
         col_port.set_alignment(0.5)
         self.treeview.append_column(col_port)
         # TC: Mount point is a technical term in relation to icecast servers.
         col_mount = Gtk.TreeViewColumn(_('Mount point       '), text_cell_rend,
                                                                         text=4)
-        col_mount.set_sizing = Gtk.TREE_VIEW_COLUMN_AUTOSIZE
+        col_mount.set_sizing = Gtk.TreeViewColumnSizing.AUTOSIZE
         self.treeview.append_column(col_mount)
         
         rend_enabled = Gtk.CellRendererToggle()
@@ -804,7 +804,7 @@ class ConnectionPane(Gtk.VBox):
         rend_listeners = Gtk.CellRendererText()
         # TC: This is the listener count heading.
         col_listeners = Gtk.TreeViewColumn(_('Listeners'))
-        col_listeners.set_sizing = Gtk.TREE_VIEW_COLUMN_AUTOSIZE
+        col_listeners.set_sizing = Gtk.TreeViewColumnSizing.AUTOSIZE
         col_listeners.pack_start(rend_enabled, False)
         col_listeners.pack_start(rend_listeners)
         col_listeners.add_attribute(rend_enabled, "active", 0)

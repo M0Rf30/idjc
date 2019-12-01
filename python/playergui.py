@@ -4167,8 +4167,8 @@ class IDJC_Media_Player(dbus.service.Object):
         self.playtimetvcolumn.set_cell_data_func(
                                 self.playtimecellrender, self.playtimerowconfig)
         self.tvcolumn.set_cell_data_func(self.cellrender, self.rowconfig)
-        self.playtimetvcolumn.set_sizing(Gtk.TREE_VIEW_COLUMN_AUTOSIZE)
-        self.tvcolumn.set_sizing(Gtk.TREE_VIEW_COLUMN_FIXED)
+        self.playtimetvcolumn.set_sizing(Gtk.TreeViewColumnSizing.AUTOSIZE)
+        self.tvcolumn.set_sizing(Gtk.TreeViewColumnSizing.FIXED)
         self.tvcolumn.set_expand(True)
         self.treeview.append_column(self.tvcolumn)
         self.treeview.append_column(self.playtimetvcolumn)

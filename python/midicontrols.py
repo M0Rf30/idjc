@@ -2017,7 +2017,7 @@ class ControlsUI(Gtk.VBox):
         column_action.set_attributes(craction, text= 5)
         column_action.set_attributes(crmodifier, text= 6)
         column_action.set_sort_column_id(1)
-        column_action.set_sizing(Gtk.TREE_VIEW_COLUMN_AUTOSIZE)
+        column_action.set_sizing(Gtk.TreeViewColumnSizing.AUTOSIZE)
         # TC: Tree column heading for targets e.g. Channel 1, Stream 2
         column_target= Gtk.TreeViewColumn(
                                 _('Target'), Gtk.CellRendererText(), text= 7)
