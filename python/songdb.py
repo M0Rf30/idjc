@@ -1822,7 +1822,7 @@ class MediaPane(Gtk.VBox):
         Gtk.VBox.__init__(self)
 
         self.notebook = Gtk.Notebook()
-        self.pack_start(self.notebook)
+        self.pack_start(self.notebook, True, True, 0)
         
         catalogs = CatalogsInterface()
         self._tree_page = TreePage(self.notebook, catalogs)
