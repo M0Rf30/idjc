@@ -33,6 +33,7 @@ from gi.repository import Gtk
 from gi.repository import Gdk
 from gi.repository import GdkPixbuf
 from gi.repository import Pango
+from pygtkcompat.generictreemodel import GenericTreeModel
 import dbus
 import dbus.service
 
@@ -2165,11 +2166,11 @@ class ControlsUI(Gtk.VBox):
         self.editor.hide()
 
 
-class BindingListModel(Gtk.GenericTreeModel):
+class BindingListModel(GenericTreeModel):
     """TreeModel mapping the list of Bindings in Controls to a TreeView
     """
     def __init__(self, owner):
-        Gtk.GenericTreeModel.__init__(self)
+        GenericTreeModel.__init__(self)
         self.owner= owner
         self.bindings= owner.owner.bindings
         self.highlights= owner.owner.highlights
