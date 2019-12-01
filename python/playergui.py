@@ -3296,14 +3296,14 @@ class IDJC_Media_Player(dbus.service.Object):
 
 
     sourcetargets = [
-        ('MY_TREE_MODEL_ROW', Gtk.TARGET_SAME_WIDGET, 0),
+        ('MY_TREE_MODEL_ROW', Gtk.TargetFlags(2), 0),
         ('text/plain', 0, 1),
         ('TEXT', 0, 2),
         ('STRING', 0, 3),
         ]
 
     droptargets = [
-        ('MY_TREE_MODEL_ROW', Gtk.TARGET_SAME_WIDGET, 0),
+        ('MY_TREE_MODEL_ROW', Gtk.TargetFlags(2), 0),
         ('text/plain', 0, 1),
         ('TEXT', 0, 2),
         ('STRING', 0, 3),
