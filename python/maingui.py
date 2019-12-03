@@ -1214,7 +1214,7 @@ class PaddedVBox(Gtk.VBox):
         self.pack_end(d, False, False, b)
         d.show()
         h = Gtk.HBox()
-        self.pack_start(h, True, True)
+        self.pack_start(h, True, True, 0)
         h.show()
         d = Gtk.VBox()
         h.pack_start(d, False, False, l)
@@ -1224,7 +1224,7 @@ class PaddedVBox(Gtk.VBox):
         d.show()
         self.vbox = Gtk.VBox()
         self.vbox.set_spacing(s)
-        h.pack_start(self.vbox)
+        h.pack_start(self.vbox, True, True, 0)
         self.vbox.show()        
         self.pack_start = self.vbox_pack_start
         self.add = self.vbox_add
@@ -1234,67 +1234,74 @@ def make_meter_scale():         # A logarithmic meter scale for a 'VU' meter
     scalebox = Gtk.VBox()
     label = Gtk.Label("  0")
     attrlist = Pango.AttrList()
-    attrlist.insert(Pango.AttrSize(METER_TEXT_SIZE, 0, len(label.get_text())))
+    # TODO
+    #attrlist.insert(Pango.AttrSize(METER_TEXT_SIZE, 0, len(label.get_text())))
     label.set_attributes(attrlist)
-    alignment = Gtk.Alignment(0, 0)
-    alignment.add(label)
+    #alignment = Gtk.Alignment(0, 0)
+    #alignment.add(label)
     label.show()
-    scalebox.add(alignment)
-    alignment.show()
+    #scalebox.add(alignment)
+    #alignment.show()
     label = Gtk.Label(" -6")
     attrlist = Pango.AttrList()
-    attrlist.insert(Pango.AttrSize(METER_TEXT_SIZE, 0, len(label.get_text())))
+    # TODO
+    #attrlist.insert(Pango.AttrSize(METER_TEXT_SIZE, 0, len(label.get_text())))
     label.set_attributes(attrlist)
-    alignment = Gtk.Alignment(0, 0)
-    alignment.add(label)
+    #alignment = Gtk.Alignment(0, 0)
+    #alignment.add(label)
     label.show()
-    scalebox.add(alignment)
-    alignment.show()
+    #scalebox.add(alignment)
+    #alignment.show()
     label = Gtk.Label("-12")
     attrlist = Pango.AttrList()
-    attrlist.insert(Pango.AttrSize(METER_TEXT_SIZE, 0, len(label.get_text())))
+    # TODO 
+    #attrlist.insert(Pango.AttrSize(METER_TEXT_SIZE, 0, len(label.get_text())))
     label.set_attributes(attrlist)
-    alignment = Gtk.Alignment(0, 0.25)
-    alignment.add(label)
+    #alignment = Gtk.Alignment(0, 0.25)
+    #alignment.add(label)
     label.show()
-    scalebox.add(alignment)
-    alignment.show()
+    #scalebox.add(alignment)
+    #alignment.show()
     label = Gtk.Label("-18")
     attrlist = Pango.AttrList()
-    attrlist.insert(Pango.AttrSize(METER_TEXT_SIZE, 0, len(label.get_text())))
+    # TODO
+    #attrlist.insert(Pango.AttrSize(METER_TEXT_SIZE, 0, len(label.get_text())))
     label.set_attributes(attrlist)
-    alignment = Gtk.Alignment(0, 0.5)
-    alignment.add(label)
+    #alignment = Gtk.Alignment(0, 0.5)
+    #alignment.add(label)
     label.show()
-    scalebox.add(alignment)
-    alignment.show()
+    #scalebox.add(alignment)
+    #alignment.show()
     label = Gtk.Label("-24")
     attrlist = Pango.AttrList()
-    attrlist.insert(Pango.AttrSize(METER_TEXT_SIZE, 0, len(label.get_text())))
+    # TODO
+    #attrlist.insert(Pango.AttrSize(METER_TEXT_SIZE, 0, len(label.get_text())))
     label.set_attributes(attrlist)
-    alignment = Gtk.Alignment(0, 0.75)
-    alignment.add(label)
+    #alignment = Gtk.Alignment(0, 0.75)
+    #alignment.add(label)
     label.show()
-    scalebox.add(alignment)
-    alignment.show()
+    #scalebox.add(alignment)
+    #alignment.show()
     label = Gtk.Label("-30")
     attrlist = Pango.AttrList()
-    attrlist.insert(Pango.AttrSize(METER_TEXT_SIZE, 0, len(label.get_text())))
+    # TODO
+    #attrlist.insert(Pango.AttrSize(METER_TEXT_SIZE, 0, len(label.get_text())))
     label.set_attributes(attrlist)
-    alignment = Gtk.Alignment(0, 1)
-    alignment.add(label)
+    #alignment = Gtk.Alignment(0, 1)
+    #alignment.add(label)
     label.show()
-    scalebox.add(alignment)
-    alignment.show()
+    #scalebox.add(alignment)
+    #alignment.show()
     label = Gtk.Label("-36")
     attrlist = Pango.AttrList()
-    attrlist.insert(Pango.AttrSize(METER_TEXT_SIZE, 0, len(label.get_text())))
+    # TODO
+    #attrlist.insert(Pango.AttrSize(METER_TEXT_SIZE, 0, len(label.get_text())))
     label.set_attributes(attrlist)
-    alignment = Gtk.Alignment(0, 1)
-    alignment.add(label)
+    #alignment = Gtk.Alignment(0, 1)
+    #alignment.add(label)
     label.show()
-    scalebox.add(alignment)
-    alignment.show()
+    #scalebox.add(alignment)
+    #alignment.show()
     return scalebox
     
     
@@ -1308,7 +1315,8 @@ def make_meter_unit(text, l_meter, r_meter):
     frame.add(hbox)
     label = Gtk.Label(text)
     attrlist = Pango.AttrList()
-    attrlist.insert(Pango.AttrSize(METER_TEXT_SIZE, 0, len(text)))
+    # TODO 
+    #attrlist.insert(Pango.AttrSize(METER_TEXT_SIZE, 0, len(text)))
     label.set_attributes(attrlist)
     labelbox = Gtk.HBox()
     labelbox.add(label)
@@ -1339,7 +1347,8 @@ def make_stream_meter_unit(text, meters):
     frame.add(inner_vbox)
     label = Gtk.Label(text)
     attrlist = Pango.AttrList()
-    attrlist.insert(Pango.AttrSize(METER_TEXT_SIZE, 0, len(text)))
+    # TODO
+    #attrlist.insert(Pango.AttrSize(METER_TEXT_SIZE, 0, len(text)))
     label.set_attributes(attrlist)
     labelbox = Gtk.HBox()
     labelbox.add(label)
@@ -1455,7 +1464,7 @@ class StreamMeter(Gtk.Frame):
         self.add(self.da)
         self.da.connect("configure_event", self.cb_configure)
         self.da.connect("realize", self.realize)
-        self.da.connect("expose_event", self.expose)
+        self.da.connect("draw", self.expose)
         self.da.show()
         self.rect = Gdk.Rectangle()
         self.value = self.oldvalue = self.base
@@ -1561,7 +1570,7 @@ class BasicMeter(Gtk.Frame):
         self.add(self.da)
         self.da.connect("configure_event", self.cb_configure)
         self.da.connect("realize", self.realize)
-        self.da.connect("expose_event", self.expose)
+        self.da.connect("draw", self.expose)
         self.da.show()
         self.base = base
         self.top = top
@@ -1649,7 +1658,7 @@ class StackedMeter(Gtk.Frame):
         self.add(self.da)
         self.da.connect("configure_event", self.cb_configure)
         self.da.connect("realize", self.realize)
-        self.da.connect("expose_event", self.expose)
+        self.da.connect("draw", self.expose)
         self.da.show()
         self.c = self.d = self.n = base - 1
 
@@ -1762,7 +1771,7 @@ class MicMeter(Gtk.VBox):
         self.led_offpb = GdkPixbuf.Pixbuf.new_from_file_at_size(
             FGlobs.pkgdatadir / "led_unlit_clear_border_64x64.png", 7, 7)
         self.led = Gtk.Image()
-        lhbox.pack_start(self.led, False, False)
+        lhbox.pack_start(self.led, False, False, 0)
         self.set_led(False)
         self.led.show()
         labeltext = labelbasetext + " " + str(index)
@@ -1771,16 +1780,16 @@ class MicMeter(Gtk.VBox):
         # TODO 
    #attrlist.insert(Pango.AttrSize(METER_TEXT_SIZE, 0, len(labeltext)))
         label.set_attributes(attrlist)    
-        lhbox.pack_start(label, False, False)
+        lhbox.pack_start(label, False, False, 0)
         label.show()
         pad = Gtk.VBox()
         lhbox.add(pad)
         pad.show()
-        self.pack_start(lhbox, False, False)
+        self.pack_start(lhbox, False, False, 0)
         lhbox.show()
         frame = Gtk.Frame()
         frame.set_border_width(4)
-        self.pack_start(frame, True, True)
+        self.pack_start(frame, True, True, 0)
         frame.show()
         hbox = Gtk.HBox()
         hbox.set_border_width(1)
@@ -1789,16 +1798,16 @@ class MicMeter(Gtk.VBox):
         
         self.peak = peakholdmeter()
         self.peak.set_size_request(16, -1)
-        hbox.pack_start(self.peak, False, False)
+        hbox.pack_start(self.peak, False, False, 0)
         self.peak.show()
 
         scale = make_meter_scale()
-        hbox.pack_start(scale, False, False)
+        hbox.pack_start(scale, False, False, 0)
         scale.show()
 
         self.attenuation = StackedMeter(0, 36)
         self.attenuation.set_size_request(16, -1)
-        hbox.pack_start(self.attenuation, False, False)
+        hbox.pack_start(self.attenuation, False, False, 0)
         self.attenuation.show()
         self.show_while_inactive = True
         self.agc = None
@@ -1814,14 +1823,14 @@ class RecIndicator(Gtk.HBox):
     def __init__(self, label_text):
         Gtk.HBox.__init__(self)
         label = Gtk.Label(label_text)
-        self.pack_start(label)
+        self.pack_start(label, True, True, 0)
         label.show()
         attrlist = Pango.AttrList()
         # TODO 
    #attrlist.insert(Pango.AttrSize(METER_TEXT_SIZE, 0, 1))
         label.set_attributes(attrlist)  
         self.image = Gtk.Image()
-        self.pack_start(self.image, False)
+        self.pack_start(self.image, False, False, 0)
         self.image.show()
         
         self.led = [GdkPixbuf.Pixbuf.new_from_file_at_size(
@@ -1841,11 +1850,11 @@ class RecordingPanel(Gtk.VBox):
         # TODO 
    #attrlist.insert(Pango.AttrSize(METER_TEXT_SIZE, 0, len(label.get_text())))
         label.set_attributes(attrlist)
-        self.pack_start(label)
+        self.pack_start(label, True, True, 0)
         label.show()
         frame = Gtk.Frame()
         frame.set_border_width(4)
-        self.pack_start(frame)
+        self.pack_start(frame, True, True, 0)
         frame.show()
         hbox = Gtk.HBox()
         hbox.set_spacing(1)
@@ -1855,13 +1864,13 @@ class RecordingPanel(Gtk.VBox):
         box = [Gtk.VBox(), Gtk.VBox()]
         for each in box:
             each.set_spacing(4)
-            hbox.pack_start(each)
+            hbox.pack_start(each, True, True, 0)
             each.show()
         self.indicator = []
         for i in range(howmany):
             ind = RecIndicator(str(i+1))
             self.indicator.append(ind)
-            box[i%2].pack_start(ind, False)
+            box[i%2].pack_start(ind, False, False, 0)
             ind.show()
 
 # A dialog window to appear when shutdown is selected while still streaming.
@@ -3644,13 +3653,17 @@ class MainWindow(dbus.service.Object):
         self.passspeed_adj = Gtk.Adjustment(1.0, 0.25, 20.0, 0.25, 0.25)
         psvbox = Gtk.VBox()
         hs = Gtk.HSeparator()
-        psvbox.pack_start(hs, False)
+        psvbox.pack_start(hs, False, False, 0)
         hs.show()
-        self.passspeed = Gtk.SpinButton(self.passspeed_adj, 0, 2)
-        psvbox.pack_start(self.passspeed, True, False)
+        self.passspeed = Gtk.SpinButton(
+            adjustment=self.passspeed_adj,
+            climb_rate=0,
+            digits=2
+        )
+        psvbox.pack_start(self.passspeed, True, False, 0)
         self.passspeed.show()
         hs = Gtk.HSeparator()
-        psvbox.pack_start(hs, False)
+        psvbox.pack_start(hs, False, False, 0)
         hs.show()
         tvbox.pack_start(psvbox, False, False, 0)
         psvbox.show()
@@ -3723,7 +3736,7 @@ class MainWindow(dbus.service.Object):
         # TC: This text appears above the stream mix peak level meter.
         self.stream_peak_box = make_meter_unit(
                                     _('Peak'), self.str_l_peak, self.str_r_peak)
-        self.streammeterbox.pack_start(self.stream_peak_box)
+        self.streammeterbox.pack_start(self.stream_peak_box, True, True, 0)
         self.stream_peak_box.show()
         set_tip(self.stream_peak_box, _('A peak hold meter indicating the '
                                         'signal strength of the stream audio.'))
@@ -3741,7 +3754,7 @@ class MainWindow(dbus.service.Object):
 
         if PGlobs.num_recorders:
             self.recording_panel = RecordingPanel(PGlobs.num_recorders)
-            self.streammeterbox.pack_start(self.recording_panel, False)
+            self.streammeterbox.pack_start(self.recording_panel, False, False, 0)
             self.recording_panel.show()
 
         self.str_l_rms_vu = vumeter()
@@ -3749,7 +3762,7 @@ class MainWindow(dbus.service.Object):
         # TC: This text appears above the stream mix VU meter.
         stream_vu_box = make_meter_unit(_('VU'),
                                         self.str_l_rms_vu, self.str_r_rms_vu)
-        self.streammeterbox.pack_start(stream_vu_box)
+        self.streammeterbox.pack_start(stream_vu_box, True, True, 0)
         stream_vu_box.show()
         set_tip(stream_vu_box, _('A VU meter for the stream audio.'))
          
@@ -3758,7 +3771,7 @@ class MainWindow(dbus.service.Object):
                                 for i in range(1, PGlobs.num_micpairs * 2 + 1)]
         if len(self.mic_meters) <= 4:
             for meter in self.mic_meters:
-                self.micmeterbox.pack_start(meter)
+                self.micmeterbox.pack_start(meter, True, True, 0)
                 meter.show()
         else:
             chvbox = Gtk.VBox()
