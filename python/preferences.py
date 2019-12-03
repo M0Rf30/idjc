@@ -80,9 +80,9 @@ class InitialPlayerConfig(Gtk.Frame):
             self.pl_mode = Gtk.ComboBoxText(player.pl_mode.get_model())
             self.fade = Gtk.ComboBoxText(player.fade.get_model())
         else:
-            self.pl_mode = Gtk.combo_box_new_text()
+            self.pl_mode = Gtk.ComboBoxText()
             self.pl_mode.set_model(player.pl_mode.get_model())
-            self.fade = Gtk.combo_box_new_text()
+            self.fade = Gtk.ComboBoxText()
             self.fade.set_model(player.pl_delay.get_model())
             
         for each in (self.pl_mode, self.fade):

@@ -3466,7 +3466,7 @@ class MainWindow(dbus.service.Object):
         label.set_attributes(attrlist)
         mvbox.add(label)
         label.show()
-        self.metadata_source = Gtk.combo_box_new_text()
+        self.metadata_source = Gtk.ComboBoxText()
         # TC: The chosen source of track metadata.
         self.metadata_source.append_text(_('Playlist 1'))
         # TC: The chosen source of track metadata.

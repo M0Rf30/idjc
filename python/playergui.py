@@ -383,8 +383,9 @@ class CuesheetPlaylist(Gtk.Frame):
 class ButtonFrame(Gtk.Frame):
     def __init__(self, title):
         Gtk.Frame.__init__(self)
-        attrlist = pango.AttrList()
-        attrlist.insert(pango.AttrSize(8000, 0, len(title)))
+        attrlist = Pango.AttrList()
+        # TODO
+        #attrlist.insert(pango.AttrSize(8000, 0, len(title)))
         label = Gtk.Label(title)
         label.set_attributes(attrlist)
         self.set_label_widget(label)
@@ -4284,7 +4285,7 @@ class IDJC_Media_Player(dbus.service.Object):
         self.hbox2 = Gtk.HBox()
         self.hbox2.set_border_width(2)
         self.hbox2.set_spacing(2)
-        pbox.pack_start(self.hbox2, False)
+        pbox.pack_start(self.hbox2, False, False, 0)
         frame.show()
 
         image = Gtk.Image()
@@ -4357,13 +4358,13 @@ class IDJC_Media_Player(dbus.service.Object):
         # The playlist mode dropdown menu.
 
         frame = ButtonFrame(_('Playlist Mode'))
-        self.hbox2.pack_start(frame)
+        self.hbox2.pack_start(frame, True, True, 0)
         frame.show()
 
         store = Gtk.ListStore(str, str)
-        self.pl_mode = Gtk.ComboBox(store)
+        self.pl_mode = Gtk.ComboBox(model=store)
         rend = Gtk.CellRendererText()
-        self.pl_mode.pack_start(rend)
+        self.pl_mode.pack_start(rend, False)
         self.pl_mode.add_attribute(rend, "text", 1)
         # TC: playlist modes
         for each in (N_('Play All'), N_('Loop All'), N_('Random'), 
@@ -4397,15 +4398,15 @@ class IDJC_Media_Player(dbus.service.Object):
         " player at the end of every track.\n\n'Random Hop' will pick a track"
         " at random from the other playlist."))
 
-        frame.hbox.pack_start(self.pl_mode)
+        frame.hbox.pack_start(self.pl_mode, True, True, 0)
         self.pl_mode.show()
 
         # TC: Fade time heading.
         frame = ButtonFrame(_('Fade'))
-        self.hbox2.pack_start(frame)
+        self.hbox2.pack_start(frame, True, True, 0)
         frame.show()
 
-        self.pl_delay = Gtk.combo_box_new_text()
+        self.pl_delay = Gtk.ComboBoxText()
         # TC: Fade time is zero. No fade, none.
         self.pl_delay.append_text(_('None'))
         self.pl_delay.append_text("5")

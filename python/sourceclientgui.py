@@ -1183,7 +1183,7 @@ class Troubleshooting(Gtk.VBox):
 
 class StreamTab(Tab):
     def make_combo_box(self, items):
-        combobox = Gtk.combo_box_new_text()
+        combobox = Gtk.ComboBoxText()
         for each in items:
             combobox.append_text(each)
         return combobox
