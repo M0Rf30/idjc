@@ -375,7 +375,7 @@ Public License instead of this License.
         self.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.ALWAYS)
         self.set_shadow_type(Gtk.ShadowType.ETCHED_IN)
         text_view = Gtk.TextView()
-        text_view.set_wrap_mode(Gtk.WRAP_WORD)
+        text_view.set_wrap_mode(Gtk.WrapMode.WORD)
         text_view.set_editable(False)
         text_view.unset_flags(Gtk.CAN_FOCUS)
         text_view.set_left_margin(8)

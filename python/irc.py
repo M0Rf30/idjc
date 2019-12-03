@@ -278,7 +278,7 @@ class IRCView(Gtk.TextView):  # pylint: disable=R0904
     def __init__(self):
         Gtk.TextView.__init__(self)
         self.set_size_request(500, -1)
-        self.set_wrap_mode(Gtk.WRAP_CHAR)
+        self.set_wrap_mode(Gtk.WrapMode.CHAR)
         self.set_editable(False)
         self.set_cursor_visible(False)
         self._rslt = self._foreground = self._background = None

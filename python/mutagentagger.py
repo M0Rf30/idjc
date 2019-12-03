@@ -80,7 +80,7 @@ class FreeTagFrame(Gtk.Frame):
         sw.show()
         self.tb = Gtk.TextBuffer()
         tv = Gtk.TextView(self.tb)
-        tv.set_wrap_mode(Gtk.WRAP_CHAR)
+        tv.set_wrap_mode(Gtk.WrapMode.CHAR)
         tv.modify_font(pango.FontDescription('sans 12'))
         sw.add(tv)
         tv.show()

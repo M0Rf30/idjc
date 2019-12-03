@@ -582,7 +582,7 @@ class AnnouncementDialog(Gtk.Dialog):
         ivbox.pack_start(sw, True, True, 0)
         sw.show()
         self.tv = Gtk.TextView()
-        self.tv.set_wrap_mode(Gtk.WRAP_WORD_CHAR)
+        self.tv.set_wrap_mode(Gtk.WrapMode.WORD_CHAR)
         sw.add(self.tv)
         self.tv.show()
         ihbox = Gtk.HBox()
