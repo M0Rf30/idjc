@@ -3509,7 +3509,7 @@ class MainWindow(dbus.service.Object):
         plvbox.add(label)
         label.show()
         self.passleft = make_arrow_button(
-                            self, Gtk.ARROW_LEFT, Gtk.ShadowType.NONE, "cfmleft")
+                            self, Gtk.ArrowType.LEFT, Gtk.ShadowType.NONE, "cfmleft")
         plvbox.add(self.passleft)
         self.passleft.show()
         self.crossbox.pack_start(plvbox, False, False, 0)
@@ -3527,8 +3527,9 @@ class MainWindow(dbus.service.Object):
         label.set_attributes(attrlist)
         cvbox.add(label)
         label.show()
-        self.crossfade = Gtk.HScale(self.crossadj)
-        self.crossfade.set_update_policy(Gtk.UPDATE_CONTINUOUS)
+        self.crossfade = Gtk.HScale(adjustment=self.crossadj)
+        # TODO
+        #self.crossfade.set_update_policy(Gtk.UPDATE_CONTINUOUS)
         self.crossfade.set_draw_value(False)
         cvbox.add(self.crossfade)
         self.crossfade.show()
@@ -3547,7 +3548,7 @@ class MainWindow(dbus.service.Object):
         prvbox.add(label)
         label.show()
         self.passright = make_arrow_button(
-                            self, Gtk.ARROW_RIGHT, Gtk.ShadowType.NONE, "cfmright")
+                            self, Gtk.ArrowType.RIGHT, Gtk.ShadowType.NONE, "cfmright")
         prvbox.add(self.passright)
         self.passright.show()
         self.crossbox.pack_start(prvbox, False, False, 0)
@@ -3576,7 +3577,7 @@ class MainWindow(dbus.service.Object):
         passbox.show()
         
         self.passmidleft = make_arrow_button(
-                                self, Gtk.ARROW_UP, Gtk.ShadowType.NONE, "cfmmidl")
+                                self, Gtk.ArrowType.UP, Gtk.ShadowType.NONE, "cfmmidl")
         sg4.add_widget(self.passmidleft)
         passhbox.pack_start(self.passmidleft, False, False, 0)
         self.passmidleft.show()
@@ -3584,7 +3585,7 @@ class MainWindow(dbus.service.Object):
         _('Move the crossfader to the middle of its range of travel.'))
         
         self.passmidright = make_arrow_button(
-                                self, Gtk.ARROW_UP, Gtk.ShadowType.NONE, "cfmmidr")
+                                self, Gtk.ArrowType.UP, Gtk.ShadowType.NONE, "cfmmidr")
         passhbox.pack_start(self.passmidright, False, False, 0)
         self.passmidright.show()
         set_tip(self.passmidright,

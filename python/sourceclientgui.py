@@ -2074,7 +2074,7 @@ class RecordTab(Tab):
             self.source_store.append((" FLAC+CUE", FGlobs.flacenabled))
             hbox.pack_start(self.source_combo, False, False, 0)
             self.source_combo.show()
-            arrow = Gtk.Arrow(Gtk.ARROW_RIGHT, Gtk.ShadowType.IN)
+            arrow = Gtk.Arrow(Gtk.ArrowType.RIGHT, Gtk.ShadowType.IN)
             hbox.pack_start(arrow, False, False, 0)
             arrow.show()
             file_dialog = Gtk.FileChooserDialog("", None,
