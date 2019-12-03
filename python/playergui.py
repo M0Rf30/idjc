@@ -368,9 +368,11 @@ class CuesheetPlaylist(Gtk.Frame):
         desc = desc or os.path.splitext(os.path.split(line.pathname)[1])[0]
         cell.props.text = desc
         if index == model.playing_index:
-            cell.props.weight = pango.WEIGHT_BOLD   
+            # TODO
+            cell.props.weight = Pango.WEIGHT_BOLD   
         else:
-            cell.props.weight = pango.WEIGHT_NORMAL
+            # TODO
+            cell.props.weight = Pango.WEIGHT_NORMAL
 
     def _play_clicked(self, cellrenderer, path):
         model = self.treeview.get_model()
@@ -385,7 +387,7 @@ class ButtonFrame(Gtk.Frame):
         Gtk.Frame.__init__(self)
         attrlist = Pango.AttrList()
         # TODO
-        #attrlist.insert(pango.AttrSize(8000, 0, len(title)))
+        #attrlist.insert(Pango.AttrSize(8000, 0, len(title)))
         label = Gtk.Label(title)
         label.set_attributes(attrlist)
         self.set_label_widget(label)
@@ -676,9 +678,9 @@ class AnnouncementDialog(Gtk.Dialog):
                 cd = int(cdtime[:2]) * 60 + int(cdtime[2:])
                 self.cdt = time.time() + cd + 1
                 self.countdownlabel = Gtk.Label()
-                self.attrlist = pango.AttrList()
+                self.attrlist = Pango.AttrList()
                 fontdesc = pango.FontDescription("monospace bold condensed 15")
-                self.attrlist.insert(pango.AttrFontDesc(fontdesc, 0, 5))
+                self.attrlist.insert(Pango.AttrFontDesc(fontdesc, 0, 5))
                 self.fontcolour_black = pango.AttrForeground(0, 0, 0, 0, 5)
                 self.fontcolour_red = pango.AttrForeground(65535, 0, 0, 0, 5)
                 self.attrlist.insert(self.fontcolour_black)

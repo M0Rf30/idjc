@@ -91,7 +91,7 @@ class SmallLabel(Gtk.Label):
         Gtk.Label.__init__(self, text)
         attrlist = Pango.AttrList()
         # TODO 
-   #attrlist.insert(pango..AttrSize(8000, 0, 1000000))
+   #attrlist.insert(Pango.AttrSize(8000, 0, 1000000))
         self.set_attributes(attrlist)
 
 

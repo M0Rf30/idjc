@@ -180,8 +180,8 @@ class autodisconnection_notification_dialog(Gtk.Dialog):
                 additional_text = additional_text.splitlines()
             for each in additional_text:
                 label = Gtk.Label()
-                attrlist = pango.AttrList()
-                attrlist.insert(pango.AttrSize(12500, 0, len(each)))
+                attrlist = Pango.AttrList()
+                attrlist.insert(Pango.AttrSize(12500, 0, len(each)))
                 label.set_attributes(attrlist)
                 label.set_text(each)
                 vbox.add(label)

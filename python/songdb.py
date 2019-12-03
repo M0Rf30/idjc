@@ -711,7 +711,8 @@ class ViewerCommon(PageCommon):
     def _cell_show_unknown(self, column, renderer, model, iter, data):
         text, max_lastplay_date, played_by, played, played_by_me, cat = model.get(iter, *data)
         if text is None: text = _('<unknown>')
-        weight = pango.WEIGHT_NORMAL
+        # TODO
+        #weight = pango.WEIGHT_NORMAL
         if not played:
             col = 'black'
             renderer.props.background_set = False
@@ -728,7 +729,8 @@ class ViewerCommon(PageCommon):
         text, max_lastplay_date, played_by, played, played_by_me, cat = model.get(iter, *data)
         if text is None: text = _('<unknown>')
         col = "black"
-        weight = pango.WEIGHT_NORMAL
+        # TODO
+        #weight = pango.WEIGHT_NORMAL
         renderer.props.background_set = False
         if model.iter_depth(iter) == 0:
             col = "red"
@@ -815,14 +817,16 @@ class ViewerCommon(PageCommon):
 
     def _get_played_percent(self, catalog, value):
         if value is None:
-            return 0, 0.0, pango.WEIGHT_NORMAL + 50
+            # TODO
+            #return 0, 0.0, pango.WEIGHT_NORMAL + 50
         now = time.time()
         max_days_ago = self.catalogs.lpscale(catalog)
         diff = now - int(value)
         if diff > max_days_ago:
             value = 0
             percent = 0.35
-            weight = pango.WEIGHT_NORMAL + 100
+            # TODO
+            #weight = pango.WEIGHT_NORMAL + 100
         else:
             percent = 1.0 - (float(diff) / float(max_days_ago))
             value = 100 * percent
@@ -830,7 +834,8 @@ class ViewerCommon(PageCommon):
             # below about .35 starts to look to much like black.
             percent = (percent * .6) + .4
             # Get a weight from 500 to 900
-            weight = ((percent * .4) * 1000) + pango.WEIGHT_NORMAL + 100
+            # TODO
+            #weight = ((percent * .4) * 1000) + pango.WEIGHT_NORMAL + 100
         return value, percent, weight
 
     @staticmethod
