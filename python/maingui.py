@@ -41,10 +41,13 @@ import dbus.service
 
 import gi
 gi.require_version('Gtk', '3.0')
+gi.require_version('Pango', '1.0')
 from gi.repository import Gtk
 from gi.repository import Gdk
 from gi.repository import GdkPixbuf
 from gi.repository import GObject
+from gi.repository import Pango
+
 import cairo
 
 from idjc import FGlobs, PGlobs
@@ -564,8 +567,9 @@ class MicButton(Gtk.ToggleButton):
         self.flash_colour = opener_settings.reminder_colour.get_color()
         self.has_reminder_flash = opener_tab.has_reminder_flash.get_active
 
-        attrlist = pango.AttrList()
-        attrlist.insert(pango.AttrSize(METER_TEXT_SIZE, 0, 100))
+        attrlist = Pango.AttrList()
+        # TODO 
+   #attrlist.insert(pango..AttrSize(METER_TEXT_SIZE, 0, 100))
         
         hbox = Gtk.HBox()
         hbox.set_spacing(4)
@@ -1763,8 +1767,9 @@ class MicMeter(Gtk.VBox):
         self.led.show()
         labeltext = labelbasetext + " " + str(index)
         label = Gtk.Label(labeltext)
-        attrlist = pango.AttrList()
-        attrlist.insert(pango.AttrSize(METER_TEXT_SIZE, 0, len(labeltext)))
+        attrlist = Pango.AttrList()
+        # TODO 
+   #attrlist.insert(pango..AttrSize(METER_TEXT_SIZE, 0, len(labeltext)))
         label.set_attributes(attrlist)    
         lhbox.pack_start(label, False, False)
         label.show()
@@ -1811,8 +1816,9 @@ class RecIndicator(Gtk.HBox):
         label = Gtk.Label(label_text)
         self.pack_start(label)
         label.show()
-        attrlist = pango.AttrList()
-        attrlist.insert(pango.AttrSize(METER_TEXT_SIZE, 0, 1))
+        attrlist = Pango.AttrList()
+        # TODO 
+   #attrlist.insert(pango..AttrSize(METER_TEXT_SIZE, 0, 1))
         label.set_attributes(attrlist)  
         self.image = Gtk.Image()
         self.pack_start(self.image, False)
@@ -1831,8 +1837,9 @@ class RecordingPanel(Gtk.VBox):
         
         # TC: Record as in, to make a recording.
         label = Gtk.Label(" %s " % _('Record'))
-        attrlist = pango.AttrList()
-        attrlist.insert(pango.AttrSize(
+        attrlist = Pango.AttrList()
+        # TODO 
+   #attrlist.insert(pango..AttrSize(
                                     METER_TEXT_SIZE, 0, len(label.get_text())))
         label.set_attributes(attrlist)
         self.pack_start(label)
@@ -3426,8 +3433,9 @@ class MainWindow(dbus.service.Object):
                 
         smvbox = Gtk.VBox()
         label = Gtk.Label(_('Monitor Mix'))
-        attrlist = pango.AttrList()
-        attrlist.insert(pango.AttrSize(8000, 0, len(_('Monitor Mix'))))
+        attrlist = Pango.AttrList()
+        # TODO
+        #attrlist.insert(pango.AttrSize(8000, 0, len(_('Monitor Mix'))))
         label.set_attributes(attrlist)
         smvbox.add(label)
         label.show()
@@ -3461,8 +3469,9 @@ class MainWindow(dbus.service.Object):
         mvbox = Gtk.VBox()
         # TC: Dropdown box title text widget.
         label = Gtk.Label(_('Metadata Source'))
-        attrlist = pango.AttrList()
-        attrlist.insert(pango.AttrSize(8000, 0, len(_('Metadata Source'))))
+        attrlist = Pango.AttrList()
+        # TODO 
+   #attrlist.insert(pango..AttrSize(8000, 0, len(_('Metadata Source'))))
         label.set_attributes(attrlist)
         mvbox.add(label)
         label.show()
@@ -3513,8 +3522,9 @@ class MainWindow(dbus.service.Object):
         self.crossadj.connect("value_changed", self.cb_crossfade)       
         cvbox = Gtk.VBox()
         label = Gtk.Label(_('Crossfader'))
-        attrlist = pango.AttrList()
-        attrlist.insert(pango.AttrSize(8000, 0, len(_('Crossfader'))))
+        attrlist = Pango.AttrList()
+        # TODO 
+   #attrlist.insert(pango..AttrSize(8000, 0, len(_('Crossfader'))))
         label.set_attributes(attrlist)
         cvbox.add(label)
         label.show()
