@@ -3596,11 +3596,11 @@ class MainWindow(dbus.service.Object):
         cell = Gtk.CellRendererPixbuf()
         self.crosspattern.pack_start(cell, True)
         self.crosspattern.add_attribute(cell, 'pixbuf', 0)
-        liststore.append((Gdk.pixbuf_new_from_file(
+        liststore.append((GdkPixbuf.Pixbuf.new_from_file(
                                     PGlobs.themedir / "classic_cross.png"), ))
-        liststore.append((Gdk.pixbuf_new_from_file(
+        liststore.append((GdkPixbuf.Pixbuf.new_from_file(
                                     PGlobs.themedir / "mk2_cross.png"), ))
-        liststore.append((Gdk.pixbuf_new_from_file(
+        liststore.append((GdkPixbuf.Pixbuf.new_from_file(
                                     PGlobs.themedir / "pat3.png"), ))
         pvbox.pack_start(self.crosspattern, True, True, 0)
         self.crosspattern.show()

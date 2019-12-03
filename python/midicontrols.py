@@ -1988,7 +1988,7 @@ class ControlsUI(Gtk.VBox):
 
         self.source_icons= {}
         for ct in Binding.SOURCES:
-            self.source_icons[ct]= Gdk.pixbuf_new_from_file(
+            self.source_icons[ct]= GdkPixbuf.Pixbuf.new_from_file(
                         PGlobs.themedir / ('control_' + ct + ".png"))
         self.editor= BindingEditor(self)
         self.editor.connect('response', self.on_editor_response)

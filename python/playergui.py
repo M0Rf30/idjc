@@ -4233,7 +4233,8 @@ class IDJC_Media_Player(dbus.service.Object):
 
         # An information display for playlist stats
         self.pl_statusbar = Gtk.Statusbar()
-        self.pl_statusbar.set_has_resize_grip(False)
+        # TODO
+        #self.pl_statusbar.set_has_resize_grip(False)
         plvbox.pack_start(self.pl_statusbar, False, False, 0)
         self.pl_statusbar.show()
         set_tip(self.pl_statusbar, _("'Block size' indicates the amount of time"
@@ -4245,7 +4246,7 @@ class IDJC_Media_Player(dbus.service.Object):
         pbox.pack_start(plframe, True, True, 0)
 
         self.fill_stopper = FillStopper()
-        pbox.pack_start(self.fill_stopper, False)
+        pbox.pack_start(self.fill_stopper, False, False, 0)
 
         # A box for the playback speed controls
         self.pbspeedbox = Gtk.HBox(False, 0)
@@ -4267,7 +4268,7 @@ class IDJC_Media_Player(dbus.service.Object):
 
         self.pbspeedzerobutton = Gtk.Button()
         self.pbspeedzerobutton.connect("clicked", self.callback, "pbspeedzero")
-        pixbuf = Gdk.pixbuf_new_from_file(
+        pixbuf = GdkPixbuf.Pixbuf.new_from_file(
                                             PGlobs.themedir / "speedicon.png")
         pixbuf = pixbuf.scale_simple(55, 14, GdkPixbuf.InterpType.BILINEAR)
         image = Gtk.Image()
@@ -4296,7 +4297,7 @@ class IDJC_Media_Player(dbus.service.Object):
         self.prev.show()
         set_tip(self.prev, _('Previous track.'))
 
-        pixbuf = Gdk.pixbuf_new_from_file(PGlobs.themedir / "play2.png")
+        pixbuf = GdkPixbuf.Pixbuf.new_from_file(PGlobs.themedir / "play2.png")
         pixbuf = pixbuf.scale_simple(14, 14, GdkPixbuf.InterpType.BILINEAR)
         image=Gtk.Image()
         image.set_from_pixbuf(pixbuf)
@@ -4338,7 +4339,7 @@ class IDJC_Media_Player(dbus.service.Object):
         self.next.show()
         set_tip(self.next, _('Next track.'))
 
-        pixbuf = Gdk.pixbuf_new_from_file(PGlobs.themedir / "add3.png")
+        pixbuf = GdkPixbuf.Pixbuf.new_from_file(PGlobs.themedir / "add3.png")
         pixbuf = pixbuf.scale_simple(14, 14, GdkPixbuf.InterpType.HYPER)
         image = Gtk.Image()
         image.set_from_pixbuf(pixbuf)

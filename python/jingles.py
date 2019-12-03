@@ -437,7 +437,7 @@ class EffectBank(Gtk.Frame):
         vol.set_draw_value(False)
         set_tip(vol, _('Effects volume.'))
 
-        pb = Gdk.pixbuf_new_from_file(PGlobs.themedir / "headroom.png")
+        pb = GdkPixbuf.Pixbuf.new_from_file(PGlobs.themedir / "headroom.png")
         mute_image = Gtk.Image.new_from_pixbuf(pb)
         mute = Gtk.VScale(mute_adj)
         mute.set_inverted(True)
@@ -616,7 +616,7 @@ class ExtraPlayers(Gtk.HBox):
 
         ilevel_vbox = Gtk.VBox()
         hbox.pack_start(ilevel_vbox, False, padding=3)
-        volpb = Gdk.pixbuf_new_from_file(PGlobs.themedir / "volume2.png")
+        volpb = GdkPixbuf.Pixbuf.new_from_file(PGlobs.themedir / "volume2.png")
         ivol_image = Gtk.Image.new_from_pixbuf(volpb)
         ilevel_vbox.pack_start(ivol_image, False, padding=2)
         ivol = Gtk.VScale(self.ivol_adj)

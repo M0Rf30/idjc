@@ -1555,7 +1555,7 @@ class mixprefs:
         vbox.pack_start(label, False, False, 0)
         label.show()
         
-        pixbuf = Gdk.pixbuf_new_from_file(FGlobs.pkgdatadir / "logo.png")
+        pixbuf = GdkPixbuf.Pixbuf.new_from_file(FGlobs.pkgdatadir / "logo.png")
         image = Gtk.Image()
         image.set_from_pixbuf(pixbuf)
         vbox.pack_start(image, False, False, 8)
