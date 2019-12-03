@@ -1549,8 +1549,8 @@ class BindingEditor(Gtk.Dialog):
             # TC: User is expected to edit a control binding.
             _('Edit control binding'), owner.owner.owner.prefs_window.window,
             Gtk.DIALOG_DESTROY_WITH_PARENT | Gtk.DIALOG_NO_SEPARATOR | 
-            Gtk.DIALOG_MODAL, (Gtk.STOCK_CANCEL, Gtk.RESPONSE_CANCEL,
-            Gtk.STOCK_OK, Gtk.RESPONSE_OK))
+            Gtk.DIALOG_MODAL, (Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
+            Gtk.STOCK_OK, Gtk.ResponseType.OK))
 
         Gtk.Dialog.set_resizable(self, False)
         owner.owner.owner.window_group.add_window(self)
@@ -2152,7 +2152,7 @@ class ControlsUI(Gtk.VBox):
         self.editor.show()
 
     def on_editor_response(self, _, response):
-        if response==Gtk.RESPONSE_OK:
+        if response==Gtk.ResponseType.OK:
             model= self.tree.get_model().get_model()
             binding= self.editor.get_binding()
             if self.editing==None:

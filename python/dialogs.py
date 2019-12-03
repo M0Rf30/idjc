@@ -70,7 +70,7 @@ class disconnection_notification_dialog(Gtk.Dialog):
             widget.set_urgency_hint(False)
     
     def respond(self, dialog, response):
-        if response in (Gtk.RESPONSE_CLOSE, Gtk.RESPONSE_DELETE_EVENT):
+        if response in (Gtk.ResponseType.CLOSE, Gtk.ResponseType.DELETE_EVENT):
             dialog.hide()
     
     def present(self):
@@ -86,7 +86,7 @@ class disconnection_notification_dialog(Gtk.Dialog):
         
         Gtk.Dialog.__init__(self, window_title, None,
                                         Gtk.DIALOG_DESTROY_WITH_PARENT,
-                                        (Gtk.STOCK_CLOSE, Gtk.RESPONSE_CLOSE))
+                                        (Gtk.STOCK_CLOSE, Gtk.ResponseType.CLOSE))
         if window_group is not None:
             window_group.add_window(self)
         self.set_resizable(False)
@@ -135,10 +135,10 @@ class autodisconnection_notification_dialog(Gtk.Dialog):
             widget.set_urgency_hint(False)
     
     def respond(self, dialog, response, actionok = None, actioncancel = None):
-        if response == Gtk.RESPONSE_OK or response == Gtk.RESPONSE_DELETE_EVENT:
+        if response == Gtk.ResponseType.OK or response == Gtk.ResponseType.DELETE_EVENT:
             if actionok is not None:
                 actionok()
-        if response == Gtk.RESPONSE_CANCEL:
+        if response == Gtk.ResponseType.CANCEL:
             if actioncancel is not None:
                 actioncancel()
         dialog.hide()
@@ -153,14 +153,14 @@ class autodisconnection_notification_dialog(Gtk.Dialog):
 
         Gtk.Dialog.__init__(self, window_title, None,
                         Gtk.DIALOG_DESTROY_WITH_PARENT, (Gtk.STOCK_CANCEL,
-                        Gtk.RESPONSE_CANCEL, Gtk.STOCK_OK, Gtk.RESPONSE_OK))
+                        Gtk.ResponseType.CANCEL, Gtk.STOCK_OK, Gtk.ResponseType.OK))
         if window_group is not None:
             window_group.add_window(self)
         self.set_resizable(False)
         self.connect("close", self.respond, actionok, actioncancel)
         self.connect("response", self.respond, actionok, actioncancel)
         self.connect("window-state-event", self.window_attn)
-        self.set_default_response(Gtk.RESPONSE_OK)
+        self.set_default_response(Gtk.ResponseType.OK)
         
         hbox = Gtk.HBox(False, 20)
         hbox.set_border_width(20)
@@ -272,9 +272,9 @@ class ReconnectionDialog(Gtk.Dialog):
             self.active = False
 
     def cb_response(self, dialog, response):
-        if response == Gtk.RESPONSE_CANCEL:
+        if response == Gtk.ResponseType.CANCEL:
             self.deactivate()
-        if response == Gtk.RESPONSE_OK:
+        if response == Gtk.ResponseType.OK:
             self.event_time = time.time() + 0.25
 
     def cb_delete(self, widget, event):
@@ -285,7 +285,7 @@ class ReconnectionDialog(Gtk.Dialog):
         self.tab = tab
         Gtk.Dialog.__init__(self, pm.title_extra.strip(), None,
                     Gtk.DIALOG_DESTROY_WITH_PARENT, (Gtk.STOCK_CANCEL,
-                    Gtk.RESPONSE_CANCEL, _('_Retry Now'), Gtk.RESPONSE_OK))
+                    Gtk.ResponseType.CANCEL, _('_Retry Now'), Gtk.ResponseType.OK))
         self.set_modal(False)
         self.set_resizable(False)
         self.set_border_width(6)

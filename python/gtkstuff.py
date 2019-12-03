@@ -515,9 +515,9 @@ class IconChooserButton(Gtk.Button):
 
     def _cb_clicked(self, button, dialog):
         response = dialog.run()
-        if response == Gtk.RESPONSE_OK:
+        if response == Gtk.ResponseType.OK:
             self.set_filename(dialog.get_filename())
-        elif response == Gtk.RESPONSE_NONE:
+        elif response == Gtk.ResponseType.NONE:
             filename = self.get_filename()
             if filename is not None:
                 dialog.set_filename(filename)
@@ -718,7 +718,7 @@ class FolderChooserButton(Gtk.Button):
     def _on_clicked(self, button):
         if self._dialog is not None:
             self._dialog.set_current_folder(self._current_folder or "")
-            if self._dialog.run() == Gtk.RESPONSE_ACCEPT:
+            if self._dialog.run() == Gtk.ResponseType.ACCEPT:
                 new_folder = self._dialog.get_current_folder()
                 if new_folder != self._current_folder:
                     self.emit('current-folder-changed', new_folder)

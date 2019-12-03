@@ -151,8 +151,8 @@ class ConnectionDialog(Gtk.Dialog):
         Gtk.Dialog.__init__(self, _('Enter new server connection details'), 
                                         parent_window, Gtk.DIALOG_MODAL |
                                         Gtk.DIALOG_DESTROY_WITH_PARENT,
-                                        (Gtk.STOCK_CANCEL, Gtk.RESPONSE_REJECT,
-                                        Gtk.STOCK_OK, Gtk.RESPONSE_ACCEPT))
+                                        (Gtk.STOCK_CANCEL, Gtk.ResponseType.REJECT,
+                                        Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT))
         model, iter = tree_selection.get_selected()
             
         # Configuration from existing server data.
@@ -215,10 +215,10 @@ class ConnectionDialog(Gtk.Dialog):
         self.tls_security.set_attributes(tls_renderer, text=1)
 
         file_dialog = Gtk.FileChooserDialog("", None,
-                Gtk.FILE_CHOOSER_ACTION_SELECT_FOLDER, (
-                Gtk.STOCK_CLEAR, Gtk.RESPONSE_NONE,
-                Gtk.STOCK_CANCEL, Gtk.RESPONSE_REJECT,
-                Gtk.STOCK_OK, Gtk.RESPONSE_ACCEPT))
+                Gtk.FileChooserAction.SELECT_FOLDER, (
+                Gtk.STOCK_CLEAR, Gtk.ResponseType.NONE,
+                Gtk.STOCK_CANCEL, Gtk.ResponseType.REJECT,
+                Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT))
         file_dialog.set_modal(True)
         file_dialog.set_transient_for(self)
         # TC: Dialog title bar text.
@@ -229,10 +229,10 @@ class ConnectionDialog(Gtk.Dialog):
         file_dialog.connect("response", self._on_file_response, self.ca_directory)
 
         file_dialog = Gtk.FileChooserDialog("", None,
-                Gtk.FILE_CHOOSER_ACTION_OPEN, (
-                Gtk.STOCK_CLEAR, Gtk.RESPONSE_NONE,
-                Gtk.STOCK_CANCEL, Gtk.RESPONSE_REJECT,
-                Gtk.STOCK_OK, Gtk.RESPONSE_ACCEPT))
+                Gtk.FileChooserAction.OPEN, (
+                Gtk.STOCK_CLEAR, Gtk.ResponseType.NONE,
+                Gtk.STOCK_CANCEL, Gtk.ResponseType.REJECT,
+                Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT))
         file_dialog.set_modal(True)
         file_dialog.set_transient_for(self)
         # TC: Dialog title bar text.
@@ -243,10 +243,10 @@ class ConnectionDialog(Gtk.Dialog):
         file_dialog.connect("response", self._on_file_response, self.ca_file)
 
         file_dialog = Gtk.FileChooserDialog("", None,
-                Gtk.FILE_CHOOSER_ACTION_OPEN, (
-                Gtk.STOCK_CLEAR, Gtk.RESPONSE_NONE,
-                Gtk.STOCK_CANCEL, Gtk.RESPONSE_REJECT,
-                Gtk.STOCK_OK, Gtk.RESPONSE_ACCEPT))
+                Gtk.FileChooserAction.OPEN, (
+                Gtk.STOCK_CLEAR, Gtk.ResponseType.NONE,
+                Gtk.STOCK_CANCEL, Gtk.ResponseType.REJECT,
+                Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT))
         file_dialog.set_modal(True)
         file_dialog.set_transient_for(self)
         # TC: Dialog title bar text.
@@ -322,7 +322,7 @@ class ConnectionDialog(Gtk.Dialog):
         
     @staticmethod
     def _on_response(self, response_id, tree_selection, model, iter):
-        if response_id == Gtk.RESPONSE_ACCEPT:
+        if response_id == Gtk.ResponseType.ACCEPT:
             for entry in (self.hostname, self.mountpoint, self.loginname,
                                                                 self.password):
                 entry.set_text(entry.get_text().strip())
@@ -368,7 +368,7 @@ class ConnectionDialog(Gtk.Dialog):
         self.loginname.set_sensitive(sens)
 
     def _on_file_response(self, dialog, response_id, chooser):
-        if response_id == Gtk.RESPONSE_NONE:
+        if response_id == Gtk.ResponseType.NONE:
             chooser.unselect_all()
 
 
@@ -2077,8 +2077,8 @@ class RecordTab(Tab):
             hbox.pack_start(arrow, False, False, 0)
             arrow.show()
             file_dialog = Gtk.FileChooserDialog("", None,
-                    Gtk.FILE_CHOOSER_ACTION_SELECT_FOLDER, (Gtk.STOCK_CANCEL,
-                    Gtk.RESPONSE_REJECT, Gtk.STOCK_OK, Gtk.RESPONSE_ACCEPT))
+                    Gtk.FileChooserAction.SELECT_FOLDER, (Gtk.STOCK_CANCEL,
+                    Gtk.ResponseType.REJECT, Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT))
             # TC: Dialog title bar text.
             file_dialog.set_title(_('Select the folder to record to'
                                                             ) + pm.title_extra)

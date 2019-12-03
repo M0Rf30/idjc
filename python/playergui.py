@@ -270,7 +270,8 @@ class CuesheetPlaylist(Gtk.Frame):
                             (GObject.TYPE_PYOBJECT, GObject.TYPE_PYOBJECT, ))}
 
     def __init__(self):
-        Gtk.Frame.__init__(self, " %s " % _('Cuesheet Playlist'))
+        super(CuesheetPlaylist, self).__init__()
+        self.set_label(" %s " % _('Cuesheet Playlist'))
         self.set_border_width(3)
 
         vbox = Gtk.VBox()
@@ -280,7 +281,7 @@ class CuesheetPlaylist(Gtk.Frame):
         vbox.show()
         hbox = Gtk.HBox()
         hbox.set_spacing(6)
-        vbox.pack_start(hbox, False)
+        vbox.pack_start(hbox, False, False, 0)
 
         def nextprev_unit(label_text):
             def icon_button(stock_item):
@@ -308,7 +309,7 @@ class CuesheetPlaylist(Gtk.Frame):
             numbered.show()
 
             next = icon_button(Gtk.STOCK_MEDIA_NEXT)
-            box.pack_start(next)
+            box.pack_start(next, True, True, 0)
             next.show()
             box.show()
             return box, prev, next, numbered
@@ -317,7 +318,7 @@ class CuesheetPlaylist(Gtk.Frame):
         scrolled.set_size_request(-1, 117)
         scrolled.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.ALWAYS)
         scrolled.set_shadow_type(Gtk.ShadowType.ETCHED_IN)
-        vbox.pack_start(scrolled)
+        vbox.pack_start(scrolled, True, True, 0)
         scrolled.show()
         self.treeview = Gtk.TreeView()
         self.treeview.connect("row-activated", self._cb_doubleclick)
@@ -448,7 +449,8 @@ class ExternalPL(Gtk.Frame):
 
     def __init__(self, player):
         self.player = player
-        Gtk.Frame.__init__(self, " %s " % _('External Playlist'))
+        super(ExternalPL, self).__init__()
+        self.set_label(" %s " % _('External Playlist'))
         self.set_border_width(4)
         hbox = Gtk.HBox()
         self.add(hbox)
@@ -470,13 +472,13 @@ class ExternalPL(Gtk.Frame):
 
         self.filechooser = Gtk.FileChooserDialog(title = 
         _('Choose a playlist file') + PM.title_extra, buttons = \
-        (Gtk.STOCK_CANCEL, Gtk.RESPONSE_REJECT, Gtk.STOCK_OPEN,
-                                                        Gtk.RESPONSE_ACCEPT))
+        (Gtk.STOCK_CANCEL, Gtk.ResponseType.REJECT, Gtk.STOCK_OPEN,
+                                                        Gtk.ResponseType.ACCEPT))
         self.filechooser.set_filter(filefilter)
         self.directorychooser = Gtk.FileChooserDialog(title =
             _('Choose a media directory') + PM.title_extra, action = \
-            Gtk.FILE_CHOOSER_ACTION_SELECT_FOLDER, buttons = (Gtk.STOCK_CANCEL,
-            Gtk.RESPONSE_REJECT, Gtk.STOCK_OPEN, Gtk.RESPONSE_ACCEPT))
+            Gtk.FileChooserAction.SELECT_FOLDER, buttons = (Gtk.STOCK_CANCEL,
+            Gtk.ResponseType.REJECT, Gtk.STOCK_OPEN, Gtk.ResponseType.ACCEPT))
 
         self.radio_file = Gtk.RadioButton()
         self.radio_directory = Gtk.RadioButton(self.radio_file)
@@ -2617,8 +2619,8 @@ class IDJC_Media_Player(dbus.service.Object):
                 else:
                     filerqtext = _('Add background music')
                 self.filerq = Gtk.FileChooserDialog(filerqtext + PM.title_extra,
-                    None, Gtk.FILE_CHOOSER_ACTION_OPEN, (Gtk.STOCK_CANCEL,
-                    Gtk.RESPONSE_REJECT, Gtk.STOCK_OK, Gtk.RESPONSE_ACCEPT))
+                    None, Gtk.FileChooserAction.OPEN, (Gtk.STOCK_CANCEL,
+                    Gtk.ResponseType.REJECT, Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT))
                 self.filerq.set_select_multiple(True)
                 self.filerq.set_current_folder(
                                             str(self.file_requester_start_dir))
@@ -2654,7 +2656,7 @@ class IDJC_Media_Player(dbus.service.Object):
                                             os.path.split(chosenfiles[0])[0])
             self.plsave_filtertype = self.filerq.get_filter()
         self.filerq.destroy()
-        if response_id != Gtk.RESPONSE_ACCEPT:
+        if response_id != Gtk.ResponseType.ACCEPT:
             return
         gen = self.filter_allowed_controls(self.get_elements_from(chosenfiles))
         idle_add(self.drag_data_received_data_idle, self.liststore, None, gen) 
@@ -2686,10 +2688,10 @@ class IDJC_Media_Player(dbus.service.Object):
         self.plsave_open = self.expander.get_expanded()
         self.plsave_folder = dialog.get_current_folder()
 
-        if response_id == Gtk.RESPONSE_ACCEPT:
+        if response_id == Gtk.ResponseType.ACCEPT:
             chosenfile = self.plfilerq.get_filename()
         self.plfilerq.destroy()
-        if response_id != Gtk.RESPONSE_ACCEPT:
+        if response_id != Gtk.ResponseType.ACCEPT:
             return
 
         main, ext = os.path.splitext(chosenfile)
@@ -3508,9 +3510,9 @@ class IDJC_Media_Player(dbus.service.Object):
                 vbox.add(self.plframe)
 
                 self.plfilerq = Gtk.FileChooserDialog(filerqtext + 
-                            PM.title_extra, None, Gtk.FILE_CHOOSER_ACTION_SAVE,
-                            (Gtk.STOCK_CANCEL, Gtk.RESPONSE_REJECT,
-                            Gtk.STOCK_OK, Gtk.RESPONSE_ACCEPT))
+                            PM.title_extra, None, Gtk.FileChooserAction.SAVE,
+                            (Gtk.STOCK_CANCEL, Gtk.ResponseType.REJECT,
+                            Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT))
                 self.plfilerq.set_current_folder(self.home)
                 self.plfilerq.add_filter(self.plfilefilter_all)
                 self.plfilerq.add_filter(self.plfilefilter_playlists)
@@ -4205,7 +4207,7 @@ class IDJC_Media_Player(dbus.service.Object):
 
         self.cuesheet_playlist = CuesheetPlaylist()
         self.cuesheet_playlist.connect("playitem", self._cb_cuesheet_item)
-        plvbox.pack_start(self.cuesheet_playlist)
+        plvbox.pack_start(self.cuesheet_playlist, True, True, 0)
 
         # External playlist control unit
         self.external_pl = ExternalPL(self)

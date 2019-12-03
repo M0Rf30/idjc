@@ -142,7 +142,7 @@ class Effect(Gtk.HBox):
 
         self.dialog = EffectConfigDialog(self, parent.window)
         self.dialog.connect("response", self._on_dialog_response)
-        self.dialog.emit("response", Gtk.RESPONSE_NO)
+        self.dialog.emit("response", Gtk.ResponseType.NO)
         self.timeout_source_id = None
         self.interlude = IDJC_Media_Player(None, None, parent)
         self.effect_length = 0.0
@@ -211,7 +211,7 @@ class Effect(Gtk.HBox):
 
         self.dialog.button_entry.set_text(button_text)
         self.dialog.gain_adj.set_value(level)
-        self._on_dialog_response(self.dialog, Gtk.RESPONSE_ACCEPT, pathname)
+        self._on_dialog_response(self.dialog, Gtk.ResponseType.ACCEPT, pathname)
         
     def _on_config(self, widget):
         self.stop.clicked()
@@ -271,7 +271,7 @@ class Effect(Gtk.HBox):
             self.approot.effect_stopped(self.num)
 
     def _on_dialog_response(self, dialog, response_id, pathname=None):
-        if response_id in (Gtk.RESPONSE_ACCEPT, Gtk.RESPONSE_NO):
+        if response_id in (Gtk.ResponseType.ACCEPT, Gtk.ResponseType.NO):
             self.pathname = pathname or dialog.get_filename()
             text = dialog.button_entry.get_text() if self.pathname and \
                                         os.path.isfile(self.pathname) else ""
@@ -279,7 +279,7 @@ class Effect(Gtk.HBox):
             self.level = dialog.gain_adj.get_value()
             
             sens = self.pathname is not None and os.path.isfile(self.pathname)
-            if response_id == Gtk.RESPONSE_ACCEPT and pathname is not None:
+            if response_id == Gtk.ResponseType.ACCEPT and pathname is not None:
                 self.uuid = str(uuid.uuid4())
             self.effect_length = 0.0 # Force effect length to be read again.
 
@@ -312,7 +312,7 @@ class Effect(Gtk.HBox):
             self.dialog.set_filename(pathname)
         self.dialog.button_entry.set_text(label)
         self.dialog.gain_adj.set_value(level)
-        self._on_dialog_response(self.dialog, Gtk.RESPONSE_ACCEPT, pathname)
+        self._on_dialog_response(self.dialog, Gtk.ResponseType.ACCEPT, pathname)
         self.pathname = pathname
 
     def update_led(self, val):
@@ -339,9 +339,9 @@ class EffectConfigDialog(Gtk.FileChooserDialog):
     def __init__(self, effect, window):
         Gtk.FileChooserDialog.__init__(self, _('Effect %d Config') % (effect.num + 1),
                             window,
-                            buttons=(Gtk.STOCK_CLEAR, Gtk.RESPONSE_NO,
-                            Gtk.STOCK_CANCEL, Gtk.RESPONSE_REJECT,
-                            Gtk.STOCK_OK, Gtk.RESPONSE_ACCEPT))
+                            buttons=(Gtk.STOCK_CLEAR, Gtk.ResponseType.NO,
+                            Gtk.STOCK_CANCEL, Gtk.ResponseType.REJECT,
+                            Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT))
         self.set_modal(True)
 
         ca = self.get_content_area()
@@ -395,7 +395,7 @@ class EffectConfigDialog(Gtk.FileChooserDialog):
 
     def _cb_response(self, dialog, response_id):
         dialog.hide()
-        if response_id == Gtk.RESPONSE_NO:
+        if response_id == Gtk.ResponseType.NO:
             dialog.unselect_all()
             dialog.set_current_folder(os.path.expanduser("~"))
             self.button_entry.set_text("")

@@ -688,9 +688,9 @@ class OpenerTab(Gtk.VBox):
         lhbox.pack_start(label, False)
         
         self.icon_chooser = IconPreviewFileChooserDialog("Choose An Icon",
-                        buttons = (Gtk.STOCK_CLEAR, Gtk.RESPONSE_NONE,
-                                      Gtk.STOCK_CANCEL, Gtk.RESPONSE_CANCEL,
-                                      Gtk.STOCK_OK, Gtk.RESPONSE_OK))
+                        buttons = (Gtk.STOCK_CLEAR, Gtk.ResponseType.NONE,
+                                      Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
+                                      Gtk.STOCK_OK, Gtk.ResponseType.OK))
         self.icb = IconChooserButtonExtd(self.icon_chooser)
         set_tip(self.icb, _("The opener button's icon."))
         self.icb.connect("filename-changed", lambda w, r: self.emit("changed"))
@@ -1867,12 +1867,12 @@ class idjc_shutdown_dialog:
             widget.set_urgency_hint(False)
     
     def respond(self, dialog, response, actionyes, actionno):
-        if response == Gtk.RESPONSE_OK:
+        if response == Gtk.ResponseType.OK:
             print("Dialog quit")
             if actionyes is not None:
                 actionyes()
-        if response == Gtk.RESPONSE_DELETE_EVENT or \
-                                                response == Gtk.RESPONSE_CANCEL:
+        if response == Gtk.ResponseType.DELETE_EVENT or \
+                                                response == Gtk.ResponseType.CANCEL:
             print("Dialog keep running")
             if actionno is not None:
                 actionno()
@@ -1883,7 +1883,7 @@ class idjc_shutdown_dialog:
                                                         additional_text = None):
         dialog = Gtk.Dialog(pm.title_extra.strip(), None, Gtk.DIALOG_MODAL |
                         Gtk.DIALOG_DESTROY_WITH_PARENT, (Gtk.STOCK_CANCEL,
-                        Gtk.RESPONSE_CANCEL, Gtk.STOCK_QUIT, Gtk.RESPONSE_OK))
+                        Gtk.ResponseType.CANCEL, Gtk.STOCK_QUIT, Gtk.ResponseType.OK))
         if window_group is not None:
             window_group.add_window(dialog)
         dialog.set_resizable(False)
