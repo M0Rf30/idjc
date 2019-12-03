@@ -1839,8 +1839,7 @@ class RecordingPanel(Gtk.VBox):
         label = Gtk.Label(" %s " % _('Record'))
         attrlist = Pango.AttrList()
         # TODO 
-   #attrlist.insert(Pango.AttrSize(
-                                    METER_TEXT_SIZE, 0, len(label.get_text())))
+   #attrlist.insert(Pango.AttrSize(METER_TEXT_SIZE, 0, len(label.get_text())))
         label.set_attributes(attrlist)
         self.pack_start(label)
         label.show()

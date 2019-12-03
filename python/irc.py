@@ -368,11 +368,9 @@ class IRCView(Gtk.TextView):  # pylint: disable=R0904
             pass
 
         if self._underline:
-            # TODO
-            #props.underline = pango.UNDERLINE_SINGLE
+            props.underline = Pango.Underline.SINGLE
         if self._bold:
-            # TODO
-            #props.weight = pango.WEIGHT_BOLD
+            props.weight = Pango.Weight.BOLD
             
         buf.insert_with_tags(buf.get_end_iter(), self._rslt.group(),
                                                             tag)      
