@@ -82,36 +82,36 @@ class Effect(Gtk.HBox):
         self.set_spacing(3)
         
         label = Gtk.Label("%02d" % (num + 1))
-        self.pack_start(label, False)
+        self.pack_start(label, False, False, 0)
         
         self.clear = LED["clear"].copy()
         self.green = LED["green"].copy()
         
         self.led = Gtk.Image()
         self.led.set_from_pixbuf(self.clear)
-        self.pack_start(self.led, False)
+        self.pack_start(self.led, False, False, 0)
         self.old_ledval = 0
         
         image = Gtk.Image.new_from_file(PGlobs.themedir / "stop.png")
         image.set_padding(4, 4)
         self.stop = Gtk.Button()
         self.stop.set_image(image)
-        self.pack_start(self.stop, False)
+        self.pack_start(self.stop, False, False, 0)
         self.stop.connect("clicked", self._on_stop)
         set_tip(self.stop, _('Stop'))
         
         self.trigger = Gtk.Button()
         self.trigger.set_size_request(80, -1)
-        self.pack_start(self.trigger)
+        self.pack_start(self.trigger, True, True, 0)
         self.trigger_label = Gtk.Label()
         self.trigger.add(self.trigger_label)
 
         pvbox = Gtk.VBox()
         self.progress = Gtk.ProgressBar()
-        pvbox.pack_start(self.progress, padding=0)
+        pvbox.pack_start(self.progress, True, True, 0)
         self.progress.set_orientation(Gtk.PROGRESS_BOTTOM_TO_TOP)
         self.progress.set_size_request(8, 0)
-        self.pack_start(pvbox, False)
+        self.pack_start(pvbox, False, False, 0)
         self.trigger.connect("clicked", self._on_trigger)
         self.trigger.drag_dest_set(Gtk.DEST_DEFAULT_ALL,
             self.dndtargets, Gdk.DragAction.DEFAULT | Gdk.DragAction.COPY)
@@ -124,14 +124,14 @@ class Effect(Gtk.HBox):
         image.set_from_pixbuf(pb)
         self.repeat.add(image)
         image.show()
-        self.pack_start(self.repeat, False)
+        self.pack_start(self.repeat, False, False, 0)
         set_tip(self.repeat, _('Repeat'))
 
         image = Gtk.Image.new_from_stock(Gtk.STOCK_PROPERTIES,
                                                             Gtk.IconSize.MENU)
         self.config = Gtk.Button()
         self.config.set_image(image)
-        self.pack_start(self.config, False)
+        self.pack_start(self.config, False, False, 0)
         self.config.connect("clicked", self._on_config)
         self.config.drag_source_set(Gdk.ModifierType.BUTTON1_MASK,
             self.dndsources, Gdk.DragAction.DEFAULT | Gdk.DragAction.COPY)
@@ -150,16 +150,16 @@ class Effect(Gtk.HBox):
         self.tabwidget = Gtk.HBox()
         self.tabwidget.set_spacing(3)
         sep = Gtk.VSeparator()
-        self.tabwidget.pack_start(sep)
+        self.tabwidget.pack_start(sep, True, True, 0)
         vb = Gtk.VBox()
-        self.tabwidget.pack_start(vb)
+        self.tabwidget.pack_start(vb, True, True, 0)
         hb = Gtk.HBox()
         hb.set_spacing(3)
         self.tabeffectname = Gtk.Label()
         self.tabeffecttime = Gtk.Label()
         hb.pack_start(self.tabeffectname)
         hb.pack_start(self.tabeffecttime)
-        vb.pack_start(hb)
+        vb.pack_start(hb, True, True, 0)
         self.tabeffectprog = Gtk.ProgressBar()
         self.tabeffectprog.set_size_request(0, 5)
         vb.pack_start(self.tabeffectprog)
@@ -414,7 +414,7 @@ class EffectBank(Gtk.Frame):
         hbox.set_spacing(1)
         self.add(hbox)
         vbox = Gtk.VBox()
-        hbox.pack_start(vbox)
+        hbox.pack_start(vbox, True, True, 0)
         
         self.effects = []
         self.all_effects = all_effects
@@ -555,11 +555,11 @@ class ExtraPlayers(Gtk.HBox):
         lbl = Gtk.Label(_('Effects'))
         sg.add_widget(lbl)
         lbl.set_padding(0, 2)
-        vb.pack_start(lbl)
+        vb.pack_start(lbl, True, True, 0)
         vb.show()
-        self.nb_label.pack_start(vb)
+        self.nb_label.pack_start(vb, True, True, 0)
         self.nb_effects_box = Gtk.HBox(False, 5)
-        self.nb_label.pack_start(self.nb_effects_box)
+        self.nb_label.pack_start(self.nb_effects_box, True, True, 0)
         self.nb_label.show_all()
         self.nb_effects_box.hide()
         Gtk.HBox.__init__(self)
@@ -568,10 +568,10 @@ class ExtraPlayers(Gtk.HBox):
         self.viewlevels = (5,)
 
         esbox = Gtk.VBox()
-        self.pack_start(esbox)
+        self.pack_start(esbox, True, True, 0)
         estable = Gtk.Table(columns=2, homogeneous=True)
         estable.set_col_spacing(1, 8)
-        esbox.pack_start(estable)
+        esbox.pack_start(estable, True, True, 0)
 
         self.jvol_adj = (Gtk.Adjustment(127.0, 0.0, 127.0, 1.0, 10.0),
                          Gtk.Adjustment(127.0, 0.0, 127.0, 1.0, 10.0))
@@ -598,7 +598,7 @@ class ExtraPlayers(Gtk.HBox):
             parent.label_subst.add_widget(bank, 
                             "effectbank%d" % col, _('Effects %d') % (col + 1))
             self.effect_banks.append(bank)
-            effects_hbox.pack_start(bank)
+            effects_hbox.pack_start(bank, True, True, 0)
             base += max_rows
         estable.attach(effects_hbox, 0, 2, 0, 1)
 
@@ -610,7 +610,7 @@ class ExtraPlayers(Gtk.HBox):
         hbox.set_spacing(1)
         interlude_frame.add(hbox)
         interlude_box = Gtk.VBox()
-        hbox.pack_start(interlude_box)
+        hbox.pack_start(interlude_box, True, True, 0)
         self.interlude = IDJC_Media_Player(interlude_box, "interlude", parent)
         interlude_box.set_no_show_all(True)
 
@@ -618,11 +618,11 @@ class ExtraPlayers(Gtk.HBox):
         hbox.pack_start(ilevel_vbox, False, padding=3)
         volpb = GdkPixbuf.Pixbuf.new_from_file(PGlobs.themedir / "volume2.png")
         ivol_image = Gtk.Image.new_from_pixbuf(volpb)
-        ilevel_vbox.pack_start(ivol_image, False, padding=2)
+        ilevel_vbox.pack_start(ivol_image, False, False, 2)
         ivol = Gtk.VScale(self.ivol_adj)
         ivol.set_inverted(True)
         ivol.set_draw_value(False)
-        ilevel_vbox.pack_start(ivol, padding=2)
+        ilevel_vbox.pack_start(ivol, True, True, 2)
         set_tip(ivol, _('Background Tracks volume.'))
 
         sg.add_widget(self.all_effects[0].tabwidget)
