@@ -98,7 +98,7 @@ class SmallLabel(Gtk.Label):
 class HistoryEntryWithMenu(HistoryEntry):
     def __init__(self):
         HistoryEntry.__init__(self, initial_text=("", "%s", "%r - %t"))
-        self.child.connect("populate-popup", self._on_populate_popup)
+        self.get_child().connect("populate-popup", self._on_populate_popup)
         
     def _on_populate_popup(self, entry, menu):
         attr_menu_item = Gtk.MenuItem(_('Insert Attribute'))
@@ -1698,7 +1698,7 @@ class StreamTab(Tab):
         # TC: Label for the metadata fallback value.
         fallback_label = SmallLabel(_('Fallback'))
         self.metadata = HistoryEntryWithMenu()
-        self.metadata.child.connect("changed", self.cb_new_metadata_format)
+        self.metadata.get_child().connect("changed", self.cb_new_metadata_format)
         self.metadata_fallback = Gtk.Entry()
         self.metadata_fallback.set_width_chars(10)
         self.metadata_fallback.set_text("<Unknown>")

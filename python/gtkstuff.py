@@ -312,15 +312,15 @@ class HistoryEntry(Gtk.ComboBox):
         super(HistoryEntry, self).__init__(has_entry=True, model=self.ls)
         self.set_entry_text_column(0)
         self.connect("notify::popup-shown", self.update_history)
-        self.child.connect("activate", self.update_history)
+        self.get_child().connect("activate", self.update_history)
         self.set_history("\x00".join(initial_text))
         geo = self.get_screen().get_root_window().get_geometry()
         cell = self.get_cells()[0]
         cell.props.wrap_width = geo[2] * 2 // 3
-        cell.props.wrap_mode = pango.WRAP_CHAR
+        cell.props.wrap_mode = Pango.WrapMode.CHAR
 
     def update_history(self, *args):
-        text = self.child.get_text().strip()
+        text = self.get_child().get_text().strip()
         if self.store_blank or text:
             # Remove duplicate stored text.
             for i, row in enumerate(self.ls):
@@ -333,11 +333,11 @@ class HistoryEntry(Gtk.ComboBox):
                 del self.ls[-1]
     
     def get_text(self):
-        return self.child.get_text()
+        return self.get_child().get_text()
 
     def set_text(self, text):
         self.update_history()
-        self.child.set_text(text)
+        self.get_child().set_text(text)
         
     def get_history(self):
         self.update_history()

@@ -234,7 +234,7 @@ class ReconnectionDialog(Gtk.Dialog):
             self.trycount = 0
             self.td = []
             for each in \
-                    self.config.reconnection_times.child.get_text().split(","):
+                    self.config.reconnection_times.get_child().get_text().split(","):
                 try:
                     x = max(float(each), 5.0)
                 except:
