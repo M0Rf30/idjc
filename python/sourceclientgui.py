@@ -121,7 +121,8 @@ class HistoryEntryWithMenu(HistoryEntry):
 
 class ModuleFrame(Gtk.Frame):
     def __init__(self, frametext = None):
-        Gtk.Frame.__init__(self, frametext)
+        super(ModuleFrame, self).__init__()
+        self.set_label(frametext)
         Gtk.Frame.set_shadow_type(self, Gtk.ShadowType.ETCHED_OUT)
         self.vbox = Gtk.VBox()
         self.add(self.vbox)
@@ -130,13 +131,15 @@ class ModuleFrame(Gtk.Frame):
 
 class CategoryFrame(Gtk.Frame):
     def __init__(self, frametext = None):
-        Gtk.Frame.__init__(self, frametext)
+        super(CategoryFrame, self).__init__()
+        self.set_label(frametext)
         Gtk.Frame.set_shadow_type(self, Gtk.ShadowType.IN)
 
  
 class SubcategoryFrame(Gtk.Frame):
     def __init__(self, frametext = None):
-        Gtk.Frame.__init__(self, frametext)
+        super(SubcategoryFrame, self).__init__()
+        self.set_label(frametext)
         Gtk.Frame.set_shadow_type(self, Gtk.ShadowType.ETCHED_IN)
 
 
@@ -937,15 +940,16 @@ class TimeEntry(Gtk.HBox):
         self.set_spacing(3)
         self.check = Gtk.CheckButton(labeltext)
         self.check.connect("toggled", self.__entry_activate)
-        self.pack_start(self.check, False)
+        self.pack_start(self.check, False, False, 0)
         self.check.show()
-        self.entry = Gtk.Entry(8)
+        self.entry = Gtk.Entry()
+        self.entry.set_max_length(8)
         self.entry.set_sensitive(False)
         self.entry.set_width_chars(7)
         self.entry.set_text("00:00:00")
         self.entry.connect("key-press-event", self.__key_validator)
         self.entry.connect("changed", self.__time_updater)
-        self.pack_start(self.entry, False)
+        self.pack_start(self.entry, False, False, 0)
         self.entry.show()
         self.seconds_past_midnight = -1
 
@@ -1567,8 +1571,8 @@ class StreamTab(Tab):
         self.tab_type = "streamer"
         self.set_spacing(10)
               
-        self.ic_expander = Gtk.Expander(_('Individual Controls'))
-        self.pack_start(self.ic_expander, False)
+        self.ic_expander = Gtk.Expander(label=_('Individual Controls'))
+        self.pack_start(self.ic_expander, False, False, 0)
         self.ic_expander.show()
                 
         self.ic_frame = Gtk.Frame()
@@ -1602,29 +1606,29 @@ class StreamTab(Tab):
         self.kick_incumbent.connect("clicked", self.cb_kick_incumbent)
         set_tip(self.kick_incumbent, _('This will disconnect whoever is '
                 'currently using the server, freeing it up for personal use.'))
-        hbox.pack_start(self.kick_incumbent, False)
+        hbox.pack_start(self.kick_incumbent, False, False, 0)
         self.kick_incumbent.show()
         
-        ic_vbox.pack_start(hbox, False)
+        ic_vbox.pack_start(hbox, False, False, 0)
         hbox.show()
         
         hbox = Gtk.HBox()
         hbox.set_spacing(6)
         label = Gtk.Label(_('Timer:'))
-        hbox.pack_start(label, False)
+        hbox.pack_start(label, False, False, 0)
         label.show()
         
         self.start_timer = TimeEntry(_('From'))
         set_tip(self.start_timer, _('Automatically connect to the server at '
                 'a specific time in 24 hour format, midnight being 00:00'))
-        hbox.pack_start(self.start_timer, False)
+        hbox.pack_start(self.start_timer, False, False, 0)
         self.start_timer.show()
         
         self.kick_before_start = Gtk.CheckButton(_('Kick'))
         self.kick_before_start.set_sensitive(False)
         set_tip(self.kick_before_start, _('Disconnect whoever is using the '
                                             'server just before start time.'))
-        hbox.pack_start(self.kick_before_start, False)
+        hbox.pack_start(self.kick_before_start, False, False, 0)
         self.kick_before_start.show()
 
         self.start_timer.check.connect("toggled", lambda w: 
@@ -1638,11 +1642,11 @@ class StreamTab(Tab):
         self.fade = Gtk.CheckButton(_('Fade out'))
         self.fade.set_sensitive(False)
         set_tip(self.fade, _('Fade audio before disconnecting.'))
-        hbox.pack_end(self.fade, False)
+        hbox.pack_end(self.fade, False, False, 0)
         self.stop_timer.check.connect("toggled", lambda w:
                                     self.fade.set_sensitive(w.props.active))
         self.fade.show()
-        hbox.pack_end(self.stop_timer, False)
+        hbox.pack_end(self.stop_timer, False, False, 0)
         self.stop_timer.show()
 
         
@@ -1680,14 +1684,14 @@ class StreamTab(Tab):
         ic_vbox.pack_start(hbox, False, False, 0)
         hbox.show()
 
-        frame = Gtk.Frame(" %s " % _('Metadata'))
+        frame = Gtk.Frame(label=" %s " % _('Metadata'))
         table = Gtk.Table(3, 3)
         table.set_border_width(6)
         table.set_row_spacings(1)
         table.set_col_spacings(4)
         frame.add(table)
         table.show()
-        ic_vbox.pack_start(frame, False)
+        ic_vbox.pack_start(frame, False, False, 0)
         frame.show()
         
         format_label = SmallLabel(_('Format String'))
@@ -1733,15 +1737,15 @@ class StreamTab(Tab):
         table.attach(self.metadata_display, 0, 3, 2, 3, x|f, s|f)
         self.metadata_display.show()
 
-        self.pack_start(self.ic_frame, False)
+        self.pack_start(self.ic_frame, False, False, 0)
         
         self.details = Gtk.Expander(_('Configuration'))
         set_tip(self.details, _('The controls for configuring a stream.'))
-        self.pack_start(self.details, False)
+        self.pack_start(self.details, False, False, 0)
         self.details.show()
       
         self.details_nb = Gtk.Notebook()
-        self.pack_start(self.details_nb, False)
+        self.pack_start(self.details_nb, False, False, 0)
         
         self.connection_pane = ConnectionPane(set_tip, self)
         label = Gtk.Label(_('Connection'))
@@ -1812,9 +1816,9 @@ class StreamTab(Tab):
             "Shoutcast master servers that have an administrator password. For"
             " those that don't leave this blank (the source password is"
             " sufficient for those)."))
-        alhbox.pack_start(self.admin_password_entry)
+        alhbox.pack_start(self.admin_password_entry, True, True, 0)
         self.admin_password_entry.show()
-        vbox.pack_start(alhbox, False)
+        vbox.pack_start(alhbox, False, False, 0)
         alhbox.show()
 
         frame = CategoryFrame(" %s " % _('Contact Details'))
@@ -1838,14 +1842,14 @@ class StreamTab(Tab):
         frame.add(contact_details_pane)
         contact_details_pane.show()
         
-        vbox.pack_start(frame, False)
+        vbox.pack_start(frame, False, False, 0)
         frame.show_all()
 
         self.shoutcast_latin1 = Gtk.CheckButton(
                         _('Use ISO-8859-1 encoding for fixed metadata'))
         set_tip(self.shoutcast_latin1,
                         _('Enable this if sending to a Shoutcast V1 server.'))
-        vbox.pack_start(self.shoutcast_latin1, False)
+        vbox.pack_start(self.shoutcast_latin1, False, False, 0)
         self.shoutcast_latin1.show()
 
         label = Gtk.Label(_('Extra Shoutcast'))
@@ -2067,10 +2071,12 @@ class RecordTab(Tab):
             hbox.set_spacing(6)
             
             self.source_store = Gtk.ListStore(str, int)
-            self.source_combo = Gtk.ComboBox(self.source_store)
+            self.source_combo = Gtk.ComboBox()
+            self.source_combo.set_model(self.source_store)
             rend = Gtk.CellRendererText()
-            self.source_combo.pack_start(rend)
-            self.source_combo.set_attributes(rend, text=0, sensitive=1)
+            self.source_combo.pack_start(rend, True)
+            self.source_combo.add_attribute(rend, "text", 0)
+            self.source_combo.add_attribute(rend, "sensitive", 1)
             self.source_store.append((" FLAC+CUE", FGlobs.flacenabled))
             hbox.pack_start(self.source_combo, False, False, 0)
             self.source_combo.show()
