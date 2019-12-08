@@ -942,15 +942,21 @@ class mixprefs:
         # User can use this to set the audio level in the headphones
         
         # TC: The DJ's sound level controller.
-        frame = Gtk.Frame(" %s " % _('DJ Audio Level'))
+        frame = Gtk.Frame(label=" %s " % _('DJ Audio Level'))
         frame.set_label_align(0.5, 0.5)
         frame.set_border_width(3)
         hbox = Gtk.HBox()
         hbox.set_border_width(5)
         frame.add(hbox)
         hbox.show()
-        self.dj_aud_adj = Gtk.Adjustment(0.0, -60.0, 0.0, 0.5, 1.0)
-        dj_aud = Gtk.SpinButton(self.dj_aud_adj, 1, 1)
+        self.dj_aud_adj = Gtk.Adjustment(
+            value=0.0,
+            lower=-60.0,
+            upper=0.0,
+            step_increment=0.5,
+            page_increment=1.0)
+        dj_aud = Gtk.SpinButton(
+            adjustment=self.dj_aud_adj, climb_rate=1, digits=1)
         dj_aud.connect("value-changed", self.cb_vol_changed)
         hbox.pack_start(dj_aud, True, False, 0)
         dj_aud.show()
@@ -959,15 +965,21 @@ class mixprefs:
         frame.show()
 
         # TC: The alarm sound level.
-        frame = Gtk.Frame(" %s " % _('Alarm Level'))
+        frame = Gtk.Frame(label=" %s " % _('Alarm Level'))
         frame.set_label_align(0.5, 0.5)
         frame.set_border_width(3)
         hbox = Gtk.HBox()
         hbox.set_border_width(5)
         frame.add(hbox)
         hbox.show()
-        self.alarm_aud_adj = Gtk.Adjustment(0.0, -60.0, 0.0, 0.5, 1.0)
-        alarm_aud = Gtk.SpinButton(self.alarm_aud_adj, 1, 1)
+        self.alarm_aud_adj = Gtk.Adjustment(
+            value=0.0,
+            lower=-60.0,
+            upper=0.0,
+            step_increment=0.5,
+            page_increment=1.0)
+        alarm_aud = Gtk.SpinButton(
+            adjustment=self.alarm_aud_adj, climb_rate=1, digits=1)
         alarm_aud.connect("value-changed", self.cb_vol_changed)
         hbox.pack_start(alarm_aud, True, False, 0)
         alarm_aud.show()
@@ -979,7 +991,7 @@ class mixprefs:
 
         # User can use this to set the resampled sound quality
         
-        frame = Gtk.Frame(" %s " % _('Player Resample Quality'))
+        frame = Gtk.Frame(label=" %s " % _('Player Resample Quality'))
         frame.set_label_align(0.5, 0.5)
         frame.set_border_width(3)
         hbox = Gtk.HBox()
@@ -1026,19 +1038,19 @@ class mixprefs:
         aud_rs_hbox.show()
         
         # TC: the set of features - section heading.
-        featuresframe = Gtk.Frame(" %s " % _('Feature Set'))
+        featuresframe = Gtk.Frame(label=" %s " % _('Feature Set'))
         featuresframe.set_border_width(3)
         featuresvbox = Gtk.VBox()
         hbox = Gtk.HBox()
         hbox.set_border_width(2)
-        featuresvbox.pack_start(hbox, False)
+        featuresvbox.pack_start(hbox, False, False, 0)
         featuresframe.add(featuresvbox)
         featuresvbox.show()
         outervbox.pack_start(featuresframe, False, False, 0)
         featuresframe.show()
         vbox = Gtk.VBox()
         # TC: Start in the full featured user interface mode.
-        self.startfull = Gtk.RadioButton(None, _('Start Full'))
+        self.startfull = Gtk.RadioButton(None, label=_('Start Full'))
         self.startfull.set_border_width(2)
         vbox.pack_start(self.startfull, False, False, 0)
         self.startfull.show()
@@ -1077,10 +1089,10 @@ class mixprefs:
         hbox.pack_start(vbox, False, False, 9)    
         hbox.show()
         
-        requires_restart = Gtk.Frame(" %s " % 
+        requires_restart = Gtk.Frame(label=" %s " % 
                             _('These settings take effect after restarting'))
         requires_restart.set_border_width(7)
-        featuresvbox.pack_start(requires_restart, False)
+        featuresvbox.pack_start(requires_restart, False, False, 0)
         requires_restart.show()
         
         rrvbox = Gtk.VBox()
@@ -1093,37 +1105,46 @@ class mixprefs:
             hbox = Gtk.HBox()
             hbox.set_spacing(3)
             for w in widgets:
-                hbox.pack_start(w, False)
+                hbox.pack_start(w, False, False, 0)
                 w.show()
             hbox.show()
             return hbox
 
         self.more_effects = Gtk.RadioButton(None, 
-                                        _('Reserve 24 sound effects slots'))
-        fewer_effects = Gtk.RadioButton(self.more_effects, _("Only 12"))
+                                        label=_('Reserve 24 sound effects slots'))
+        fewer_effects = Gtk.RadioButton(self.more_effects, label=_("Only 12"))
         if PGlobs.num_effects == 24:
             self.more_effects.clicked()
         else:
             fewer_effects.clicked()
        
-        rrvbox.pack_start(hjoin(self.more_effects, fewer_effects))
+        rrvbox.pack_start(hjoin(self.more_effects, fewer_effects), True, True, 0)
 
         self.mic_qty_adj = Gtk.Adjustment(
-                                        PGlobs.num_micpairs * 2, 2.0, 12.0, 2.0)
-        spin = Gtk.SpinButton(self.mic_qty_adj)
+            value=PGlobs.num_micpairs * 2,
+            lower=2.0,
+            upper=12.0,
+            step_increment=2.0)
+        spin = Gtk.SpinButton(adjustment=self.mic_qty_adj)
         rrvbox.pack_start(hjoin(spin, Gtk.Label(
-                                        _('Audio input channels'))))
+                                        label=_('Audio input channels'))), True, True, 0)
     
         self.stream_qty_adj = Gtk.Adjustment(
-                                            PGlobs.num_streamers, 1.0, 9.0, 1.0)
-        spin = Gtk.SpinButton(self.stream_qty_adj)
-        rrvbox.pack_start(hjoin(spin, Gtk.Label(_('Simultaneous stream(s)'))))
+            value=PGlobs.num_streamers,
+            lower=1.0,
+            upper=9.0,
+            step_increment=1.0)
+        spin = Gtk.SpinButton(adjustment=self.stream_qty_adj)
+        rrvbox.pack_start(hjoin(spin, Gtk.Label(label=_('Simultaneous stream(s)'))), True, True, 0)
 
         self.recorder_qty_adj = Gtk.Adjustment(
-                                            PGlobs.num_recorders, 0.0, 4.0, 1.0)
-        spin = Gtk.SpinButton(self.recorder_qty_adj)
+            value=PGlobs.num_recorders,
+            lower=0.0,
+            upper=4.0,
+            step_increment=1.0)
+        spin = Gtk.SpinButton(adjustment=self.recorder_qty_adj)
         rrvbox.pack_start(hjoin(spin, Gtk.Label(
-                                            _('Simultaneous recording(s)'))))
+                                            label=_('Simultaneous recording(s)'))), True, True, 0)
         
         self.rrvaluesdict = {"num_micpairs": self.mic_qty_adj,
                                     "num_streamers": self.stream_qty_adj,
@@ -1145,7 +1166,7 @@ class mixprefs:
                 return image
                 
             for each in "play2 pause stop next repeat".split():
-                box.pack_start(image(each), False)
+                box.pack_start(image(each), False, False, 0)
             
             frame.show_all()
             return frame      
@@ -1157,11 +1178,11 @@ class mixprefs:
         if PGlobs.theme == "darktheme":
             self.dark_theme.set_active(True)
         hbox = Gtk.HBox()
-        hbox.pack_start(self.light_theme, False)
+        hbox.pack_start(self.light_theme, False, False, 0)
         self.light_theme.show()
-        hbox.pack_start(self.dark_theme, False)
+        hbox.pack_start(self.dark_theme, False, False, 0)
         self.dark_theme.show()
-        rrvbox.pack_start(hbox)
+        rrvbox.pack_start(hbox, True, True, 0)
         hbox.show()
         
         # Meters on/off
@@ -1171,7 +1192,7 @@ class mixprefs:
                 target.show()
             else:
                 target.hide()
-        frame = Gtk.Frame(" %s " % _('View'))
+        frame = Gtk.Frame(label=" %s " % _('View'))
         frame.set_border_width(3)
         hbox = Gtk.HBox(3, True)
         hbox.set_border_width(10)
@@ -1179,36 +1200,36 @@ class mixprefs:
         hbox.show()
 
         vbox = Gtk.VBox()
-        hbox.pack_start(vbox)
+        hbox.pack_start(vbox, True, True, 0)
         vbox.show()
         self.show_stream_meters = Gtk.CheckButton()
         self.show_stream_meters.set_active(True)
         self.show_stream_meters.connect(
                                     "toggled", showhide, parent.streammeterbox)
-        vbox.pack_start(self.show_stream_meters, False)
+        vbox.pack_start(self.show_stream_meters, False, False, 0)
         self.show_stream_meters.show()
 
         self.show_background_tracks_player = Gtk.CheckButton()
         self.show_background_tracks_player.set_active(True)
         self.show_background_tracks_player.connect(
                             "toggled", showhide, parent.jingles.interlude_frame)
-        vbox.pack_start(self.show_background_tracks_player, False)
+        vbox.pack_start(self.show_background_tracks_player, False, False, 0)
         self.show_background_tracks_player.show()
         
         self.show_button_bar = Gtk.CheckButton()
         self.show_button_bar.set_active(True)
         self.show_button_bar.connect("toggled", showhide, parent.hbox10)
         self.show_button_bar.connect("toggled", showhide, parent.hbox10spc)
-        vbox.pack_start(self.show_button_bar, False)
+        vbox.pack_start(self.show_button_bar, False, False, 0)
         self.show_button_bar.show()
 
         vbox = Gtk.VBox()
-        hbox.pack_start(vbox)
+        hbox.pack_start(vbox, True, True, 0)
         vbox.show()
         self.show_microphones = Gtk.CheckButton()
         self.show_microphones.set_active(True)
         self.show_microphones.connect("toggled", showhide, parent.micmeterbox)
-        vbox.pack_start(self.show_microphones, False)
+        vbox.pack_start(self.show_microphones, False, False, 0)
         self.show_microphones.show()                
         
         self.no_mic_void_space = Gtk.CheckButton(
@@ -1216,7 +1237,7 @@ class mixprefs:
         self.no_mic_void_space.set_active(True)
         for meter in parent.mic_meters:
             self.no_mic_void_space.connect("toggled", meter.always_show)
-        vbox.pack_start(self.no_mic_void_space, False)
+        vbox.pack_start(self.no_mic_void_space, False, False, 0)
         self.no_mic_void_space.show()
         
         outervbox.pack_start(frame, False, False, 0)
@@ -1224,7 +1245,7 @@ class mixprefs:
         
         # ReplayGain controls
         
-        frame = Gtk.Frame(" %s " % _('Player Loudness Normalisation'))
+        frame = Gtk.Frame(label=" %s " % _('Player Loudness Normalisation'))
         frame.set_border_width(3)
         outervbox.pack_start(frame, False, False, 0)
         vbox = Gtk.VBox()
@@ -1235,7 +1256,7 @@ class mixprefs:
         vbox.show()
         
         self.rg_indicate = Gtk.CheckButton(
-                            _('Indicate which tracks have loudness metadata'))
+                            label=_('Indicate which tracks have loudness metadata'))
         set_tip(self.rg_indicate, _('Shows a marker in the playlists next to'
                     ' each track. Either a green circle or a red triangle.'))
         self.rg_indicate.connect("toggled", self.cb_rg_indicate)
@@ -1253,47 +1274,62 @@ class mixprefs:
         table.set_col_spacings(3)
         label = Gtk.Label(_('R128'))
         label.set_alignment(1.0, 0.5)
-        r128_boostadj = Gtk.Adjustment(4.0, -5.0, 25.5, 0.5)
-        self.r128_boost = Gtk.SpinButton(r128_boostadj, 0.0, 1)
+        r128_boostadj = Gtk.Adjustment(
+            value=4.0, lower=-5.0, upper=25.5, step_increment=0.5)
+        self.r128_boost = Gtk.SpinButton(
+            adjustment=r128_boostadj, climb_rate=0.0, digits=1)
         set_tip(self.r128_boost, _('It may not be desirable to use the '
                     'default level since it is rather quiet. This should be'
                     ' set 4 or 5 dB higher than the ReplayGain setting.'))
         table.attach(label, 0, 1, 0, 1)
         table.attach(self.r128_boost, 1, 2, 0, 1)
-        label = Gtk.Label(_('ReplayGain'))
+        label = Gtk.Label(label=_('ReplayGain'))
         label.set_alignment(1.0, 0.5)
-        rg_boostadj = Gtk.Adjustment(0.0, -10.0, 20.5, 0.5)
-        self.rg_boost = Gtk.SpinButton(rg_boostadj, 0.0, 1)
+        rg_boostadj = Gtk.Adjustment(
+            value=0.0,
+            lower=-10.0,
+            upper=20.5,
+            step_increment=0.5
+        )
+        self.rg_boost = Gtk.SpinButton(
+            adjustment=rg_boostadj,
+            climb_rate=0.0,
+            digits=1
+        )
         set_tip(self.rg_boost, _('It may not be desirable to use the default'
                         ' level since it is rather quiet. This should be set'
                         ' 4 or 5 dB lower than the R128 setting.'))
         table.attach(label, 2, 3, 0, 1)
         table.attach(self.rg_boost, 3, 4, 0, 1)
-        label = Gtk.Label(_('Untagged'))
+        label = Gtk.Label(label=_('Untagged'))
         label.set_alignment(1.0, 0.5)
-        rg_defaultgainadj = Gtk.Adjustment(-8.0, -30.0, 10.0, 0.5)
-        self.rg_defaultgain = Gtk.SpinButton(rg_defaultgainadj, 0.0, 1)
+        rg_defaultgainadj = Gtk.Adjustment(
+            value=-8.0, lower=-30.0, upper=10.0, step_increment=0.5)
+        self.rg_defaultgain = Gtk.SpinButton(
+            adjustment=rg_defaultgainadj, climb_rate=0.0, digits=1)
         set_tip(self.rg_defaultgain, _('Set this so that any unmarked tracks'
         ' are playing at a roughly similar loudness level as the marked ones.'))
         table.attach(label, 4, 5, 0, 1)
         table.attach(self.rg_defaultgain, 5, 6, 0, 1)
 
-        label = Gtk.Label(_('All'))
+        label = Gtk.Label(label=_('All'))
         label.set_alignment(1.0, 0.5)
-        all_boostadj = Gtk.Adjustment(0.0, -10.0, 10.0, 0.5)
-        self.all_boost = Gtk.SpinButton(all_boostadj, 0.0, 1)
+        all_boostadj = Gtk.Adjustment(
+            value=0.0, lower=-10.0, upper=10.0, step_increment=0.5)
+        self.all_boost = Gtk.SpinButton(
+            adjustment=all_boostadj, climb_rate=0.0, digits=1)
         set_tip(self.all_boost, _('A master level control for the media players.'))
         table.attach(label, 0, 1, 1, 2)
         table.attach(self.all_boost, 1, 2, 1, 2)
         
-        vbox.pack_start(table, False)
+        vbox.pack_start(table, False, False, 0)
         table.set_col_spacing(1, 7)
         table.set_col_spacing(3, 7)
         table.show_all()
 
         # Recorder filename format may be desirable to change for FAT32 compatibility
 
-        frame = Gtk.Frame(" %s " % _('Recorder Filename (excluding the file extension)'))
+        frame = Gtk.Frame(label=" %s " % _('Recorder Filename (excluding the file extension)'))
         set_tip(frame, _("The specifiers are $r for the number of the "
         "recorder with the rest being documented in the strftime man page.\n"
         "Users may wish to alter this to make filenames that are compatible with particular filesystems."))
@@ -1306,12 +1342,12 @@ class mixprefs:
         align.set_border_width(3)
         frame.add(align)
         align.show()
-        outervbox.pack_start(frame, True)
+        outervbox.pack_start(frame, True, True, 0)
         frame.show()
 
         # Miscellaneous Features
         
-        frame = Gtk.Frame(" " + _('Miscellaneous Features') + " ")
+        frame = Gtk.Frame(label=" " + _('Miscellaneous Features') + " ")
         frame.set_border_width(3)
         vbox = Gtk.VBox()
         frame.add(vbox)
@@ -1388,21 +1424,21 @@ class mixprefs:
         
         vbox.show()
 
-        outervbox.pack_start(frame, False)
+        outervbox.pack_start(frame, False, False, 0)
        
         # Song database preferences and connect button.
         self.songdbprefs = self.parent.topleftpane.prefs_controls
         self.parent.menu.songdbmenu_a.connect_proxy(self.songdbprefs.dbtoggle)
-        outervbox.pack_start(self.songdbprefs, False)
+        outervbox.pack_start(self.songdbprefs, False, False, 0)
         
         # Widget for user interface label renaming.
         label_subst = self.parent.label_subst
-        outervbox.pack_start(label_subst, False)
+        outervbox.pack_start(label_subst, False, False, 0)
         label_subst.set_border_width(3)
         label_subst.show_all()
         
         # Session to be saved, or initial settings preferences.
-        frame = Gtk.Frame(" %s " % _('Player Settings At Startup'))
+        frame = Gtk.Frame(label=" %s " % _('Player Settings At Startup'))
         frame.set_label_align(0.5, 0.5)
         frame.set_border_width(3)
         vbox = Gtk.VBox()
@@ -1469,7 +1505,7 @@ class mixprefs:
         frame.show() 
                 
         # TC: A heading label for miscellaneous settings.
-        features_label = Gtk.Label(_('General'))
+        features_label = Gtk.Label(label=_('General'))
         self.notebook.append_page(generalwindow, features_label)
         features_label.show()
         outervbox.show()
@@ -1516,7 +1552,7 @@ class mixprefs:
             mic_controls[-1].set_partner(mic_controls[-2])  
         parent.mic_opener.finalise()
 
-        panevbox.pack_start(vbox, False)
+        panevbox.pack_start(vbox, False, False, 0)
         vbox.show()
                 
         self.voip_pan = PanWidget(_('VoIP panning + mono downmix'), "voip_pan_widget")
@@ -1526,14 +1562,14 @@ class mixprefs:
         panevbox.pack_start(self.voip_pan, False)
         self.voip_pan.show_all()
                 
-        label = Gtk.Label(_('Channels'))
+        label = Gtk.Label(label=_('Channels'))
         self.notebook.append_page(scrolled_window, label)
         label.show()
 
         # Controls tab
         tab= midicontrols.ControlsUI(self.parent.controls)
         # TC: Keyboard and MIDI bindings configuration.
-        label= Gtk.Label(_('Bindings'))
+        label= Gtk.Label(label=_('Bindings'))
         self.notebook.append_page(tab, label)
         tab.show()
         label.show()
@@ -1581,7 +1617,7 @@ class mixprefs:
         lw = licence_window.LicenceWindow()
         lw.set_border_width(1)
         lw.set_shadow_type(Gtk.ShadowType.ETCHED_IN)
-        label = Gtk.Label(_('Licence'))
+        label = Gtk.Label(label=_('Licence'))
         nb.append_page(lw, label)
         lw.show()
         label.show()
@@ -1616,7 +1652,7 @@ class mixprefs:
             "<b>fr</b> nvignot (nicotux@users.sf.net)",
             "<b>it</b>  Raffaele Morelli (raffaele.morelli@gmail.com)"))
 
-        label = Gtk.Label(_('Build Info'))
+        label = Gtk.Label(label=_('Build Info'))
         ivbox = Gtk.VBox()
         ivbox.set_spacing(10)
         ivbox.set_border_width(10)
@@ -1633,7 +1669,7 @@ class mixprefs:
 
         vbox.show()
 
-        aboutlabel = Gtk.Label(_('About'))
+        aboutlabel = Gtk.Label(label=_('About'))
         self.notebook.append_page(self.aboutframe, aboutlabel)
         aboutlabel.show()
         self.aboutframe.show()
