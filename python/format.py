@@ -22,6 +22,9 @@ import gettext
 import ctypes
 from abc import ABCMeta, abstractmethod, abstractproperty
 
+import gi
+gi.require_version('Gtk', '3.0')
+gi.require_version('Pango', '1.0')
 from gi.repository import Gtk
 from gi.repository import GObject
 
@@ -297,11 +300,11 @@ class FormatDropdown(Gtk.VBox):
         self._ident = ident
         self._row = row
         Gtk.VBox.__init__(self)
-        frame = Gtk.Frame(" %s " % title)
+        frame = Gtk.Frame(label=" %s " % title)
         frame.set_label_align(0.5, 0.5)
         if tooltip is not None:
             set_tip(frame, tooltip)
-        self.pack_start(frame, fill=False)
+        self.pack_start(frame, True, False, 0)
         size_group = Gtk.SizeGroup(Gtk.SizeGroupMode.VERTICAL)
         vbox = Gtk.VBox()
         vbox.set_border_width(3)
@@ -314,14 +317,15 @@ class FormatDropdown(Gtk.VBox):
                 default = index
             model.append(((each),))
         cell_text = Gtk.CellRendererText()
-        self._combo_box = Gtk.ComboBox(model)
+        self._combo_box = Gtk.ComboBox()
+        self._combo_box.set_model(model)
         size_group.add_widget(self._combo_box)
-        self._combo_box.pack_start(cell_text)
+        self._combo_box.pack_start(cell_text, True)
         self._combo_box.set_cell_data_func(cell_text, self._cell_data_func)
-        vbox.pack_start(self._combo_box, False)
+        vbox.pack_start(self._combo_box, False, False, 0)
         self._fixed = Gtk.Label()
         size_group.add_widget(self._fixed)
-        vbox.pack_start(self._fixed, False)
+        vbox.pack_start(self._fixed, False, False, 0)
         self._fixed.set_no_show_all(True)
 
         self._combo_box.connect("changed", self._on_changed)
@@ -1211,14 +1215,14 @@ class FormatControl(Gtk.VBox):
         self.set_border_width(6)
         self.set_spacing(4)
         elem_box = [Gtk.HBox()]
-        self.pack_start(elem_box[0])
+        self.pack_start(elem_box[0], True, True, 0)
         
-        self.caps_frame = Gtk.Frame(" %s " % _('Capabilities'))
+        self.caps_frame = Gtk.Frame(label=" %s " % _('Capabilities'))
         self.caps_frame.set_sensitive(False)
         caps_box = Gtk.HBox()
         caps_box.set_border_width(6)
         self.caps_frame.add(caps_box)
-        self.pack_start(self.caps_frame, fill=False)
+        self.pack_start(self.caps_frame, True, False, 0)
         
         led = LEDDict(8)
         self.green = led["green"]
@@ -1229,17 +1233,17 @@ class FormatControl(Gtk.VBox):
             hbox = Gtk.HBox()
             hbox.set_spacing(3)
             label = Gtk.Label(label_text)
-            hbox.pack_start(label, False)
+            hbox.pack_start(label, False, False, 0)
             
             image = Gtk.Image()
             image.set_from_pixbuf(self.clear)
-            hbox.pack_start(image, False)
+            hbox.pack_start(image, False, False, 0)
             
-            caps_box.pack_start(hbox, fill=False)
+            caps_box.pack_start(hbox, True, False, 0)
             setattr(self, "_" + name + "_indicator", image)
 
         elem_box.append(Gtk.HBox())
-        self.pack_start(elem_box[-1])
+        self.pack_start(elem_box[-1], True, True, 0)
         
         button_frame = Gtk.Alignment(xalign=1.0, yscale=0.85)
         button_frame.props.top_padding = 6
@@ -1260,11 +1264,11 @@ class FormatControl(Gtk.VBox):
         #button_box.add(test_button)
         #test_button.connect("toggled", self._on_test)
         
-        elem_box[-1].pack_end(button_frame, True)
+        elem_box[-1].pack_end(button_frame, True, False, 0)
         self.show_all()
 
         self._current = self._first = FormatFamily(prev_object=None)
-        elem_box[self._first.row].pack_start(self._first, False)
+        elem_box[self._first.row].pack_start(self._first, False, False, 0)
         
         apply_button.connect("clicked", self._on_apply, back_button, elem_box)
         back_button.connect("clicked", self._on_back, apply_button)

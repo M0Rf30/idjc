@@ -878,8 +878,8 @@ class ConnectionPane(Gtk.VBox):
         edit.connect("clicked", self.on_edit_clicked, selection)
         self.remove.connect("clicked", self.on_remove_clicked, selection)
         self.require_selection = (self.remove, edit)
-        hbox.pack_start(bbox)
-        vbox.pack_start(hbox, False)
+        hbox.pack_start(bbox, True, True, 0)
+        vbox.pack_start(hbox, False, False, 0)
         hbox.show_all()
         self.timer = ActionTimer(40, self.stats_commence, self.stats_collate)
 
@@ -1313,7 +1313,7 @@ class StreamTab(Tab):
                 else:
                     label = text
                 sizegroup.add_widget(label)
-                labelbox.pack_end(label, False, False)
+                labelbox.pack_end(label, False, False, 0)
                 label.show()
                 vbox_left.pack_start(labelbox, False, False, 0)
                 labelbox.show()
