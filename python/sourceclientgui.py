@@ -2881,7 +2881,7 @@ class SourceClientGui(dbus.service.Object):
         self.source_client_crash_count = 0
         self.source_client_open()
 
-        self.window = Gtk.Window(Gtk.WINDOW_TOPLEVEL)
+        self.window = Gtk.Window(Gtk.WindowType.TOPLEVEL)
         self.parent.window_group.add_window(self.window)
         # TC: Window title bar text.
         self.window.set_title(_('IDJC Output') + pm.title_extra)

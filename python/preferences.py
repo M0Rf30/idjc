@@ -912,7 +912,7 @@ class mixprefs:
     def __init__(self, parent):
         self.parent = parent
         self.parent.prefs_window = self
-        self.window = Gtk.Window(Gtk.WINDOW_TOPLEVEL)
+        self.window = Gtk.Window(Gtk.WindowType.TOPLEVEL)
         self.window.set_size_request(-1, 480)
         self.window.connect("realize", self.cb_realize)
         self.parent.window_group.add_window(self.window)

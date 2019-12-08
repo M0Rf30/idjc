@@ -44,7 +44,7 @@ class PopupWindow:
 
     class new_popup_window(Gtk.Window):
         def __init__(self):
-            Gtk.Window.__init__(self, Gtk.WINDOW_POPUP)
+            Gtk.Window.__init__(self, Gtk.WindowType.POPUP)
             Gtk.Window.set_decorated(self, False)
     
 

@@ -542,7 +542,7 @@ class ProfileDialog(Gtk.Dialog):
         except GLib.GError:
             print("Profile icon image file not found:", iconpathname)
         else:
-            Gtk.window_set_default_icon_from_file(iconpathname)
+            Gtk.WindowType.set_default_icon_from_file(iconpathname)
 
         self.cancel.set_label(Gtk.STOCK_CLOSE)
         self.connect("delete-event", self._cb_delete_event)

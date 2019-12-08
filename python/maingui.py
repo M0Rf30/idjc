@@ -3803,7 +3803,7 @@ class MainWindow(dbus.service.Object):
         # Aux players initialisation.
         self.jingles = ExtraPlayers(self)
         page = self.player_nb.append_page(self.jingles, self.jingles.nb_label)
-        self.player_nb.set_page(0)
+        self.player_nb.set_current_page(0)
         self.jingles_window = ExtraPlayersWindow(self.player_nb, page)
 
         # Variable initialisation

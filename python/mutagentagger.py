@@ -684,7 +684,7 @@ class MutagenGUI:
             print("Tagger file extension", extension, "not supported.")
             return
         
-        self.window = Gtk.Window(Gtk.WINDOW_TOPLEVEL)
+        self.window = Gtk.Window(Gtk.WindowType.TOPLEVEL)
         if idjcroot is not None:
             idjcroot.window_group.add_window(self.window)
         self.window.set_size_request(550, 450)
