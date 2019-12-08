@@ -309,7 +309,8 @@ class HistoryEntry(Gtk.ComboBox):
         self.max_size = max_size
         self.store_blank = store_blank
         self.ls = Gtk.ListStore(str)
-        Gtk.ComboBox.__init__(self, self.ls, 0)
+        super(HistoryEntry, self).__init__(has_entry=True, model=self.ls)
+        self.set_entry_text_column(0)
         self.connect("notify::popup-shown", self.update_history)
         self.child.connect("activate", self.update_history)
         self.set_history("\x00".join(initial_text))
