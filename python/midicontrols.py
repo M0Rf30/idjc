@@ -2057,7 +2057,7 @@ class ControlsUI(Gtk.VBox):
         #
         buttons= Gtk.HButtonBox()
         buttons.set_spacing(8)
-        buttons.set_layout(Gtk.BUTTONBOX_END)
+        buttons.set_layout(Gtk.ButtonBoxStyle.END)
         buttons.pack_start(self.edit_button, False, False)
         buttons.pack_start(self.remove_button, False, False)
         buttons.pack_start(self.new_button, False, False)

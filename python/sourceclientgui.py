@@ -761,7 +761,7 @@ class ConnectionPane(Gtk.VBox):
         scrolled = Gtk.ScrolledWindow()
         scrolled.set_shadow_type(Gtk.ShadowType.ETCHED_IN)
         scrolled.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.ALWAYS)
-        vbox.pack_start(scrolled, True)
+        vbox.pack_start(scrolled, True, True, 0)
         scrolled.show()
         self.liststore = Gtk.ListStore(*[x[1] for x in LISTFORMAT])
         self.liststore.connect("row-deleted", lambda x, y: self.set_button(tab))
@@ -810,7 +810,7 @@ class ConnectionPane(Gtk.VBox):
         col_listeners = Gtk.TreeViewColumn(_('Listeners'))
         col_listeners.set_sizing = Gtk.TreeViewColumnSizing.AUTOSIZE
         col_listeners.pack_start(rend_enabled, False)
-        col_listeners.pack_start(rend_listeners)
+        col_listeners.pack_start(rend_listeners, True)
         col_listeners.add_attribute(rend_enabled, "active", 0)
         col_listeners.set_cell_data_func(rend_listeners,
                                                     self.listeners_renderer_cb)
@@ -840,7 +840,7 @@ class ConnectionPane(Gtk.VBox):
         frame.add(self.listeners_display)
         self.listeners_display.show()
         self.listener_count_button.add(ihbox)
-        hbox.pack_start(self.listener_count_button, False)
+        hbox.pack_start(self.listener_count_button, False, False, 0)
         
         lcmenu = Gtk.Menu()
         self.listener_count_button.connect("button-press-event",
@@ -863,7 +863,7 @@ class ConnectionPane(Gtk.VBox):
         
         bbox = Gtk.HButtonBox()
         bbox.set_spacing(6)
-        bbox.set_layout(Gtk.BUTTONBOX_END)
+        bbox.set_layout(Gtk.ButtonBoxStyle.END)
         new = Gtk.Button(stock=Gtk.STOCK_NEW)
         self.remove = Gtk.Button(stock=Gtk.STOCK_DELETE)
         edit = Gtk.Button(stock=Gtk.STOCK_EDIT)
@@ -1740,7 +1740,7 @@ class StreamTab(Tab):
 
         self.pack_start(self.ic_frame, False, False, 0)
         
-        self.details = Gtk.Expander(_('Configuration'))
+        self.details = Gtk.Expander(label=_('Configuration'))
         set_tip(self.details, _('The controls for configuring a stream.'))
         self.pack_start(self.details, False, False, 0)
         self.details.show()

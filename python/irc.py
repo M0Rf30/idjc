@@ -945,7 +945,7 @@ class IRCPane(Gtk.VBox):
         
         bb = Gtk.HButtonBox()
         bb.set_spacing(6)
-        bb.set_layout(Gtk.BUTTONBOX_END)
+        bb.set_layout(Gtk.ButtonBoxStyle.END)
         edit = Gtk.Button(Gtk.STOCK_EDIT)
         new = Gtk.Button(Gtk.STOCK_NEW)
         for b, c in zip((edit, new), ("edit", "new")):
