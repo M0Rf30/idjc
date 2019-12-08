@@ -1571,7 +1571,7 @@ class StreamTab(Tab):
         self.tab_type = "streamer"
         self.set_spacing(10)
               
-        self.ic_expander = Gtk.AttachOptions.EXPANDer(label=_('Individual Controls'))
+        self.ic_expander = Gtk.Expander(label=_('Individual Controls'))
         self.pack_start(self.ic_expander, False, False, 0)
         self.ic_expander.show()
                 
@@ -1740,7 +1740,7 @@ class StreamTab(Tab):
 
         self.pack_start(self.ic_frame, False, False, 0)
         
-        self.details = Gtk.AttachOptions.EXPANDer(_('Configuration'))
+        self.details = Gtk.Expander(_('Configuration'))
         set_tip(self.details, _('The controls for configuring a stream.'))
         self.pack_start(self.details, False, False, 0)
         self.details.show()

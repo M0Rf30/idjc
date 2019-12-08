@@ -3480,7 +3480,7 @@ class IDJC_Media_Player(dbus.service.Object):
                 else:
                     filerqtext = _('Save background playlist')
                 vbox = Gtk.VBox()
-                self.expander = Gtk.AttachOptions.EXPANDer()
+                self.expander = Gtk.Expander()
                 self.expander.connect("notify::expanded", self.cb_plexpander)
                 vbox.add(self.expander)
                 self.expander.show()
