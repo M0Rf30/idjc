@@ -1571,7 +1571,7 @@ class StreamTab(Tab):
         self.tab_type = "streamer"
         self.set_spacing(10)
               
-        self.ic_expander = Gtk.Expander(label=_('Individual Controls'))
+        self.ic_expander = Gtk.AttachOptions.EXPANDer(label=_('Individual Controls'))
         self.pack_start(self.ic_expander, False, False, 0)
         self.ic_expander.show()
                 
@@ -1708,7 +1708,8 @@ class StreamTab(Tab):
         image.show()
         self.metadata_update.connect("clicked", self.cb_metadata)
         self.metadata_display = Gtk.Statusbar()
-        self.metadata_display.set_has_resize_grip(False)
+        # TODO
+        #self.metadata_display.set_has_resize_grip(False)
 
         set_tip(self.metadata, _('You can enter text to accompany the stream '
             'here and can specify placemarkers %r %t %l %s for the artist, '
@@ -1723,9 +1724,9 @@ class StreamTab(Tab):
         set_tip(self.metadata_update, _('Metadata normally updates only on song'
             ' title changes but you can force an immediate update here.'))
         
-        x = Gtk.EXPAND
-        f = Gtk.FILL
-        s = Gtk.SHRINK
+        x = Gtk.AttachOptions.EXPAND
+        f = Gtk.AttachOptions.FILL
+        s = Gtk.AttachOptions.SHRINK
         arrangement = (((format_label, x|f), (fallback_label, s|f)),
                 ((self.metadata, x|f),
                 (self.metadata_fallback, s), (self.metadata_update, s)))
@@ -1739,7 +1740,7 @@ class StreamTab(Tab):
 
         self.pack_start(self.ic_frame, False, False, 0)
         
-        self.details = Gtk.Expander(_('Configuration'))
+        self.details = Gtk.AttachOptions.EXPANDer(_('Configuration'))
         set_tip(self.details, _('The controls for configuring a stream.'))
         self.pack_start(self.details, False, False, 0)
         self.details.show()

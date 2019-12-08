@@ -472,7 +472,7 @@ class ServerDialog(Gtk.Dialog):
             l = Gtk.Label(text)
             l.set_alignment(1.0, 0.5)
             
-            table.attach(l, 0, 1, i, i + 1, Gtk.SHRINK | Gtk.FILL)
+            table.attach(l, 0, 1, i, i + 1, Gtk.AttachOptions.SHRINK | Gtk.AttachOptions.FILL)
             table.attach(widget, 1, 2, i, i + 1)
 
         for each in (self.nick1, self.nick2, self.nick3):

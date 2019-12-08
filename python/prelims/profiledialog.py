@@ -142,9 +142,9 @@ class NewProfileDialog(Gtk.Dialog):
         for i, (label, name, widget) in enumerate(zip(labels, names, widgets)):
             label = Gtk.Label(label)
             label.set_alignment(1.0, 0.5)
-            table.attach(label, 0, 1, i, i + 1, Gtk.SHRINK | Gtk.FILL)
+            table.attach(label, 0, 1, i, i + 1, Gtk.AttachOptions.SHRINK | Gtk.AttachOptions.FILL)
 
-            table.attach(widget, 1, 2, i, i + 1, yoptions=Gtk.SHRINK)
+            table.attach(widget, 1, 2, i, i + 1, yoptions=Gtk.AttachOptions.SHRINK)
             setattr(self, name, widget)
 
         self.profile_entry.set_width_chars(30)

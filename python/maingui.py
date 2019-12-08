@@ -3368,7 +3368,7 @@ class MainWindow(dbus.service.Object):
 
         history_expander_hbox = Gtk.HBox()
         # Expander widget text for indicating recent tracks played.
-        self.history_expander = Gtk.Expander.new_with_mnemonic(
+        self.history_expander = Gtk.AttachOptions.EXPANDer.new_with_mnemonic(
                                                             _('Tracks Played'))
         history_expander_hbox.pack_start(self.history_expander, True, True, 6)
         self.history_expander.connect("notify::expanded", self.expandercallback)

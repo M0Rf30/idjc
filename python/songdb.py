@@ -848,7 +848,7 @@ class ViewerCommon(PageCommon):
 
 class ExpandAllButton(Gtk.Button):
     def __init__(self, expanded, tooltip=None):
-        expander = Gtk.Expander()
+        expander = Gtk.AttachOptions.EXPANDer()
         expander.set_expanded(expanded)
         expander.show_all()
         Gtk.Button.__init__(self)
