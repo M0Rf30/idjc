@@ -1896,8 +1896,8 @@ class idjc_shutdown_dialog:
 
     def __init__(self, window_group = None, actionyes = None, actionno = None,
                                                         additional_text = None):
-        dialog = Gtk.Dialog(pm.title_extra.strip(), None, Gtk.DIALOG_MODAL |
-                        Gtk.DIALOG_DESTROY_WITH_PARENT, (Gtk.STOCK_CANCEL,
+        dialog = Gtk.Dialog(pm.title_extra.strip(), None, Gtk.DialogFlags.MODAL |
+                        Gtk.DialogFlags.DESTROY_WITH_PARENT, (Gtk.STOCK_CANCEL,
                         Gtk.ResponseType.CANCEL, Gtk.STOCK_QUIT, Gtk.ResponseType.OK))
         if window_group is not None:
             window_group.add_window(dialog)

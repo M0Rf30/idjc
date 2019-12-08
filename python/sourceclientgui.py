@@ -153,8 +153,8 @@ class ConnectionDialog(Gtk.Dialog):
 
     def __init__(self, parent_window, tree_selection):
         Gtk.Dialog.__init__(self, _('Enter new server connection details'), 
-                                        parent_window, Gtk.DIALOG_MODAL |
-                                        Gtk.DIALOG_DESTROY_WITH_PARENT,
+                                        parent_window, Gtk.DialogFlags.MODAL |
+                                        Gtk.DialogFlags.DESTROY_WITH_PARENT,
                                         (Gtk.STOCK_CANCEL, Gtk.ResponseType.REJECT,
                                         Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT))
         model, iter = tree_selection.get_selected()
@@ -1113,11 +1113,11 @@ class Troubleshooting(Gtk.VBox):
         hbox.set_spacing(4)
         self.custom_user_agent = Gtk.CheckButton(_("Custom user agent string"))
         self.custom_user_agent.connect("toggled", self._on_custom_user_agent)
-        hbox.pack_start(self.custom_user_agent, False)
+        hbox.pack_start(self.custom_user_agent, False, False, 0)
         self.user_agent_entry = HistoryEntry()
         self.user_agent_entry.set_sensitive(False)
-        hbox.pack_start(self.user_agent_entry)
-        self.pack_start(hbox, False)
+        hbox.pack_start(self.user_agent_entry, True, True, 0)
+        self.pack_start(hbox, False, False, 0)
         set_tip(hbox, _("Set this on the occasion that the server or its "
             "firewall specifically refuses to allow libshout based clients."))
         
@@ -1126,7 +1126,7 @@ class Troubleshooting(Gtk.VBox):
                         _("If the connection breaks reconnect to the server"))
         self.automatic_reconnection.set_active(True)
         frame.set_label_widget(self.automatic_reconnection)
-        self.pack_start(frame, False)
+        self.pack_start(frame, False, False, 0)
         
         reconbox = Gtk.HBox()
         reconbox.set_border_width(6)
@@ -1134,39 +1134,39 @@ class Troubleshooting(Gtk.VBox):
         frame.add(reconbox)
         # TC: Label for a comma separated list of delay times.
         reconlabel = Gtk.Label(_("Delay times"))
-        reconbox.pack_start(reconlabel, False)
+        reconbox.pack_start(reconlabel, False, False, 0)
         self.reconnection_times = HistoryEntry(initial_text=("10,10,60", "5"),
                                                             store_blank=False)
         set_tip(self.reconnection_times, _("A comma separated list of delays"
             " in seconds between reconnection attempts. Note that bad values"
             " or values less than 5 will be interpreted as 5."))
-        reconbox.pack_start(self.reconnection_times, True)
+        reconbox.pack_start(self.reconnection_times, True, True, 0)
         self.reconnection_repeat = Gtk.CheckButton(_("Repeat"))
         set_tip(self.reconnection_repeat, 
                             _("Repeat the sequence of delays indefinitely."))
-        reconbox.pack_start(self.reconnection_repeat, False)
+        reconbox.pack_start(self.reconnection_repeat, False, False, 0)
         # TC: User specifies no dialog box to be shown.
         self.reconnection_quiet = Gtk.CheckButton(_("Quiet"))
         set_tip(self.reconnection_quiet,
                 _("Keep the reconnection dialogue box hidden at all times."))
-        reconbox.pack_start(self.reconnection_quiet, False)
+        reconbox.pack_start(self.reconnection_quiet, False, False, 0)
         self.automatic_reconnection.connect("toggled",
                                     self._on_automatic_reconnection, reconbox)
         
-        frame = Gtk.Frame(" %s " % _("The contingency plan upon the stream "
+        frame = Gtk.Frame(label=" %s " % _("The contingency plan upon the stream "
                                                 "buffer becoming full is..."))
         sbfbox = Gtk.VBox()
         sbfbox.set_border_width(6)
         sbfbox.set_spacing(1)
         frame.add(sbfbox)
-        self.pack_start(frame, False)
+        self.pack_start(frame, False, False, 0)
         
         self.sbf_discard_audio = Gtk.RadioButton(None,
                                 _("Discard audio data for as long as needed."))
         self.sbf_reconnect = Gtk.RadioButton(self.sbf_discard_audio,
                     _("Assume the connection is beyond saving and reconnect."))
         for each in (self.sbf_discard_audio, self.sbf_reconnect):
-            sbfbox.pack_start(each, True, False)
+            sbfbox.pack_start(each, True, False, 0)
         
         self.show_all()
         
@@ -1809,7 +1809,7 @@ class StreamTab(Tab):
         alhbox = Gtk.HBox()
         alhbox.set_spacing(3)
         label = Gtk.Label(_('Master server admin password'))
-        alhbox.pack_start(label, False)
+        alhbox.pack_start(label, False, False, 0)
         label.show()
         self.admin_password_entry = Gtk.Entry()
         self.admin_password_entry.set_visibility(False)

@@ -1548,8 +1548,8 @@ class BindingEditor(Gtk.Dialog):
             # TC: Dialog window title text.
             # TC: User is expected to edit a control binding.
             _('Edit control binding'), owner.owner.owner.prefs_window.window,
-            Gtk.DIALOG_DESTROY_WITH_PARENT | Gtk.DIALOG_NO_SEPARATOR | 
-            Gtk.DIALOG_MODAL, (Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
+            Gtk.DialogFlags.DESTROY_WITH_PARENT | Gtk.DialogFlags.NO_SEPARATOR | 
+            Gtk.DialogFlags.MODAL, (Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
             Gtk.STOCK_OK, Gtk.ResponseType.OK))
 
         Gtk.Dialog.set_resizable(self, False)

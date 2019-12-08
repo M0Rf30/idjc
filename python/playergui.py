@@ -570,7 +570,7 @@ class AnnouncementDialog(Gtk.Dialog):
         self.model = model
         self.iter = iter
         self.mode = mode
-        Gtk.Dialog.__init__(self, "", player.parent.window, Gtk.DIALOG_MODAL)
+        Gtk.Dialog.__init__(self, "", player.parent.window, Gtk.DialogFlags.MODAL)
         self.connect("key-press-event", self.cb_keypress)
         ivbox = Gtk.VBox()
         ivbox.set_border_width(10)

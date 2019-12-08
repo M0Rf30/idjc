@@ -85,7 +85,7 @@ class disconnection_notification_dialog(Gtk.Dialog):
             window_title += pm.title_extra
         
         Gtk.Dialog.__init__(self, window_title, None,
-                                        Gtk.DIALOG_DESTROY_WITH_PARENT,
+                                        Gtk.DialogFlags.DESTROY_WITH_PARENT,
                                         (Gtk.STOCK_CLOSE, Gtk.ResponseType.CLOSE))
         if window_group is not None:
             window_group.add_window(self)
@@ -103,7 +103,7 @@ class disconnection_notification_dialog(Gtk.Dialog):
         image = Gtk.Image()
         image.set_alignment(0.5, 0)
         image.set_from_stock(Gtk.STOCK_DISCONNECT, Gtk.IconSize.DIALOG)
-        hbox.pack_start(image, False)
+        hbox.pack_start(image, False, False, 0)
         image.show()
         vbox = Gtk.VBox()
         hbox.pack_start(vbox, True, True, 0)
@@ -114,7 +114,7 @@ class disconnection_notification_dialog(Gtk.Dialog):
                 label = Gtk.Label(each)
                 label.set_use_markup(True)
                 label.set_alignment(0.0, 0.5)
-                vbox.pack_start(label, False)
+                vbox.pack_start(label, False, False, 0)
                 label.show()
 
         if dial_group is not None:
@@ -152,7 +152,7 @@ class autodisconnection_notification_dialog(Gtk.Dialog):
                                     actionok = None, actioncancel = None):
 
         Gtk.Dialog.__init__(self, window_title, None,
-                        Gtk.DIALOG_DESTROY_WITH_PARENT, (Gtk.STOCK_CANCEL,
+                        Gtk.DialogFlags.DESTROY_WITH_PARENT, (Gtk.STOCK_CANCEL,
                         Gtk.ResponseType.CANCEL, Gtk.STOCK_OK, Gtk.ResponseType.OK))
         if window_group is not None:
             window_group.add_window(self)
@@ -284,7 +284,7 @@ class ReconnectionDialog(Gtk.Dialog):
     def __init__(self, tab):
         self.tab = tab
         Gtk.Dialog.__init__(self, pm.title_extra.strip(), None,
-                    Gtk.DIALOG_DESTROY_WITH_PARENT, (Gtk.STOCK_CANCEL,
+                    Gtk.DialogFlags.DESTROY_WITH_PARENT, (Gtk.STOCK_CANCEL,
                     Gtk.ResponseType.CANCEL, _('_Retry Now'), Gtk.ResponseType.OK))
         self.set_modal(False)
         self.set_resizable(False)
@@ -293,16 +293,16 @@ class ReconnectionDialog(Gtk.Dialog):
         
         hbox = Gtk.HBox()
         hbox.set_spacing(12)
-        self.get_content_area().pack_start(hbox, False)
+        self.get_content_area().pack_start(hbox, False, False, 0)
         hbox.show()
         i = Gtk.Image.new_from_stock(Gtk.STOCK_DISCONNECT, Gtk.IconSize.DIALOG)
         i.set_alignment(0.5, 0)
-        hbox.pack_start(i, False)
+        hbox.pack_start(i, False, False, 0)
         i.show()
 
         vbox = Gtk.VBox()
         vbox.set_spacing(3)
-        hbox.pack_start(vbox, False)
+        hbox.pack_start(vbox, False, False, 0)
         self.label1 = Gtk.Label(self.lines[0].format(
                                         servertab = tab.numeric_id + 1) + "\n")
         self.label1.set_use_markup(True)
@@ -310,7 +310,7 @@ class ReconnectionDialog(Gtk.Dialog):
         self.label3 = Gtk.Label(self.lines[2].format(attempt = 1, maxtries = 1))
         for l in (self.label1, self.label2, self.label3):
             l.set_alignment(0.0, 0.5)
-            vbox.pack_start(l, False)
+            vbox.pack_start(l, False, False, 0)
             l.show()
             
         vbox.show()
